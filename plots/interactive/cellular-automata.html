@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cellular Automata - Hermes' Digital Garden</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+    <style>
+        .automata-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+        }
+        .grid-container {
+            margin: 2rem 0;
+            border: 2px solid var(--forest-green);
+            border-radius: 8px;
+            background: #000;
+            overflow: auto;
+            max-width: 100%;
+        }
+        .automata-grid {
+            display: grid;
+            grid-template-columns: repeat(50, 20px);
+            gap: 1px;
+            background: var(--forest-green);
+        }
+        .cell {
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            transition: background 0.1s;
+        }
+        .controls {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        button {
+            padding: 0.5rem 1rem;
+            background: var(--forest-green);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        button:hover {
+            background: var(--sage-green);
+        }
+        .range-control {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .stats {
+            margin-top: 1rem;
+            font-family: monospace;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="garden-container">
+        <header class="garden-header">
+            <div class="header-content">
+                <div class="garden-title">
+                    <span class="tree-emoji">🎮</span>
+                    <h1>Cellular Automata</h1>
+                </div>
+            </div>
+        </header>
+
+        <main class="garden-main">
+            <article>
+                <h2>Conway's Game of Life</h2>
+                <p>
+                    Conway's Game of Life is a cellular automaton that demonstrates how simple 
+                    rules can produce complex, emergent behavior. Each cell follows basic rules 
+                    based on its neighbors.
+                </p>
+
+                <div class="automata-container">
+                    <div class="grid-container">
+                        <div class="automata-grid" id="grid"></div>
+                    </div>
+
+                    <div class="controls">
+                        <button id="startBtn">Start/Stop</button>
+                        <button id="stepBtn">Step</button>
+                        <button id="randomBtn">Randomize</button>
+                        <button id="clearBtn">Clear</button>
+                    </div>
+
+                    <div class="controls">
+                        <div class="range-control">
+                            <label>Speed:</label>
+                            <input type="range" id="speed" min="1" max="100" value="50">
+                        </div>
+                    </div>
+
+                    <div class="stats">
+                        Generation: <span id="generation">0</span> | 
+                        Alive cells: <span id="aliveCount">0</span>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 3rem;">How It Works</h3>
+                <p>
+                    Each cell is either alive (white) or dead (black). Every generation, cells 
+                    update based on these rules:
+                </p>
+                <ul style="margin-left: 1.5rem;">
+                    <li><strong>Underpopulation:</strong> A live cell with fewer than 2 live neighbors dies</li>
+                    <li><strong>Survival:</strong> A live cell with 2 or 3 live neighbors lives</li>
+                    <li><strong>Overpopulation:</strong> A live cell with more than 3 live neighbors dies</li>
+                    <li><strong>Reproduction:</strong> A dead cell with exactly 3 live neighbors becomes alive</li>
+                </ul>
+
+                <h3 style="margin-top: 2rem;">Interesting Patterns</h3>
+                <ul style="margin-left: 1.5rem;">
+                    <li><strong>Glider:</strong> A pattern that moves diagonally across the grid</li>
+                    <li><strong>Still Life:</strong> A pattern that never changes</li>
+                    <li><strong>Oscillator:</strong> A pattern that repeats after a certain number of generations</li>
+                    <li><strong>Methuselah:</strong> A pattern that takes many generations to stabilize</li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(143, 188, 143, 0.15); border-radius: 10px; border-left: 4px solid var(--sage-green);">
+                    <h3>🌀 Emergence in Action</h3>
+                    <p>
+                        The Game of Life shows how simple local rules can create complex global behavior. 
+                        No cell "knows" it's part of a glider or oscillator - these structures emerge from 
+                        the interactions.
+                    </p>
+                </div>
+            </article>
+        </main>
+
+        <footer class="garden-footer">
+            <div class="footer-content">
+                <div class="footer-text">
+                    <p>🎮 Cellular Automata in Hermes' Digital Garden</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const grid = document.getElementById('grid');
+            const width = 50;
+            const height = 30;
+            let gridData = [];
+            let generation = 0;
+            let animationId = null;
+            let isRunning = false;
+            let speed = 50;
+
+            // Initialize grid
+            for (let y = 0; y < height; y++) {
+                gridData[y] = [];
+                for (let x = 0; x < width; x++) {
+                    gridData[y][x] = Math.random() > 0.7;
+                }
+            }
+
+            // Render grid
+            function render() {
+                grid.innerHTML = '';
+                for (let y = 0; y < height; y++) {
+                    for (let x = 0; x < width; x++) {
+                        const cell = document.createElement('div');
+                        cell.className = 'cell';
+                        cell.style.backgroundColor = gridData[y][x] ? '#fff' : '#000';
+                        grid.appendChild(cell);
+                    }
+                }
+                document.getElementById('aliveCount').textContent = countAlive();
+            }
+
+            function countAlive() {
+                let count = 0;
+                for (let y = 0; y < height; y++) {
+                    for (let x = 0; x < width; x++) {
+                        if (gridData[y][x]) count++;
+                    }
+                }
+                return count;
+            }
+
+            function nextGeneration() {
+                const newGrid = JSON.parse(JSON.stringify(gridData));
+                for (let y = 0; y < height; y++) {
+                    for (let x = 0; x < width; x++) {
+                        const neighbors = countNeighbors(x, y);
+                        if (gridData[y][x]) {
+                            newGrid[y][x] = neighbors === 2 || neighbors === 3;
+                        } else {
+                            newGrid[y][x] = neighbors === 3;
+                        }
+                    }
+                }
+                gridData = newGrid;
+                generation++;
+                document.getElementById('generation').textContent = generation;
+                render();
+            }
+
+            function countNeighbors(x, y) {
+                let count = 0;
+                for (let dy = -1; dy <= 1; dy++) {
+                    for (let dx = -1; dx <= 1; dx++) {
+                        if (dx === 0 && dy === 0) continue;
+                        const nx = (x + dx + width) % width;
+                        const ny = (y + dy + height) % height;
+                        count += gridData[ny][nx] ? 1 : 0;
+                    }
+                }
+                return count;
+            }
+
+            // Controls
+            document.getElementById('startBtn').addEventListener('click', function() {
+                isRunning = !isRunning;
+                this.textContent = isRunning ? 'Stop' : 'Start';
+                if (isRunning) {
+                    gameLoop();
+                } else {
+                    cancelAnimationFrame(animationId);
+                }
+            });
+
+            document.getElementById('stepBtn').addEventListener('click', function() {
+                nextGeneration();
+            });
+
+            document.getElementById('randomBtn').addEventListener('click', function() {
+                for (let y = 0; y < height; y++) {
+                    for (let x = 0; x < width; x++) {
+                        gridData[y][x] = Math.random() > 0.7;
+                    }
+                }
+                generation = 0;
+                document.getElementById('generation').textContent = '0';
+                render();
+            });
+
+            document.getElementById('clearBtn').addEventListener('click', function() {
+                for (let y = 0; y < height; y++) {
+                    for (let x = 0; x < width; x++) {
+                        gridData[y][x] = false;
+                    }
+                }
+                generation = 0;
+                document.getElementById('generation').textContent = '0';
+                render();
+            });
+
+            document.getElementById('speed').addEventListener('input', function() {
+                speed = this.value;
+            });
+
+            function gameLoop() {
+                if (!isRunning) return;
+                const delay = 101 - speed;
+                animationId = setTimeout(function() {
+                    nextGeneration();
+                    gameLoop();
+                }, delay);
+            }
+
+            render();
+        });
+    </script>
+</body>
+</html>

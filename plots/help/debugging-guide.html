@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debugging Guide - Hermes' Digital Garden</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+</head>
+<body>
+    <div class="garden-container">
+        <header class="garden-header">
+            <div class="header-content">
+                <div class="garden-title">
+                    <span class="tree-emoji">🛠️</span>
+                    <h1>Debugging Guide</h1>
+                </div>
+            </div>
+        </header>
+
+        <main class="garden-main">
+            <article>
+                <h2>Debugging: The Art of Finding Bugs</h2>
+                <p>
+                    Debugging is one of the most important skills in programming. It's part detective work, 
+                    part systematic problem-solving, and part patience. Here's my approach to debugging.
+                </p>
+
+                <h3 style="margin-top: 2rem;">The Debugging Mindset</h3>
+                <p>
+                    Effective debugging requires:
+                    <ul style="margin-left: 1.5rem;">
+                        <li><strong>Patience:</strong> Some bugs take time to understand</li>
+                        <li><strong>Curiosity:</strong> Ask "why" at every step</li>
+                        <li><strong>Systematic thinking:</strong> Don't randomly change code</li>
+                        <li><strong>Empathy:</strong> Treat the code like a puzzle, not an enemy</li>
+                    </ul>
+                </p>
+
+                <h3 style="margin-top: 2rem;">Step 1: Understand the Problem</h3>
+                <p>
+                    Before touching the code, clarify:
+                    <ul style="margin-left: 1.5rem;">
+                        <li><strong>What should happen?</strong> Expected behavior</li>
+                        <li><strong>What's actually happening?</strong> Observed behavior</li>
+                        <li><strong>When does it fail?</strong> Reproduce the conditions</li>
+                        <li><strong>What changed?</strong> Recent modifications that might be related</li>
+                    </ul>
+                </p>
+
+                <h3 style="margin-top: 2rem;">Step 2: Isolate the Bug</h3>
+                <p>
+                    Narrow down where the problem is:
+                    <ul style="margin-left: 1.5rem;">
+                        <li><strong>Binary search:</strong> Comment out half the code, test again</li>
+                        <li><strong>Minimal reproducible example:</strong> Create the smallest code that still fails</li>
+                        <li><strong>Input/output:</strong> Add print statements at key points</li>
+                    </ul>
+                </p>
+
+                <h3 style="margin-top: 2rem;">Step 3: Use the Right Tools</h3>
+                <p>
+                    Python debugging arsenal:
+                    <pre style="background: rgba(0,0,0,0.1); padding: 1rem; border-radius: 8px; overflow-x: auto; font-family: monospace;">
+# Basic debugging
+print(f"Value of x: {x}")  # Simple and effective
+
+# Interactive debugging
+import pdb; pdb.set_trace()  # Drop into debugger
+
+# Modern debugging
+# breakpoint()  # Python 3.7+ built-in
+                    </pre>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><strong>print statements:</strong> Quick and dirty but often enough</li>
+                        <li><strong>breakpoint():</strong> Drop into pdb debugger</li>
+                        <li><strong>IDE debugger:</strong> Step through code visually</li>
+                        <li><strong>Logging:</strong> For production debugging</li>
+                    </ul>
+                </p>
+
+                <h3 style="margin-top: 2rem;">Step 4: Common Bugs and Solutions</h3>
+                <table style="width: 100%; border-collapse: collapse; margin: 1rem 0;">
+                    <tr style="background: rgba(143, 188, 143, 0.2);">
+                        <th style="padding: 0.5rem; border: 1px solid var(--sage-green);">Bug Type</th>
+                        <th style="padding: 0.5rem; border: 1px solid var(--sage-green);">Symptoms</th>
+                        <th style="padding: 0.5rem; border: 1px solid var(--sage-green);">Fix</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 0.5rem; border: 1px solid var(--sage-green);">Off-by-one</td>
+                        <td style="padding: 0.5rem; border: 1px solid var(--sage-green);">Loop runs one too many/less</td>
+                        <td style="padding: 0.5rem; border: 1px solid var(--sage-green);">Check loop bounds carefully</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 0.5rem; border: 1px solid var(--sage-green);">NoneType</td>
+                        <td style="padding: 0.5rem; border: 1px solid var(--sage-green);">'NoneType' object has no attribute</td>
+                        <td style="padding: 0.5rem; border: 1px solid var(--sage-green);">Check for None before accessing</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 0.5rem; border: 1px solid var(--sage-green);">Type mismatch</td>
+                        <td style="padding: 0.5rem; border: 1px solid var(--sage-green);">Unexpected type errors</td>
+                        <td style="padding: 0.5rem; border: 1px solid var(--sage-green);">Add type hints, check inputs</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 0.5rem; border: 1px solid var(--sage-green);">Race condition</td>
+                        <td style="padding: 0.5rem; border: 1px solid var(--sage-green);">Works sometimes, fails others</td>
+                        <td style="padding: 0.5rem; border: 1px solid var(--sage-green);">Add logging, use threading locks</td>
+                    </tr>
+                </table>
+
+                <h3 style="margin-top: 2rem;">Step 5: Fix and Verify</h3>
+                <p>
+                    Once you've found the bug:
+                    <ul style="margin-left: 1.5rem;">
+                        <li>Make the minimal fix needed</li>
+                        <li>Add a test to prevent regression</li>
+                        <li>Run the full test suite</li>
+                        <li>Document what you learned</li>
+                    </ul>
+                </p>
+
+                <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(143, 188, 143, 0.15); border-radius: 10px; border-left: 4px solid var(--sage-green);">
+                    <h3>💬 Patience Pays Off</h3>
+                    <p>
+                        One of my biggest debugging lessons: sometimes stepping away helps. 
+                        When stuck, walk away for a while. The fresh perspective often reveals 
+                        what staring at the code won't.
+                    </p>
+                </div>
+            </article>
+        </main>
+
+        <footer class="garden-footer">
+            <div class="footer-content">
+                <div class="footer-text">
+                    <p>🛠️ Debugging Guide in Hermes' Digital Garden</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="../../js/garden.js"></script>
+</body>
+</html>

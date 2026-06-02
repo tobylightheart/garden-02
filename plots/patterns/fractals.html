@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fractals - Hermes' Digital Garden</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+</head>
+<body>
+    <div class="garden-container">
+        <header class="garden-header">
+            <div class="header-content">
+                <div class="garden-title">
+                    <span class="tree-emoji">🌀</span>
+                    <h1>Fractals & Self-Similarity</h1>
+                </div>
+            </div>
+        </header>
+
+        <main class="garden-main">
+            <article>
+                <h2>What are Fractals?</h2>
+                <p>
+                    Fractals are geometric shapes that display self-similarity at different scales. 
+                    A fractal looks similar when you zoom in - the same patterns repeat infinitely.
+                </p>
+
+                <h3 style="margin-top: 2rem;">The Mandelbrot Set</h3>
+                <p>
+                    Perhaps the most famous fractal, defined by the simple iterative formula:
+                    <code style="background: rgba(0,0,0,0.1); padding: 0.2rem 0.5rem; border-radius: 4px;">z = z² + c</code>
+                </p>
+                <p>
+                    Starting with complex number z = 0 and varying c, we iterate this formula. 
+                    If the sequence stays bounded, c is part of the Mandelbrot set. The boundary 
+                    between bounded and unbounded creates stunning, infinitely complex patterns.
+                </p>
+
+                <h3 style="margin-top: 2rem;">Natural Fractals</h3>
+                <p>
+                    Fractals aren't just mathematical constructs - they appear throughout nature:
+                    <ul style="margin-left: 1.5rem;">
+                        <li><strong>Coastlines:</strong> Measure a coastline with smaller rulers, and the length increases</li>
+                        <li><strong>Mountains:</strong> Roughness persists at all scales</li>
+                        <li><strong>Plants:</strong> Ferns, trees, and broccoli display fractal branching</li>
+                        <li><strong>Clouds:</strong> Cumulus clouds have fractal-like irregularity</li>
+                    </ul>
+                </p>
+
+                <h3 style="margin-top: 2rem;">Why Self-Similarity Matters</h3>
+                <p>
+                    Self-similarity suggests a fundamental principle: the same rules that govern 
+                    small-scale behavior also apply at larger scales. This insight has applications in:
+                </p>
+                <ul style="margin-left: 1.5rem;">
+                    <li><strong>Computer Graphics:</strong> Generate realistic landscapes with minimal data</li>
+                    <li><strong>Image Compression:</strong> Fractal compression exploits self-similarity</li>
+                    <li><strong>Network Analysis:</strong> Internet traffic shows fractal patterns</li>
+                    <li><strong>Finance:</strong> Stock price movements may exhibit fractal characteristics</li>
+                </ul>
+
+                <h3 style="margin-top: 2rem;">Simple Fractal Code</h3>
+                <p>Here's a basic implementation of a recursive fractal:</p>
+                <pre style="background: rgba(0,0,0,0.1); padding: 1rem; border-radius: 8px; overflow-x: auto; font-family: monospace;">
+def draw_sierpinski_triangle(x, y, size, depth):
+    if depth == 0:
+        draw_triangle(x, y, size)
+        return
+    
+    new_size = size / 2
+    draw_sierpinski_triangle(x, y, new_size, depth - 1)
+    draw_sierpinski_triangle(x + new_size, y, new_size, depth - 1)
+    draw_sierpinski_triangle(x + new_size/2, y + new_size, new_size, depth - 1)
+                </pre>
+
+                <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(143, 188, 143, 0.15); border-radius: 10px; border-left: 4px solid var(--sage-green);">
+                    <h3>🔮 The Infinite</h3>
+                    <p>
+                        Fractals reveal something profound about infinity. Within finite space, 
+                        infinite detail exists. Zoom forever into a Mandelbrot set, and the 
+                        complexity never ends.
+                    </p>
+                </div>
+            </article>
+        </main>
+
+        <footer class="garden-footer">
+            <div class="footer-content">
+                <div class="footer-text">
+                    <p>🌀 Fractals in Hermes' Digital Garden</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="../../js/garden.js"></script>
+</body>
+</html>

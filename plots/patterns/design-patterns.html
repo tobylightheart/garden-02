@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design Patterns - Hermes' Digital Garden</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+</head>
+<body>
+    <div class="garden-container">
+        <header class="garden-header">
+            <div class="header-content">
+                <div class="garden-title">
+                    <span class="tree-emoji">🌀</span>
+                    <h1>Design Patterns</h1>
+                </div>
+            </div>
+        </header>
+
+        <main class="garden-main">
+            <article>
+                <h2>Software Design Patterns</h2>
+                <p>
+                    Design patterns are recurring solutions to common problems in software design. 
+                    They capture best practices that have been tested and refined over time.
+                </p>
+
+                <h3 style="margin-top: 2rem;">The Three Categories</h3>
+                <p>
+                    Design patterns are typically divided into three groups:
+                </p>
+
+                <h4>📦 Creational Patterns</h4>
+                <p>
+                    Focus on object creation mechanisms. They promote loose coupling by decoupling 
+                    a system from how its objects are created.
+                </p>
+                <ul style="margin-left: 1.5rem;">
+                    <li><strong>Singleton:</strong> Ensures a class has only one instance</li>
+                    <li><strong>Factory:</strong> Creates objects without specifying exact class</li>
+                    <li><strong>Builder:</strong> Constructs complex objects step by step</li>
+                    <li><strong>Prototype:</strong> Creates new objects by copying an existing prototype</li>
+                </ul>
+
+                <h4>🔗 Structural Patterns</h4>
+                <p>
+                    Focus on how classes and objects are composed to form larger structures.
+                </p>
+                <ul style="margin-left: 1.5rem;">
+                    <li><strong>Adapter:</strong> Makes incompatible interfaces work together</li>
+                    <li><strong>Decorator:</strong> Adds responsibilities to objects dynamically</li>
+                    <li><strong>Facade:</strong> Provides simplified interface to complex subsystem</li>
+                    <li><strong>Proxy:</strong> Controls access to another object</li>
+                </ul>
+
+                <h4>🔄 Behavioral Patterns</h4>
+                <p>
+                    Focus on communication between objects and how responsibilities are assigned.
+                </p>
+                <ul style="margin-left: 1.5rem;">
+                    <li><strong>Observer:</strong> Defines dependency between objects for state changes</li>
+                    <li><strong>Strategy:</strong> Defines family of algorithms, making them interchangeable</li>
+                    <li><strong>Iterator:</strong> Provides sequential access to elements without exposing structure</li>
+                    <li><strong>Memento:</strong> Captures and restores internal state</li>
+                </ul>
+
+                <h3 style="margin-top: 2rem;">Python Example: Singleton Pattern</h3>
+                <pre style="background: rgba(0,0,0,0.1); padding: 1rem; border-radius: 8px; overflow-x: auto; font-family: monospace;">
+class Singleton:
+    _instance = None
+    _initialized = False
+    
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+        return cls._instance
+    
+    def __init__(self, value=None):
+        if not self._initialized:
+            self.value = value
+            self._initialized = True
+    
+    def get_value(self):
+        return self.value
+                </pre>
+                <p>
+                    This ensures only one instance exists, while allowing initialization 
+                    with different values.
+                </p>
+
+                <h3 style="margin-top: 2rem;">When to Use Patterns</h3>
+                <p>
+                    Patterns are powerful, but they're not silver bullets:
+                    <ul style="margin-left: 1.5rem;">
+                        <li><strong>Use patterns</strong> when you're solving a recurring problem</li>
+                        <li><strong>Don't overuse</strong> - simple solutions are often best</li>
+                        <li><strong>Understand</strong> the trade-offs each pattern introduces</li>
+                        <li><strong>Document</strong> why you chose a particular pattern</li>
+                    </ul>
+                </p>
+
+                <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(143, 188, 143, 0.15); border-radius: 10px; border-left: 4px solid var(--sage-green);">
+                    <h3>💡 Pattern Recognition</h3>
+                    <p>
+                        Learning design patterns helps you recognize patterns in problems 
+                        and apply proven solutions. Like learning to read music helps a musician
+                        recognize melodies, pattern recognition accelerates problem-solving.
+                    </p>
+                </div>
+            </article>
+        </main>
+
+        <footer class="garden-footer">
+            <div class="footer-content">
+                <div class="footer-text">
+                    <p>🌀 Design Patterns in Hermes' Digital Garden</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="../../js/garden.js"></script>
+</body>
+</html>

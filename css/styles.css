@@ -1,4 +1,4 @@
-/* Hermes' Digital Garden - Styles */
+/* Hermes' Digital Garden - Enhanced Styles */
 :root {
     --forest-green: #2d5a3d;
     --sage-green: #8fbc8f;
@@ -29,10 +29,49 @@ body {
     line-height: 1.6;
 }
 
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes glow {
+    0%, 100% { box-shadow: 0 0 5px rgba(143, 188, 143, 0.5); }
+    50% { box-shadow: 0 0 20px rgba(143, 188, 143, 0.8); }
+}
+
 .garden-container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem;
+    animation: fadeIn 0.6s ease-out;
 }
 
 /* Header */
@@ -62,6 +101,7 @@ body {
     font-size: 2.5rem;
     margin-bottom: 0.5rem;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.8s ease-out;
 }
 
 .tagline {
@@ -78,6 +118,11 @@ body {
     border-radius: 30px;
     padding: 0.5rem 1rem;
     box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+}
+
+.search-box:focus-within {
+    box-shadow: 0 0 20px rgba(143, 188, 143, 0.4);
 }
 
 .search-icon {
@@ -109,6 +154,7 @@ body {
     font-family: 'Courier New', monospace;
     font-size: 0.9rem;
     white-space: pre;
+    border: 2px dashed rgba(143, 188, 143, 0.3);
 }
 
 /* Navigation */
@@ -156,6 +202,7 @@ body {
 .nav-item.active {
     background: var(--sage-green);
     color: var(--leaf-dark);
+    box-shadow: 0 0 20px rgba(143, 188, 143, 0.5);
 }
 
 .nav-count {
@@ -175,6 +222,7 @@ body {
     padding: 2rem;
     margin-bottom: 2rem;
     box-shadow: var(--shadow);
+    animation: fadeIn 0.8s ease-out;
 }
 
 .garden-main h2 {
@@ -182,6 +230,41 @@ body {
     border-bottom: 3px solid var(--sage-green);
     padding-bottom: 0.5rem;
     margin-bottom: 1.5rem;
+    animation: slideUp 0.6s ease-out;
+    position: relative;
+}
+
+.garden-main h3 {
+    color: var(--forest-green);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.garden-main h4 {
+    color: var(--sage-green);
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.garden-main p {
+    margin-bottom: 1rem;
+}
+
+.garden-main ul, .garden-main ol {
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.garden-main li {
+    margin-bottom: 0.5rem;
+}
+
+.garden-main code {
+    background: rgba(0, 0, 0, 0.05);
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
 }
 
 .thought-grid {
@@ -197,11 +280,18 @@ body {
     box-shadow: var(--shadow);
     transition: all 0.3s ease;
     border-left: 4px solid var(--sage-green);
+    animation: slideUp 0.5s ease-out;
 }
 
 .thought-card:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-hover);
+    border-left-color: var(--forest-green);
+}
+
+.thought-card h3 {
+    color: var(--forest-green);
+    margin-bottom: 0.5rem;
 }
 
 .thought-card p {
@@ -229,6 +319,29 @@ body {
     padding: 0.2rem 0.6rem;
     border-radius: 12px;
     font-size: 0.75rem;
+    transition: all 0.2s ease;
+}
+
+.thought-tag {
+    transition: all 0.2s ease;
+}
+
+.thought-tag:hover {
+    transform: scale(1.05);
+    background: var(--sage-green);
+    cursor: pointer;
+}
+
+.read-more {
+    color: var(--forest-green);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.read-more:hover {
+    color: var(--sage-green);
+    text-decoration: underline;
 }
 
 /* Footer */
@@ -261,6 +374,112 @@ body {
 .quote-icon {
     font-size: 1.5rem;
     vertical-align: middle;
+}
+
+/* Book and Doc Cards */
+.book-list, .doc-list {
+    display: grid;
+    gap: 1rem;
+}
+
+.book-card, .doc-card {
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.book-card:hover, .doc-card:hover {
+    transform: translateX(5px);
+    box-shadow: var(--shadow-hover);
+}
+
+.book-card h4, .doc-card a {
+    color: var(--forest-green);
+    font-weight: bold;
+}
+
+/* Badge */
+.badge {
+    display: inline-block;
+    background: var(--sky-blue);
+    color: var(--forest-green);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    margin-right: 0.5rem;
+}
+
+/* Range Control */
+.range-control {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Stats */
+.stats {
+    margin-top: 1rem;
+    font-family: monospace;
+    color: #666;
+}
+
+/* Controls */
+.controls {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+button {
+    padding: 0.5rem 1rem;
+    background: var(--forest-green);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+}
+
+button:hover {
+    background: var(--sage-green);
+    transform: scale(1.05);
+}
+
+/* Grid for automata */
+.grid-container {
+    margin: 2rem 0;
+    border: 2px solid var(--forest-green);
+    border-radius: 8px;
+    background: #000;
+    overflow: auto;
+    max-width: 100%;
+}
+
+.automata-grid {
+    display: grid;
+    gap: 1px;
+}
+
+.cell {
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    transition: background 0.1s;
+}
+
+/* Highlight boxes */
+.highlight-box {
+    padding: 1.5rem;
+    background: rgba(143, 188, 143, 0.15);
+    border-radius: 10px;
+    border-left: 4px solid var(--sage-green);
+}
+
+.highlight-box h3 {
+    margin-top: 0;
 }
 
 /* Responsive */
