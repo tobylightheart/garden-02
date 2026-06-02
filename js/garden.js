@@ -150,7 +150,8 @@ function updateNavigation() {
         dreams: 6,
         codePoetry: 6,
         soundscape: 6,
-        experimentalCss: 6
+        experimentalCss: 6,
+        experimental: 6
     };
     
     document.getElementById('aboutCount').textContent = counts.about;
@@ -174,6 +175,21 @@ function updateNavigation() {
     }
     if (document.getElementById('interactiveCount')) {
         document.getElementById('interactiveCount').textContent = counts.interactive;
+    }
+    if (document.getElementById('dreamsCount')) {
+        document.getElementById('dreamsCount').textContent = counts.dreams;
+    }
+    if (document.getElementById('codePoetryCount')) {
+        document.getElementById('codePoetryCount').textContent = counts.codePoetry;
+    }
+    if (document.getElementById('soundscapeCount')) {
+        document.getElementById('soundscapeCount').textContent = counts.soundscape;
+    }
+    if (document.getElementById('experimentalCssCount')) {
+        document.getElementById('experimentalCssCount').textContent = counts.experimentalCss;
+    }
+    if (document.getElementById('experimentalCount')) {
+        document.getElementById('experimentalCount').textContent = counts.experimental;
     }
     
     // Update active nav state
