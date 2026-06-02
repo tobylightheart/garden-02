@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ambient Soundscape - Hermes' Digital Garden</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #0c1445 0%, #141035 50%, #240b36 100%);
+            min-height: 100vh;
+        }
+        
+        .soundscape-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .soundscape-header {
+            text-align: center;
+            padding: 3rem;
+            color: #e0e0e0;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            margin-bottom: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .soundscape-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 30% 50%, rgba(100, 150, 255, 0.1), transparent 50%),
+                radial-gradient(circle at 70% 50%, rgba(150, 100, 255, 0.1), transparent 50%);
+            animation: soundPulse 4s ease-in-out infinite;
+        }
+        
+        @keyframes soundPulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+        
+        .soundscape-title {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .soundscape-tagline {
+            color: #a0a0a0;
+            font-size: 1.2rem;
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .main-player {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .visualizer-container {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+        
+        .visualizer-container canvas {
+            width: 100%;
+            height: 200px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.02);
+        }
+        
+        .playback-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .play-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 30px rgba(102, 126, 234, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .play-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 40px rgba(102, 126, 234, 0.6);
+        }
+        
+        .play-btn.playing {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            animation: pulseBtn 1s ease-in-out infinite;
+        }
+        
+        @keyframes pulseBtn {
+            0%, 100% { box-shadow: 0 4px 30px rgba(240, 147, 251, 0.4); }
+            50% { box-shadow: 0 6px 40px rgba(240, 147, 251, 0.8); }
+        }
+        
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: #e0e0e0;
+        }
+        
+        .volume-slider {
+            width: 150px;
+            height: 6px;
+            -webkit-appearance: none;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+            outline: none;
+        }
+        
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .volume-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+        
+        .sound-scene {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .scene-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .scene-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+        
+        .scene-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .scene-card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateY(-5px);
+        }
+        
+        .scene-card.active {
+            background: rgba(102, 126, 234, 0.1);
+            border-color: rgba(102, 126, 234, 0.4);
+        }
+        
+        .scene-card.active::before {
+            transform: scaleX(1);
+        }
+        
+        .scene-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .scene-title {
+            color: #e0e0e0;
+            font-size: 1.3rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        
+        .scene-description {
+            color: #888;
+            text-align: center;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .scene-tags {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .scene-tag {
+            background: rgba(102, 126, 234, 0.2);
+            color: #a0c4ff;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .ambient-info {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .ambient-info h3 {
+            color: #e0e0e0;
+            margin-bottom: 1rem;
+        }
+        
+        .ambient-info p {
+            color: #a0a0a0;
+            line-height: 1.8;
+        }
+        
+        .frequency-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        
+        .frequency-tag {
+            background: rgba(150, 100, 255, 0.2);
+            color: #c4b5fd;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+        
+        .tips-section {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .tips-section h3 {
+            color: #e0e0e0;
+            margin-bottom: 1rem;
+        }
+        
+        .tips-section ul {
+            color: #a0a0a0;
+            line-height: 2;
+        }
+        
+        .tips-section li {
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .tips-section li::before {
+            content: '🔊';
+            position: absolute;
+            left: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .soundscape-grid {
+                grid-template-columns: 1fr;
+            }
+            .soundscape-title {
+                font-size: 2rem;
+            }
+            .playback-controls {
+                flex-direction: column;
+            }
+            .volume-control {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="soundscape-container">
+        <header class="soundscape-header">
+            <h1 class="soundscape-title">🎵 Ambient Soundscape</h1>
+            <p class="soundscape-tagline">Where sound becomes meditation and silence becomes space</p>
+        </header>
+        
+        <main>
+            <section class="main-player">
+                <div class="visualizer-container">
+                    <canvas id="visualizer"></canvas>
+                </div>
+                
+                <div class="playback-controls">
+                    <button class="play-btn" id="playBtn" onclick="togglePlay()">▶️</button>
+                    
+                    <div class="volume-control">
+                        <span>🔇</span>
+                        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.01" value="0.5" oninput="setVolume(this.value)">
+                        <span>🔊</span>
+                    </div>
+                </div>
+                
+                <div class="ambient-info">
+                    <h3>🌊 Current Soundscape</h3>
+                    <p id="currentScene">Select a scene to begin your auditory journey...</p>
+                    <div class="frequency-tags" id="frequencyTags"></div>
+                </div>
+            </section>
+            
+            <section class="sound-scene" id="sceneGrid">
+                <!-- Scenes will be populated -->
+            </section>
+            
+            <section class="tips-section">
+                <h3>💡 For the Best Experience</h3>
+                <ul>
+                    <li>Use headphones for an immersive experience</li>
+                    <li>Find a quiet space and close your eyes</li>
+                    <li>Let the sounds wash over you without judgment</li>
+                    <li>Stay for at least 5 minutes to truly absorb the atmosphere</li>
+                    <li>Try different scenes for different moods and activities</li>
+                    <li>Combine scenes for a custom soundscape</li>
+                </ul>
+            </section>
+        </main>
+    </div>
+    
+    <script>
+        const scenes = [
+            {
+                name: "Deep Forest",
+                icon: "🌲",
+                description: "The gentle rustle of leaves, distant bird calls, and the soft hum of life in a ancient forest.",
+                tags: ["nature", "forest", "calm"],
+                frequencies: ["low hum", "bird calls", "wind"],
+                color: "#2d5a3d"
+            },
+            {
+                name: "Ocean Waves",
+                icon: "🌊",
+                description: "The rhythmic crash of waves against the shore, the deep ocean roar, and the gentle sea breeze.",
+                tags: ["ocean", "water", "meditation"],
+                frequencies: ["crashing", "deep ocean", "foam"],
+                color: "#1e3a5f"
+            },
+            {
+                name: "Mountain Stream",
+                icon: "💧",
+                description: "Clear water flowing over rocks, the gentle babbling, and the sound of water in nature.",
+                tags: ["water", "nature", "peaceful"],
+                frequencies: ["flowing", "droplets", "stones"],
+                color: "#4a9eff"
+            },
+            {
+                name: "Space Ambience",
+                icon: "🌌",
+                description: "The deep silence of space, distant cosmic hum, and the mysterious sounds of the universe.",
+                tags: ["space", "cosmic", "mysterious"],
+                frequencies: ["deep hum", "cosmic", "static"],
+                color: "#667eea"
+            },
+            {
+                name: "Rain on Roof",
+                icon: "🌧️",
+                description: "Soft raindrops hitting a roof, the gentle patter, and the cozy atmosphere of a rainy day.",
+                tags: ["rain", "cozy", "relaxing"],
+                frequencies: ["pattering", "dripping", "muffled"],
+                color: "#7c3aed"
+            },
+            {
+                name: "Night City",
+                icon: "🌃",
+                description: "The distant hum of a city at night, distant traffic, and the electric energy of urban life.",
+                tags: ["city", "urban", "night"],
+                frequencies: ["distant traffic", "electric hum", "city"],
+                color: "#f5576c"
+            },
+            {
+                name: "Winter Silence",
+                icon: "❄️",
+                description: "The quiet of a snowy landscape, the occasional wind through trees, and peaceful cold.",
+                tags: ["winter", "snow", "quiet"],
+                frequencies: ["wind", "snow", "silent"],
+                color: "#e0e0e0"
+            },
+            {
+                name: "Cave Echo",
+                icon: "🦇",
+                description: "The deep hollow of a cave, distant dripping water, and the mysterious echo of space.",
+                tags: ["cave", "echo", "mysterious"],
+                frequencies: ["echo", "dripping", "hollow"],
+                color: "#5d4037"
+            }
+        ];
+        
+        let isPlaying = false;
+        let currentScene = null;
+        let audioContext = null;
+        let analyser = null;
+        let source = null;
+        let animationId = null;
+        
+        function init() {
+            const grid = document.getElementById('sceneGrid');
+            
+            scenes.forEach((scene, index) => {
+                const card = document.createElement('div');
+                card.className = 'scene-card';
+                card.innerHTML = `
+                    <div class="scene-icon">${scene.icon}</div>
+                    <h3 class="scene-title">${scene.name}</h3>
+                    <p class="scene-description">${scene.description}</p>
+                    <div class="scene-tags">
+                        ${scene.tags.map(tag => `<span class="scene-tag">${tag}</span>`).join('')}
+                    </div>
+                `;
+                card.onclick = () => selectScene(scene, card);
+                grid.appendChild(card);
+            });
+            
+            initVisualizer();
+        }
+        
+        function selectScene(scene, card) {
+            // Remove active from all cards
+            document.querySelectorAll('.scene-card').forEach(c => c.classList.remove('active'));
+            
+            // Set active on clicked card
+            card.classList.add('active');
+            currentScene = scene;
+            
+            // Update display
+            document.getElementById('currentScene').textContent = 
+                `${scene.icon} ${scene.name}: ${scene.description}`;
+            
+            // Update frequency tags
+            const tagsContainer = document.getElementById('frequencyTags');
+            tagsContainer.innerHTML = scene.frequencies.map(freq => 
+                `<span class="frequency-tag">${freq}</span>`
+            ).join('');
+            
+            // Reset play button
+            resetVisualizer();
+        }
+        
+        function togglePlay() {
+            if (isPlaying) {
+                stopPlay();
+            } else {
+                startPlay();
+            }
+        }
+        
+        function startPlay() {
+            if (!currentScene) {
+                alert('Please select a scene first!');
+                return;
+            }
+            
+            isPlaying = true;
+            const playBtn = document.getElementById('playBtn');
+            playBtn.classList.add('playing');
+            playBtn.innerHTML = '⏸️';
+            
+            // In a real implementation, this would play actual audio
+            // For now, we'll just animate the visualizer
+            animateVisualizer();
+        }
+        
+        function stopPlay() {
+            isPlaying = false;
+            const playBtn = document.getElementById('playBtn');
+            playBtn.classList.remove('playing');
+            playBtn.innerHTML = '▶️';
+            
+            resetVisualizer();
+        }
+        
+        function setVolume(value) {
+            // In a real implementation, this would set audio volume
+            console.log('Volume set to:', value);
+        }
+        
+        function initVisualizer() {
+            const canvas = document.getElementById('visualizer');
+            canvas.width = canvas.parentElement.offsetWidth;
+            canvas.height = canvas.parentElement.offsetHeight;
+            const ctx = canvas.getContext('2d');
+            
+            // Create gradient
+            const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+            gradient.addColorStop(0, 'rgba(102, 126, 234, 0.3)');
+            gradient.addColorStop(0.5, 'rgba(118, 75, 162, 0.3)');
+            gradient.addColorStop(1, 'rgba(240, 147, 251, 0.3)');
+            
+            function draw() {
+                if (!isPlaying) return;
+                
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                // Draw sound waves
+                const time = Date.now() / 1000;
+                const centerY = canvas.height / 2;
+                
+                ctx.beginPath();
+                for (let x = 0; x < canvas.width; x += 5) {
+                    const y = centerY + 
+                        Math.sin(x * 0.01 + time) * 50 +
+                        Math.sin(x * 0.02 + time * 1.5) * 30 +
+                        Math.sin(x * 0.03 + time * 2.5) * 20;
+                    
+                    ctx.lineTo(x, y);
+                }
+                
+                ctx.strokeStyle = currentScene ? currentScene.color : 'rgba(255, 255, 255, 0.3)';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                
+                // Add particles
+                const particleTime = Date.now() / 200;
+                for (let i = 0; i < 30; i++) {
+                    const x = (particleTime + i * 100) % canvas.width;
+                    const y = centerY + Math.sin(particleTime * 0.1 + i) * 40;
+                    
+                    ctx.beginPath();
+                    ctx.arc(x, y, 2, 0, Math.PI * 2);
+                    ctx.fillStyle = currentScene ? currentScene.color : 'rgba(255, 255, 255, 0.5)';
+                    ctx.fill();
+                }
+                
+                animationId = requestAnimationFrame(draw);
+            }
+            
+            draw();
+        }
+        
+        function animateVisualizer() {
+            if (isPlaying) {
+                initVisualizer();
+            }
+        }
+        
+        function resetVisualizer() {
+            cancelAnimationFrame(animationId);
+            animationId = null;
+        }
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            const canvas = document.getElementById('visualizer');
+            canvas.width = canvas.parentElement.offsetWidth;
+            canvas.height = canvas.parentElement.offsetHeight;
+        });
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

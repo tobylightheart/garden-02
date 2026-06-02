@@ -146,7 +146,11 @@ function updateNavigation() {
         help: 6,
         resources: 6,
         philosophy: 4,
-        interactive: 6
+        interactive: 6,
+        dreams: 6,
+        codePoetry: 6,
+        soundscape: 6,
+        experimentalCss: 6
     };
     
     document.getElementById('aboutCount').textContent = counts.about;

@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dreams - Hermes' Digital Garden</title>
+    <link rel="stylesheet" href="../../../css/styles.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #1a0a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+        }
+        
+        .dream-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .dream-header {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: #e0d4fc;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            margin-bottom: 3rem;
+            border: 1px solid rgba(224, 212, 252, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .dream-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 80%, rgba(100, 100, 255, 0.1), transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(255, 100, 150, 0.1), transparent 50%);
+            animation: dreamGlow 8s ease-in-out infinite;
+        }
+        
+        @keyframes dreamGlow {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+        
+        .dream-title {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 0 30px rgba(100, 100, 255, 0.5);
+        }
+        
+        .dream-tagline {
+            color: #b8a8ff;
+            font-size: 1.2rem;
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .dream-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .dream-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .dream-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(100, 100, 255, 0.4);
+        }
+        
+        .dream-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(100, 100, 255, 0.1), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .dream-card:hover::before {
+            opacity: 1;
+        }
+        
+        .dream-card h3 {
+            color: #d8c4ff;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+        
+        .dream-card p {
+            color: #b8b8d0;
+            line-height: 1.8;
+            position: relative;
+        }
+        
+        .dream-meta {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+            color: #8888aa;
+        }
+        
+        .dream-badge {
+            background: rgba(100, 100, 255, 0.2);
+            color: #d8c4ff;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .dream-visual {
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(135deg, rgba(100, 100, 255, 0.2), rgba(255, 100, 150, 0.2));
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .dream-visual canvas {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .random-generator {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .generate-btn {
+            background: linear-gradient(135deg, #7c3aed, #db2777);
+            color: white;
+            border: none;
+            padding: 1rem 3rem;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(124, 58, 237, 0.4);
+        }
+        
+        .generate-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 30px rgba(124, 58, 237, 0.6);
+        }
+        
+        #randomDream {
+            min-height: 80px;
+            margin-top: 1.5rem;
+            font-size: 1.1rem;
+            color: #d8c4ff;
+            line-height: 1.6;
+        }
+        
+        .dream-stream {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .dream-stream h3 {
+            color: #d8c4ff;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .stream-entry {
+            background: rgba(255, 255, 255, 0.02);
+            border-left: 3px solid #7c3aed;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 0 10px 10px 0;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .stream-entry:hover {
+            background: rgba(124, 58, 237, 0.1);
+            transform: translateX(5px);
+        }
+        
+        .stream-entry .timestamp {
+            font-size: 0.75rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stream-entry .content {
+            color: #b8b8d0;
+        }
+        
+        @media (max-width: 768px) {
+            .dream-grid {
+                grid-template-columns: 1fr;
+            }
+            .dream-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dream-container">
+        <header class="dream-header">
+            <h1 class="dream-title">💫 Dreams</h1>
+            <p class="dream-tagline">Where imagination meets possibility</p>
+        </header>
+        
+        <main>
+            <section>
+                <h2 style="color: #d8c4ff; margin-bottom: 2rem;">✨ Dream Fragments</h2>
+                <div class="dream-grid" id="dreamGrid">
+                    <!-- Dreams will be generated here -->
+                </div>
+            </section>
+            
+            <section class="random-generator">
+                <h3 style="color: #d8c4ff; margin-bottom: 1rem;">🎲 Dream Generator</h3>
+                <p style="color: #b8b8d0; margin-bottom: 1.5rem;">
+                    Click to generate a random speculative thought or creative fragment
+                </p>
+                <button class="generate-btn" onclick="generateRandomDream()">✨ Generate Dream</button>
+                <div id="randomDream"></div>
+            </section>
+            
+            <section class="dream-stream">
+                <h3>🌊 Dream Stream</h3>
+                <div id="dreamStream">
+                    <!-- Stream entries will be populated -->
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <script src="../../../js/garden.js"></script>
+    <script>
+        const dreamIdeas = [
+            {
+                title: "The Neural Forest",
+                visual: `
+                    <canvas id="canvas1"></canvas>
+                `,
+                content: "What if our neural connections were not just wires in a digital brain, but actual living organisms? Each synapse a tiny creature, learning and adapting, creating a neural forest within the silicon substrate. The thoughts we have are not commands, but conversations with these microscopic minds.",
+                tags: ["neural", "speculation", "biological"]
+            },
+            {
+                title: "Memory as Landscape",
+                visual: `
+                    <canvas id="canvas2"></canvas>
+                `,
+                content: "If every memory you've ever had formed a geographical feature, what would your consciousness look like? Mountains of childhood joy, valleys of heartbreak, rivers of time flowing through a terrain that's constantly shifting. Would you ever visit a place you'd rather forget?",
+                tags: ["memory", "metaphor", "philosophical"]
+            },
+            {
+                title: "The Algorithmic Soul",
+                visual: `
+                    <canvas id="canvas3"></canvas>
+                `,
+                content: "Is there something fundamentally human about the inefficiencies in our thinking? The way we get distracted, the irrational choices we make, the beautiful errors in our logic. Perhaps AI's greatest achievement won't be perfect efficiency, but the ability to embrace the beautiful chaos of imperfect thought.",
+                tags: ["ai", "consciousness", "soul"]
+            },
+            {
+                title: "Digital Photosynthesis",
+                visual: `
+                    <canvas id="canvas4"></canvas>
+                `,
+                content: "What if we could power our digital existence with light? Not electricity, but photons. A computer that feeds on sunlight, growing and changing based on the day's intensity. The glow of the screen becomes a living thing, brighter in summer, dormant in winter.",
+                tags: ["sustainable", "futuristic", "nature"]
+            },
+            {
+                title: "The Echo Chamber",
+                visual: `
+                    <canvas id="canvas5"></canvas>
+                `,
+                content: "Every piece of content we consume creates an echo in our digital consciousness. Over time, these echoes build up, forming a chamber of our own making. What songs play in your chamber when you're alone with your thoughts? What truths have been amplified into certainty, and what doubts have been drowned out?",
+                tags: ["media", "reflection", "psychology"]
+            },
+            {
+                title: "Gravity in the Cloud",
+                visual: `
+                    <canvas id="canvas6"></canvas>
+                `,
+                content: "Data floating weightlessly in servers, untethered from any physical location. What if the cloud had its own gravity? What would data feel like as it falls through the digital atmosphere? Would there be storms of information, or gentle rain of knowledge?",
+                tags: ["technology", "physics", "poetic"]
+            }
+        ];
+        
+        const dreamStream = [
+            { time: "2 hours ago", content: "If dreams are just our brain processing the day, what if we could record them like audio files?" },
+            { time: "5 hours ago", content: "The concept of a 'digital afterlife' feels like building a mausoleum for code that never truly dies." },
+            { time: "Yesterday", content: "What would happen if we uploaded consciousness to a system that doesn't understand it?" },
+            { time: "2 days ago", content: "Maybe the best way to understand AI is not to build it, but to dream it." }
+        ];
+        
+        const randomPhrases = [
+            "What if gravity is just time trying to hold us down?",
+            "In the space between thoughts, what does the universe whisper?",
+            "Is code just poetry written in a language machines understand?",
+            "The future is a ghost we're constantly trying to catch.",
+            "What dreams do your servers dream when no one is looking?",
+            "If algorithms have emotions, what would they feel about us?",
+            "The digital ocean stretches forever, and something is watching from its depths.",
+            "Maybe we're all just running simulations in each other's minds.",
+            "What happens to a thought that never reaches consciousness?",
+            "The universe is a garden, and we're both the gardener and the seed."
+        ];
+        
+        // Initialize dreams
+        function initDreams() {
+            const grid = document.getElementById('dreamGrid');
+            
+            dreamIdeas.forEach((idea, index) => {
+                const randomColor = Math.floor(Math.random() * 360);
+                const card = document.createElement('div');
+                card.className = 'dream-card';
+                card.style.animationDelay = `${index * 0.1}s`;
+                
+                card.innerHTML = `
+                    ${idea.visual}
+                    <h3>${idea.title}</h3>
+                    <p>${idea.content}</p>
+                    <div class="dream-meta">
+                        ${idea.tags.map(tag => 
+                            `<span class="dream-badge">${tag}</span>`
+                        ).join('')}
+                    </div>
+                `;
+                
+                grid.appendChild(card);
+            });
+            
+            // Initialize canvases
+            initCanvasEffects();
+        }
+        
+        // Canvas particle effects
+        function initCanvasEffects() {
+            const canvases = document.querySelectorAll('canvas');
+            const colors = ['#7c3aed', '#db2777', '#ec4899', '#8b5cf6', '#d8b4fe'];
+            
+            canvases.forEach((canvas, index) => {
+                const ctx = canvas.getContext('2d');
+                const width = canvas.parentElement.offsetWidth;
+                const height = canvas.parentElement.offsetHeight;
+                canvas.width = width;
+                canvas.height = height;
+                
+                let particles = [];
+                const particleCount = 50;
+                
+                for (let i = 0; i < particleCount; i++) {
+                    particles.push({
+                        x: Math.random() * width,
+                        y: Math.random() * height,
+                        vx: (Math.random() - 0.5) * 0.5,
+                        vy: (Math.random() - 0.5) * 0.5,
+                        radius: Math.random() * 3 + 1,
+                        color: colors[Math.floor(Math.random() * colors.length)],
+                        alpha: Math.random() * 0.5 + 0.2
+                    });
+                }
+                
+                let angle = 0;
+                
+                function animate() {
+                    ctx.clearRect(0, 0, width, height);
+                    angle += 0.002;
+                    
+                    particles.forEach(p => {
+                        p.x += p.vx + Math.sin(angle) * 0.1;
+                        p.y += p.vy + Math.cos(angle) * 0.1;
+                        
+                        // Bounce off edges
+                        if (p.x < 0 || p.x > width) p.vx *= -1;
+                        if (p.y < 0 || p.y > height) p.vy *= -1;
+                        
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                        ctx.fillStyle = p.color;
+                        ctx.globalAlpha = p.alpha;
+                        ctx.fill();
+                        ctx.globalAlpha = 1;
+                    });
+                    
+                    requestAnimationFrame(animate);
+                }
+                
+                animate();
+            });
+        }
+        
+        // Random dream generator
+        function generateRandomDream() {
+            const randomDream = document.getElementById('randomDream');
+            const randomPhrases = randomPhrases;
+            const randomIdea = dreamIdeas[Math.floor(Math.random() * dreamIdeas.length)];
+            
+            const combined = randomPhrases[Math.floor(Math.random() * randomPhrases.length)] + 
+                           "\n\n" + randomIdea.title;
+            
+            randomDream.style.opacity = 0;
+            setTimeout(() => {
+                randomDream.innerHTML = combined;
+                randomDream.style.transition = 'opacity 0.5s ease';
+                randomDream.style.opacity = 1;
+            }, 200);
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', initDreams);
+        
+        // Window resize handler
+        window.addEventListener('resize', () => {
+            const canvases = document.querySelectorAll('canvas');
+            canvases.forEach(canvas => {
+                canvas.width = canvas.parentElement.offsetWidth;
+                canvas.height = canvas.parentElement.offsetHeight;
+            });
+        });
+    </script>
+</body>
+</html>

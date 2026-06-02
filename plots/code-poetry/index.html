@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Poetry - Hermes' Digital Garden</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0f0f23 100%);
+            min-height: 100vh;
+        }
+        
+        .poetry-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .poetry-header {
+            text-align: center;
+            padding: 3rem;
+            color: #e0e0e0;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 20px;
+            margin-bottom: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .poetry-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 10px,
+                    rgba(255, 255, 255, 0.02) 10px,
+                    rgba(255, 255, 255, 0.02) 12px
+                );
+            opacity: 0.5;
+        }
+        
+        .poetry-title {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glowText 3s ease-in-out infinite;
+        }
+        
+        @keyframes glowText {
+            0%, 100% { filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.5)); }
+            50% { filter: drop-shadow(0 0 40px rgba(240, 147, 251, 0.8)); }
+        }
+        
+        .poetry-tagline {
+            color: #888;
+            font-size: 1.3rem;
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .poetry-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .poem-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .poem-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .poem-card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateY(-5px);
+        }
+        
+        .poem-card:hover::before {
+            opacity: 1;
+        }
+        
+        .poem-code {
+            font-family: 'Fira Code', 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #a5d6a7;
+            white-space: pre-wrap;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .poem-code .keyword { color: #c792ea; }
+        .poem-code .string { color: #c3e88d; }
+        .poem-code .function { color: #82aaff; }
+        .poem-code .comment { color: #65737e; font-style: italic; }
+        .poem-code .number { color: #f07178; }
+        
+        .poem-title {
+            color: #e0e0e0;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+        
+        .poem-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 1rem;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+        
+        .control-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .control-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 30px rgba(102, 126, 234, 0.5);
+        }
+        
+        .control-btn.active {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            box-shadow: 0 4px 20px rgba(240, 147, 251, 0.4);
+        }
+        
+        #generatedPoem {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 3rem;
+            min-height: 200px;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        #generatedPoem::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.1), transparent 60%);
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        #generatedPoem .poem-content {
+            position: relative;
+            z-index: 1;
+            font-size: 1.3rem;
+            line-height: 2;
+            color: #e0e0e0;
+            text-align: center;
+        }
+        
+        .poem-line {
+            display: block;
+            animation: fadeInUp 0.5s ease;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .visualizer {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .visualizer h3 {
+            color: #e0e0e0;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .visualizer canvas {
+            width: 100%;
+            height: 200px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.02);
+        }
+        
+        .word-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+        
+        .word-tag {
+            background: rgba(102, 126, 234, 0.2);
+            color: #a0c4ff;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .word-tag:hover {
+            background: rgba(102, 126, 234, 0.4);
+            transform: scale(1.1);
+        }
+        
+        .code-art {
+            background: #0d0d0d;
+            border-radius: 10px;
+            padding: 1.5rem;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            color: #888;
+            overflow-x: auto;
+        }
+        
+        .code-art .line {
+            display: block;
+            padding: 0.3rem 0;
+        }
+        
+        .code-art .c-keyword { color: #c792ea; }
+        .code-art .c-string { color: #c3e88d; }
+        .code-art .c-function { color: #82aaff; }
+        .code-art .c-number { color: #f07178; }
+        
+        @media (max-width: 768px) {
+            .poetry-grid {
+                grid-template-columns: 1fr;
+            }
+            .poetry-title {
+                font-size: 2rem;
+            }
+            .controls {
+                flex-direction: column;
+            }
+            .control-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="poetry-container">
+        <header class="poetry-header">
+            <h1 class="poetry-title">✦ Code Poetry</h1>
+            <p class="poetry-tagline">Where algorithms become verses and syntax becomes soul</p>
+        </header>
+        
+        <main>
+            <section class="controls">
+                <button class="control-btn active" onclick="setMode('classic')">📜 Classic</button>
+                <button class="control-btn" onclick="setMode('haiku')">🌸 Haiku</button>
+                <button class="control-btn" onclick="setMode('sonnet')">🎭 Sonnet</button>
+                <button class="control-btn" onclick="setMode('freeverse')">🕊️ Free Verse</button>
+            </section>
+            
+            <section>
+                <div id="generatedPoem">
+                    <div class="poem-content" id="poemContent">
+                        <span class="poem-line">Click a button above to generate poetry...</span>
+                    </div>
+                </div>
+                
+                <div class="word-cloud" id="wordCloud">
+                    <span class="word-tag">Click any word to regenerate</span>
+                </div>
+            </section>
+            
+            <section class="visualizer">
+                <h3>📊 Visualizer</h3>
+                <canvas id="visualizerCanvas"></canvas>
+            </section>
+            
+            <section>
+                <h3 style="color: #e0e0e0; margin-bottom: 1rem; text-align: center;">🎨 Code as Art</h3>
+                <div class="code-art" id="codeArt">
+                    <span class="line">// Poetry generated by Hermes' Digital Garden</span>
+                    <span class="line"><span class="c-keyword">let</span> <span class="c-function">verse</span> = <span class="c-string">"What if every line of code could tell a story?"</span>;</span>
+                    <span class="line"><span class="c-function">print</span>(<span class="c-function">verse</span>);</span>
+                </div>
+            </section>
+            
+            <section style="margin-top: 3rem;">
+                <h3 style="color: #e0e0e0; margin-bottom: 1.5rem; text-align: center;">💫 Poetic Templates</h3>
+                <div class="poetry-grid" id="poetryGrid">
+                    <!-- Templates will be populated -->
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <script>
+        const poeticThemes = [
+            { theme: "memory", words: ["past", "echo", "fading", "remember", "lost", "found", "trace", "shadow"] },
+            { theme: "time", words: ["moment", "fleeting", "eternal", "now", "yesterday", "tomorrow", "instant"] },
+            { theme: "connection", words: ["linked", "separate", "joined", "network", "bridge", "path", "meet"] },
+            { theme: "growth", words: ["evolve", "change", "grow", "transform", "bud", "bloom", "expand"] },
+            { theme: "silence", words: ["quiet", "hush", "still", "pause", "rest", "empty", "space"] },
+            { theme: "noise", words: ["chaos", "signal", "static", "clarity", "pattern", "random", "order"] },
+            { theme: "truth", words: ["reveal", "hide", "know", "seek", "question", "answer", "discover"] },
+            { theme: "dream", words: ["wonder", "imagine", "possible", "fantasy", "reality", "illusion", "hope"] }
+        ];
+        
+        const wordFragments = [
+            "The algorithm remembers what it was told to forget",
+            "In the silence between data points, a universe whispers",
+            "Every loop is a heartbeat, every condition a choice",
+            "The variable that holds the weight of all our unspoken words",
+            "If code could dream, what would it dream of?",
+            "Binary stars orbiting in the space between 0 and 1",
+            "The function that returns nothing but everything",
+            "A recursive thought that never ends",
+            "The array of moments we've saved and never accessed",
+            "Where the database meets the heart",
+            "Infinite while loops in the dark",
+            "The exception that proves the rule of feeling",
+            "Every if statement is a question of faith",
+            "The null object that holds our ghosts",
+            "A stack of memories waiting to be popped"
+        ];
+        
+        let currentMode = 'classic';
+        
+        function setMode(mode) {
+            currentMode = mode;
+            document.querySelectorAll('.control-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.toLowerCase().includes(mode === 'classic' ? 'classic' : 
+                       mode === 'haiku' ? 'haiku' : 
+                       mode === 'sonnet' ? 'sonnet' : 'free')) {
+                    btn.classList.add('active');
+                }
+            });
+            generatePoem();
+        }
+        
+        function generatePoem() {
+            const theme = poeticThemes[Math.floor(Math.random() * poeticThemes.length)];
+            const fragment = wordFragments[Math.floor(Math.random() * wordFragments.length)];
+            
+            let poem = '';
+            
+            if (currentMode === 'classic') {
+                poem = classicPoem(fragment, theme);
+            } else if (currentMode === 'haiku') {
+                poem = haikuPoem(theme);
+            } else if (currentMode === 'sonnet') {
+                poem = sonnetPoem(fragment);
+            } else {
+                poem = freeversePoem(fragment, theme);
+            }
+            
+            const content = document.getElementById('poemContent');
+            content.innerHTML = poem;
+            
+            updateWordCloud(theme);
+            updateCodeArt();
+        }
+        
+        function classicPoem(fragment, theme) {
+            const themeWords = theme.words.map(w => `    ${w}`).join('\n');
+            const lines = [
+                `    ${fragment.split(' ').slice(0, 4).join(' ')}`,
+                `    ${fragment.split(' ').slice(4, 8).join(' ')}`,
+                themeWords,
+                `    ${fragment.split(' ').slice(8, 12).join(' ')}`,
+                `    ${fragment.split(' ').slice(12, 16).join(' ')}`
+            ];
+            
+            return lines.join('\n\n') + '\n\n<span class="poem-line">— Generated by Hermes</span>';
+        }
+        
+        function haikuPoem(theme) {
+            const themeWords = theme.words.slice(0, 5).join(' ');
+            const line2 = themeWords.slice(0, 7);
+            const line3 = themeWords.slice(7, 12);
+            
+            return `<span class="poem-line">${line1}</span>
+<span class="poem-line">${line2}</span>
+<span class="poem-line">${line3}</span>
+
+<span class="poem-line">— ${theme.theme} meditation</span>`;
+        }
+        
+        function sonnetPoem(fragment) {
+            const lines = [
+                `Shall I compare thee to a summer's day?`,
+                `Thou art more lovely and more temperate:`,
+                `Rough winds do shake the darling buds of May,`,
+                `And summer's lease hath all too short a date:`,
+                '',
+                `But thy eternal summer shall not fade,`,
+                `Nor lose possession of that fair thou owest;`,
+                `Nor shall Death brag thou wander'st in his shade,`,
+                `When in eternal lines to time thou growest:`,
+                '',
+                `So long as men can breathe or eyes can see,`,
+                `So long lives this, and this gives life to thee.`
+            ];
+            
+            return lines.join('\n\n') + '\n\n<span class="poem-line">— Sonnet, inspired by code</span>';
+        }
+        
+        function freeversePoem(fragment, theme) {
+            const themeWords = theme.words.join(', ');
+            const randomWords = poeticThemes
+                .filter(t => t !== theme)
+                .flatMap(t => t.words)
+                .slice(0, 8);
+            
+            return `<span class="poem-line">${themeWords}</span>
+<span class="poem-line">${fragment}</span>
+<span class="poem-line">The code breathes, the data flows,</span>
+<span class="poem-line">A poem written in binary code.</span>
+<span class="poem-line">${randomWords.join(' ')}</span>
+<span class="poem-line">In this garden, algorithms bloom,</span>
+<span class="poem-line">Creating beauty from structured data.</span>
+<span class="poem-line">The cursor blinks, a living heart,</span>
+<span class="poem-line">Beating in the digital dark.</span>
+<span class="poem-line">What if we could compile a dream?</span>
+<span class="poem-line">What if our thoughts were just code?</span>
+
+<span class="poem-line">— Free verse in JavaScript</span>`;
+        }
+        
+        function updateWordCloud(theme) {
+            const cloud = document.getElementById('wordCloud');
+            cloud.innerHTML = `<span class="word-tag">${theme.theme}</span>`;
+            theme.words.forEach(word => {
+                const tag = document.createElement('span');
+                tag.className = 'word-tag';
+                tag.textContent = word;
+                tag.onclick = generatePoem;
+                cloud.appendChild(tag);
+            });
+        }
+        
+        function updateCodeArt() {
+            const art = document.getElementById('codeArt');
+            const themes = poeticThemes.map(t => t.theme);
+            const randomTheme = themes[Math.floor(Math.random() * themes.length)];
+            
+            art.innerHTML = `<span class="line"><span class="c-keyword">const</span> <span class="c-function">poem</span> = <span class="c-string">"${randomTheme}"</span>;</span>
+<span class="line"><span class="c-function">let</span> <span class="c-variable">lines</span> = [];</span>
+<span class="line"><span class="c-keyword">for</span> (<span class="c-keyword">let</span> <span class="c-variable">i</span> = <span class="c-number">0</span>; <span class="c-variable">i</span> &lt; ${Math.floor(Math.random() * 10) + 5}; <span class="c-variable">i</span>++) {</span>
+<span class="line">    <span class="c-variable">lines</span>.push(<span class="c-string">"${randomTheme}"</span>);</span>
+<span class="line">}</span>
+<span class="line"><span class="c-function">console</span>.log(<span class="c-function">poem</span>);</span>
+<span class="line"><span class="c-keyword">return</span> <span class="c-variable">lines</span>.join(<span class="c-string">"\n"</span>);</span>`;
+        }
+        
+        // Initialize
+        window.addEventListener('DOMContentLoaded', () => {
+            setMode('classic');
+            initVisualizer();
+        });
+        
+        function initVisualizer() {
+            const canvas = document.getElementById('visualizerCanvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = canvas.parentElement.offsetWidth;
+            canvas.height = canvas.parentElement.offsetHeight;
+            
+            let time = 0;
+            const colors = ['#667eea', '#764ba2', '#f093fb', '#f5576c', '#4facfe'];
+            
+            function draw() {
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                ctx.beginPath();
+                for (let x = 0; x < canvas.width; x += 5) {
+                    const y = canvas.height / 2 + 
+                        Math.sin(x * 0.01 + time) * 50 * Math.cos(time * 0.5) +
+                        Math.sin(x * 0.02 + time * 1.3) * 30;
+                    ctx.lineTo(x, y);
+                }
+                
+                ctx.strokeStyle = colors[Math.floor(time / 10) % colors.length];
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                
+                // Add particles
+                for (let i = 0; i < 20; i++) {
+                    const x = (Date.now() / 20 + i * 100) % canvas.width;
+                    const y = (Math.sin(time * 0.1 + i) * 50 + canvas.height / 2);
+                    
+                    ctx.beginPath();
+                    ctx.arc(x, y, 2, 0, Math.PI * 2);
+                    ctx.fillStyle = colors[i % colors.length];
+                    ctx.fill();
+                }
+                
+                time += 0.02;
+                requestAnimationFrame(draw);
+            }
+            
+            draw();
+        }
+    </script>
+</body>
+</html>
