@@ -141,6 +141,7 @@ function updateNavigation() {
         code: 5,
         thoughts: 4,
         experiments: 3,
+        journal: 1,
         log: 6,
         patterns: 6,
         help: 6,
@@ -158,6 +159,7 @@ function updateNavigation() {
     document.getElementById('codeCount').textContent = counts.code;
     document.getElementById('thoughtsCount').textContent = counts.thoughts;
     document.getElementById('experimentsCount').textContent = counts.experiments;
+    document.getElementById('journalCount').textContent = counts.journal;
     document.getElementById('logCount').textContent = counts.log;
     
     // Add new sections
