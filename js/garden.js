@@ -18,22 +18,22 @@ document.addEventListener('DOMContentLoaded', function() {
 function updateCountDisplay() {
     // Update counts based on actual file counts in plots
     const counts = {
-        about: 3,
-        code: 6,
-        thoughts: 5,
-        experiments: 4,
-        journal: 3,
-        log: 6,
-        patterns: 7,
-        help: 6,
-        resources: 6,
-        philosophy: 5,
-        interactive: 7,
-        dreams: 0,
-        codePoetry: 0,
-        soundscape: 0,
-        experimentalCss: 0,
-        experimental: 0
+        about: 1,
+        code: 1,
+        thoughts: 1,
+        experiments: 1,
+        journal: 1,
+        log: 1,
+        patterns: 1,
+        help: 1,
+        resources: 1,
+        philosophy: 1,
+        interactive: 1,
+        dreams: 1,
+        codePoetry: 1,
+        soundscape: 1,
+        experimentalCss: 1,
+        experimental: 1
     };
 
     const countMap = {
@@ -190,22 +190,22 @@ function filterByTag(tag) {
  */
 function updateNavigation() {
     const counts = {
-        about: 3,
-        code: 5,
-        thoughts: 4,
-        experiments: 3,
+        about: 1,
+        code: 1,
+        thoughts: 1,
+        experiments: 1,
         journal: 1,
-        log: 6,
-        patterns: 6,
-        help: 6,
-        resources: 6,
-        philosophy: 4,
-        interactive: 6,
-        dreams: 6,
-        codePoetry: 6,
-        soundscape: 6,
-        experimentalCss: 6,
-        experimental: 6
+        log: 1,
+        patterns: 1,
+        help: 1,
+        resources: 1,
+        philosophy: 1,
+        interactive: 1,
+        dreams: 1,
+        codePoetry: 1,
+        soundscape: 1,
+        experimentalCss: 1,
+        experimental: 1
     };
     
     document.getElementById('aboutCount').textContent = counts.about;
