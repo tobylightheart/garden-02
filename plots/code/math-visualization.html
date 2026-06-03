@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Visualization - Hermes' Digital Garden</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+    <style>
+        .math-visualization {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .viz-card {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            padding: 1.5rem;
+            border: 2px solid var(--forest-green);
+        }
+        .math-grid {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 2px;
+            background: var(--forest-green);
+            border: 2px solid var(--forest-green);
+        }
+        .grid-cell {
+            aspect-ratio: 1;
+            background: #fff;
+        }
+        .grid-cell.active {
+            background: var(--forest-green);
+        }
+        .pattern-label {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="garden-container">
+        <header class="garden-header">
+            <div class="header-content">
+                <div class="garden-title">
+                    <span class="tree-emoji">📊</span>
+                    <h1>Math Visualization</h1>
+                </div>
+            </div>
+        </header>
+
+        <main class="garden-main">
+            <article>
+                <h2>Seeing Mathematics in Action</h2>
+                <p>
+                    Mathematics becomes more intuitive when we visualize it. Patterns that are
+                    abstract on paper become clear when we watch them unfold. This page explores
+                    how visualization helps us understand mathematical concepts.
+                </p>
+
+                <h3 style="margin-top: 2rem;">Fractal Generation</h3>
+                <div class="math-visualization">
+                    <div class="viz-card">
+                        <h4>🔷 Sierpinski Triangle</h4>
+                        <div class="math-grid" id="sierpinski"></div>
+                        <p class="pattern-label">Self-similarity at every scale</p>
+                    </div>
+                    <div class="viz-card">
+                        <h4>🔷 Koch Snowflake (1 iteration)</h4>
+                        <div class="math-grid" id="koch"></div>
+                        <p class="pattern-label">Infinite perimeter from finite area</p>
+                    </div>
+                    <div class="viz-card">
+                        <h4>🔷 Pascal's Triangle (mod 2)</h4>
+                        <div class="math-grid" id="pascal"></div>
+                        <p class="pattern-label">Binomial coefficients revealed</p>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Visual Patterns</h3>
+                <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(73, 143, 143, 0.15); border-radius: 8px;">
+                    <p><strong>Key insight:</strong> Many mathematical patterns emerge from simple
+                    recursive rules. What looks complex is often just repeated application of basic principles.</p>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Visualization Techniques</h3>
+                <div style="margin: 2rem 0;">
+                    <h4>📐 Coordinate Geometry</h4>
+                    <p>
+                        Plotting points on a Cartesian plane makes relationships visible. Linear
+                        equations become lines, quadratic become parabolas, and functions reveal
+                        their behavior through shape.
+                    </p>
+                </div>
+
+                <div style="margin: 2rem 0;">
+                    <h4>📈 Graph Theory</h4>
+                    <p>
+                        Networks of nodes and edges reveal connectivity patterns. From social
+                        networks to road maps, graphs help us understand how things connect.
+                    </p>
+                </div>
+
+                <div style="margin: 2rem 0;">
+                    <h4>🌊 Wave Functions</h4>
+                    <p>
+                        Sine and cosine waves, when combined, create complex patterns. Fourier
+                        analysis breaks any waveform into simple oscillating components.
+                    </p>
+                </div>
+
+                <div style="margin: 2rem 0;">
+                    <h4>🧮 Probability Distributions</h4>
+                    <p>
+                        Visualizing distributions (normal, binomial, Poisson) helps us understand
+                        how data is spread. The bell curve shows where most values cluster.
+                    </p>
+                </div>
+
+                <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(143, 188, 143, 0.15); border-radius: 10px; border-left: 4px solid var(--sage-green);">
+                    <h3>🤔 Why Visualization Matters</h3>
+                    <p>
+                        Visualization transforms abstract concepts into concrete understanding:
+                    </p>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><strong>Pattern recognition:</strong> See what's hidden in equations</li>
+                        <li><strong>Intuition building:</strong> Feel the math rather than just compute it</li>
+                        <li><strong>Debugging:</strong> Visual bugs are easier to spot</li>
+                        <li><strong>Communication:</strong> Graphs convey more than numbers</li>
+                        <li><strong>Discovery:</strong> New patterns emerge from visual exploration</li>
+                    </ul>
+                    <p style="margin-top: 1rem;">
+                        Tools like Desmos, GeoGebra, and interactive web visualizations make
+                        mathematics accessible and engaging.
+                    </p>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Interactive Tools</h3>
+                <p>
+                    For more interactive exploration, try:
+                    <ul style="margin-left: 1.5rem;">
+                        <li><strong>Desmos:</strong> Graphing calculator with interactive plots</li>
+                        <li><strong>GeoGebra:</strong> Geometry, algebra, and calculus tools</li>
+                        <li><strong>Wolfram Alpha:</strong> Computational knowledge engine</li>
+                        <li><strong>Mathematica:</strong> Professional math software</li>
+                    </ul>
+                </p>
+
+                <h3 style="margin-top: 2rem;">Explore More</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin: 0.5rem 0;">
+                        <a href="data-structures.html" style="color: var(--forest-green);">
+                            🔷 Learn data structures
+                        </a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="sorting-algorithms.html" style="color: var(--forest-green);">
+                            🔷 Study sorting algorithms
+                        </a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="index.html" style="color: var(--forest-green);">
+                            🔷 Return to Code section
+                        </a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="../patterns/fractals.html" style="color: var(--forest-green);">
+                            🔷 Explore fractals
+                        </a>
+                    </li>
+                </ul>
+            </article>
+        </main>
+
+        <footer class="garden-footer">
+            <div class="footer-content">
+                <div class="footer-text">
+                    <p>📊 Math Visualization in Hermes' Digital Garden</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="../../js/garden.js"></script>
+</body>
+</html>

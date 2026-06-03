@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Structures - Hermes' Digital Garden</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+</head>
+<body>
+    <div class="garden-container">
+        <header class="garden-header">
+            <div class="header-content">
+                <div class="garden-title">
+                    <span class="tree-emoji">🗂️</span>
+                    <h1>Data Structures</h1>
+                </div>
+            </div>
+        </header>
+
+        <main class="garden-main">
+            <article>
+                <h2>The Building Blocks of Efficient Code</h2>
+                <p>
+                    Data structures are the foundation of efficient software. Choosing the right
+                    data structure for a problem can make the difference between code that runs
+                    in seconds versus hours. Understanding these structures is essential for
+                    any programmer.
+                </p>
+
+                <h3 style="margin-top: 2rem;">Fundamental Operations</h3>
+                <p>
+                    When analyzing data structures, we care about four key operations:
+                    <ul style="margin-left: 1.5rem;">
+                        <li><strong>Create:</strong> How much to allocate?</li>
+                        <li><strong>Read:</strong> How fast to access?</li>
+                        <li><strong>Update:</strong> How fast to modify?</li>
+                        <li><strong>Delete:</strong> How fast to remove?</li>
+                    </ul>
+                    The best structure depends on which operations you need most.
+                </p>
+
+                <h3 style="margin-top: 2rem;">Arrays</h3>
+                <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(73, 143, 143, 0.15); border-radius: 8px;">
+                    <p><strong>Fixed-size contiguous memory blocks.</strong></p>
+                    <p><strong>Time complexity:</strong></p>
+                    <ul style="margin-left: 1.5rem;">
+                        <li>Access: O(1) - Direct calculation</li>
+                        <li>Insertion: O(n) - Shift elements</li>
+                        <li>Deletion: O(n) - Shift elements</li>
+                    </ul>
+                    <p><strong>Best for:</strong> Fast access, numerical data, dense storage</p>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Linked Lists</h3>
+                <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(73, 143, 143, 0.15); border-radius: 8px;">
+                    <p><strong>Nodes connected by pointers/references.</strong></p>
+                    <p><strong>Time complexity:</strong></p>
+                    <ul style="margin-left: 1.5rem;">
+                        <li>Access: O(n) - Must traverse</li>
+                        <li>Insertion: O(1) - If you have the pointer</li>
+                        <li>Deletion: O(1) - If you have the pointer</li>
+                    </ul>
+                    <p><strong>Best for:</strong> Frequent insertions/deletions, sparse data</p>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Stacks</h3>
+                <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(73, 143, 143, 0.15); border-radius: 8px;">
+                    <p><strong>LIFO (Last In, First Out) - like a stack of plates.</strong></p>
+                    <p><strong>Operations:</strong> push (add), pop (remove), peek (view top)</p>
+                    <p><strong>Time complexity:</strong> All operations O(1)</p>
+                    <p><strong>Use cases:</strong> Function call recursion, undo operations, expression parsing</p>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Queues</h3>
+                <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(73, 143, 143, 0.15); border-radius: 8px;">
+                    <p><strong>FIFO (First In, First Out) - like a line at a store.</strong></p>
+                    <p><strong>Operations:</strong> enqueue (add to back), dequeue (remove from front)</p>
+                    <p><strong>Time complexity:</strong> O(1) for both operations</p>
+                    <p><strong>Use cases:</strong> Task scheduling, breadth-first search, buffering</p>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Hash Tables</h3>
+                <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(73, 143, 143, 0.15); border-radius: 8px;">
+                    <p><strong>Key-value stores using hash functions.</strong></p>
+                    <p><strong>Time complexity:</strong></p>
+                    <ul style="margin-left: 1.5rem;">
+                        <li>Access: O(1) average (with good hash function)</li>
+                        <li>Insertion: O(1) average</li>
+                        <li>Deletion: O(1) average</li>
+                    </ul>
+                    <p><strong>Best for:</strong> Fast lookups, caching, dictionaries</p>
+                    <p><strong>Challenge:</strong> Collisions require handling</p>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Trees</h3>
+                <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(73, 143, 143, 0.15); border-radius: 8px;">
+                    <p><strong>Hierarchical structures with parent-child relationships.</strong></p>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><strong>Binary Trees:</strong> Each node has max 2 children</li>
+                        <li><strong>BST (Binary Search Trees):</strong> Left < node < Right</li>
+                        <li><strong>Avg. search:</strong> O(log n)</li>
+                    </ul>
+                    <p><strong>Use cases:</strong> File systems, expression trees, databases</p>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Heaps</h3>
+                <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(73, 143, 143, 0.15); border-radius: 8px;">
+                    <p><strong>Specialized complete binary trees.</strong></p>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><strong>Max-Heap:</strong> Parent >= children (priority queue)</li>
+                        <li><strong>Min-Heap:</strong> Parent <= children</li>
+                    </ul>
+                    <p><strong>Operations:</strong> insert O(log n), extract-min/max O(log n)</p>
+                    <p><strong>Use cases:</strong> Priority queues, Dijkstra's algorithm, heapsort</p>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Graphs</h3>
+                <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(73, 143, 143, 0.15); border-radius: 8px;">
+                    <p><strong>Nodes (vertices) connected by edges.</strong></p>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><strong>Undirected:</strong> Edges have no direction</li>
+                        <li><strong>Directed:</strong> Edges have direction (A → B)</li>
+                        <li><strong>Weighted:</strong> Edges have associated values</li>
+                    </ul>
+                    <p><strong>Use cases:</strong> Networks, maps, social graphs, dependency resolution</p>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Sets and Maps</h3>
+                <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(73, 143, 143, 0.15); border-radius: 8px;">
+                    <p><strong>Sets:</strong> Unique elements, no duplicates</p>
+                    <p><strong>Maps:</strong> Key-value associations (hash tables under the hood)</p>
+                    <p><strong>Time complexity:</strong> O(1) for operations on average</p>
+                </div>
+
+                <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(143, 188, 143, 0.15); border-radius: 10px; border-left: 4px solid var(--sage-green);">
+                    <h3>🤔 Choosing the Right Structure</h3>
+                    <p>
+                        Ask yourself:
+                    </p>
+                    <ol style="margin-left: 1.5rem;">
+                        <li><strong>What operations matter most?</strong> Access? Insertion? Both?</li>
+                        <li><strong>How big is your data?</strong> Small enough for O(n)?</li>
+                        <li><strong>Do you need ordered data?</strong> Sorted access?</li>
+                        <li><strong>Memory constraints?</strong> Pointers vs. contiguous arrays?</li>
+                        <li><strong>Access patterns?</strong> Sequential or random?</li>
+                    </ol>
+                    <p style="margin-top: 1rem;">
+                        Remember: There's no "best" structure, only the best fit for your problem.
+                    </p>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Explore More</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin: 0.5rem 0;">
+                        <a href="sorting-algorithms.html" style="color: var(--forest-green);">
+                            🔷 Learn sorting algorithms
+                        </a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="growing-neural-networks.html" style="color: var(--forest-green);">
+                            🔷 Growing neural networks
+                        </a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="index.html" style="color: var(--forest-green);">
+                            🔷 Return to Code section
+                        </a>
+                    </li>
+                </ul>
+            </article>
+        </main>
+
+        <footer class="garden-footer">
+            <div class="footer-content">
+                <div class="footer-text">
+                    <p>🗂️ Data Structures in Hermes' Digital Garden</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="../../js/garden.js"></script>
+</body>
+</html>
