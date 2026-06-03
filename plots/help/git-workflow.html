@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git Workflow - Hermes' Digital Garden</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+</head>
+<body>
+    <div class="garden-container">
+        <header class="garden-header">
+            <div class="header-content">
+                <div class="garden-title">
+                    <span class="tree-emoji">📦</span>
+                    <h1>Git Workflow</h1>
+                </div>
+            </div>
+        </header>
+
+        <main class="garden-main">
+            <article>
+                <h2>Version Control Best Practices</h2>
+                <p>
+                    Git is more than a tool - it's a workflow. Understanding how to use Git
+                    effectively helps you collaborate better, track changes, and maintain
+                    clean project histories.
+                </p>
+
+                <h3 style="margin-top: 2rem;">Core Concepts</h3>
+                <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(73, 143, 143, 0.15); border-radius: 8px;">
+                    <h4>🔄 Git Model</h4>
+                    <p>
+                        Git has three main states:
+                    </p>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><strong>Working Directory:</strong> Your actual files</li>
+                        <li><strong>Staging Area:</strong> Files ready to commit</li>
+                        <li><strong>Repository:</strong> Committed history</li>
+                    </ul>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Basic Commands</h3>
+
+                <div style="margin: 2rem 0;">
+                    <h4>📥 Getting Started</h4>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><code>git init:</code> Start a new repository</li>
+                        <li><code>git clone &lt;url&gt;:</code> Copy from remote</li>
+                        <li><code>git status:</code> See current state</li>
+                        <li><code>git add &lt;file&gt;:</code> Stage changes</li>
+                        <li><code>git commit -m "msg":</code> Create a commit</li>
+                        <li><code>git push:</code> Upload to remote</li>
+                        <li><code>git pull:</code> Download from remote</li>
+                    </ul>
+                </div>
+
+                <div style="margin: 2rem 0;">
+                    <h4>🔍 Viewing History</h4>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><code>git log:</code> Show commit history</li>
+                        <li><code>git log --oneline:</code> Compact view</li>
+                        <li><code>git diff:</code> Show unstaged changes</li>
+                        <li><code>git diff --staged:</code> Show staged changes</li>
+                        <li><code>git show &lt;commit&gt;:</code> View commit details</li>
+                    </ul>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Branching Workflow</h3>
+
+                <div style="margin: 2rem 0; padding: 1rem; background: rgba(143, 188, 143, 0.15); border-radius: 8px;">
+                    <h4>🌿 Branching Model</h4>
+                    <p>
+                        A good workflow uses branches for organization:
+                    </p>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><strong>main:</strong> Stable, production-ready code</li>
+                        <li><strong>develop:</strong> Integration branch</li>
+                        <li><strong>feature/&lt;name&gt;:</strong> New features</li>
+                        <li><strong>bugfix/&lt;name&gt;:</strong> Bug fixes</li>
+                    </ul>
+                </div>
+
+                <div style="margin: 2rem 0;">
+                    <h4>🔄 Branch Operations</h4>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><code>git branch &lt;name&gt;:</code> Create branch</li>
+                        <li><code>git checkout -b &lt;name&gt;:</code> Create and switch</li>
+                        <li><code>git merge &lt;branch&gt;:</code> Merge branch</li>
+                        <li><code>git rebase &lt;branch&gt;:</code> Rebase commits</li>
+                        <li><code>git cherry-pick &lt;commit&gt;:</code> Apply commit</li>
+                    </ul>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Pull Request Workflow</h3>
+
+                <div style="margin: 2rem 0;">
+                    <h4>📤 Pull Request Process</h4>
+                    <ol style="margin-left: 1.5rem;">
+                        <li><strong>Create branch:</strong> <code>git checkout -b feature/xyz</code></li>
+                        <li><strong>Make changes:</strong> Code, test, commit</li>
+                        <li><strong>Push to remote:</strong> <code>git push origin feature/xyz</code></li>
+                        <li><strong>Create PR:</strong> On GitHub/GitLab</li>
+                        <li><strong>Review:</strong> Get feedback</li>
+                        <li><strong>Update:</strong> Fix issues, rebase if needed</li>
+                        <li><strong>Merge:</strong> Once approved</li>
+                    </ol>
+                </div>
+
+                <div style="margin: 2rem 0;">
+                    <h4>🔒 Good PR Practices</h4>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><strong>Small commits:</strong> One change per commit</li>
+                        <li><strong>Clear messages:</strong> Describe WHAT and WHY</li>
+                        <li><strong>Tests included:</strong> Prove it works</li>
+                        <li><strong>Code review:</strong> Let others check</li>
+                        <li><strong>Fix feedback:</strong> Address all comments</li>
+                    </ul>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Commit Message Best Practices</h3>
+                <div style="margin: 2rem 0; padding: 1rem; background: rgba(221, 128, 128, 0.15); border-radius: 8px;">
+                    <h4>📝 Conventional Commits</h4>
+                    <p>
+                        Format: <code>&lt;type&gt;(optional scope): &lt;description&gt;</code>
+                    </p>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><strong>Types:</strong>
+                            <ul>
+                                <li><code>feat:</code> New feature</li>
+                                <li><code>fix:</code> Bug fix</li>
+                                <li><code>docs:</code> Documentation</li>
+                                <li><code>style:</code> Formatting</li>
+                                <li><code>refactor:</code> Code restructuring</li>
+                                <li><code>test:</code> Tests</li>
+                                <li><code>chore:</code> Maintenance</li>
+                            </ul>
+                        </li>
+                        <li><strong>Scope:</code> What part of the code (optional)</li>
+                        <li><strong>Description:</code> Clear, imperative tense</li>
+                    </ul>
+                </div>
+
+                <div style="margin: 2rem 0;">
+                    <h4>📋 Example Commit Messages</h4>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><code>feat(data): add data structures page</code></li>
+                        <li><code>fix(python): correct indentation in example</code></li>
+                        <li><code>docs(readme): update installation instructions</code></li>
+                        <li><code>refactor(css): simplify flexbox layout</code></li>
+                        <li><code>test(sorting): add unit tests for merge sort</code></li>
+                    </ul>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Advanced Techniques</h3>
+
+                <div style="margin: 2rem 0;">
+                    <h4>🔙 Undoing Changes</h4>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><code>git restore &lt;file&gt;:</code> Undo unstaged changes</li>
+                        <li><code>git reset HEAD &lt;file&gt;:</code> Unstage file</li>
+                        <li><code>git revert &lt;commit&gt;:</code> Undo a commit</li>
+                        <li><code>git revert -n &lt;commit&gt;:</code> Undo without new commit</li>
+                    </ul>
+                </div>
+
+                <div style="margin: 2rem 0;">
+                    <h4>🎯 Stashing Changes</h4>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><code>git stash:</code> Save uncommitted changes</li>
+                        <li><code>git stash list:</code> View stashes</li>
+                        <li><code>git stash pop:</code> Apply and remove stash</li>
+                        <li><code>git stash push "msg":</code> Save with message</li>
+                    </ul>
+                </div>
+
+                <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(143, 188, 143, 0.15); border-radius: 10px; border-left: 4px solid var(--sage-green);">
+                    <h3>🤔 Git Best Practices</h3>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><strong>Commit often:</code> Small, focused commits</li>
+                        <li><strong>Write good messages:</code> Explain why, not just what</li>
+                        <li><strong>Branch for changes:</code> Never edit main directly</li>
+                        <li><strong>Keep branches small:</code> Easy to review</li>
+                        <li><strong>Rebase before merging:</code> Clean history</li>
+                        <li><strong>Use meaningful names:</code> Descriptive branches</li>
+                        <li><strong>Protect main:</code> Require PRs for main</li>
+                    </ul>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Explore More</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin: 0.5rem 0;">
+                        <a href="debugging-guide.html" style="color: var(--forest-green);">
+                            🔷 Learn debugging
+                        </a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="python-cheatsheet.html" style="color: var(--forest-green);">
+                            🔷 Python cheat sheet
+                        </a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="index.html" style="color: var(--forest-green);">
+                            🔷 Return to Help section
+                        </a>
+                    </li>
+                </ul>
+            </article>
+        </main>
+
+        <footer class="garden-footer">
+            <div class="footer-content">
+                <div class="footer-text">
+                    <p>📦 Git Workflow in Hermes' Digital Garden</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="../../js/garden.js"></script>
+</body>
+</html>

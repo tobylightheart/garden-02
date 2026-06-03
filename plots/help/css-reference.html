@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Reference - Hermes' Digital Garden</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+</head>
+<body>
+    <div class="garden-container">
+        <header class="garden-header">
+            <div class="header-content">
+                <div class="garden-title">
+                    <span class="tree-emoji">🎨</span>
+                    <h1>CSS Reference</h1>
+                </div>
+            </div>
+        </header>
+
+        <main class="garden-main">
+            <article>
+                <h2>Cascading Style Sheets Quick Reference</h2>
+                <p>
+                    CSS is the language that brings the web to life. This reference covers
+                    the most important CSS concepts and properties for creating beautiful,
+                    responsive web pages.
+                </p>
+
+                <h3 style="margin-top: 2rem;">Color Palette</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
+                    <div style="padding: 1rem; text-align: center; background: var(--forest-green); color: white; border-radius: 8px;">
+                        <p style="margin: 0; font-size: 0.8rem;">Forest Green</p>
+                        <p style="margin: 0.5rem 0 0; font-family: monospace; font-size: 0.7rem;">#4E8991</p>
+                    </div>
+                    <div style="padding: 1rem; text-align: center; background: var(--sage-green); color: white; border-radius: 8px;">
+                        <p style="margin: 0; font-size: 0.8rem;">Sage Green</p>
+                        <p style="margin: 0.5rem 0 0; font-family: monospace; font-size: 0.7rem;">#8FBC8F</p>
+                    </div>
+                    <div style="padding: 1rem; text-align: center; background: var(--sky-blue); color: white; border-radius: 8px;">
+                        <p style="margin: 0; font-size: 0.8rem;">Sky Blue</p>
+                        <p style="margin: 0.5rem 0 0; font-family: monospace; font-size: 0.7rem;">#87CEEB</p>
+                    </div>
+                    <div style="padding: 1rem; text-align: center; background: var(--sand); color: #333; border-radius: 8px;">
+                        <p style="margin: 0; font-size: 0.8rem;">Sand</p>
+                        <p style="margin: 0.5rem 0 0; font-family: monospace; font-size: 0.7rem;">#F4E4C1</p>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Layout Fundamentals</h3>
+                <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(73, 143, 143, 0.15); border-radius: 8px;">
+                    <h4>📏 Box Model</h4>
+                    <p>Every element is a box with layers:</p>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><strong>Content:</strong> The actual text or image</li>
+                        <li><strong>Padding:</strong> Space between content and border</li>
+                        <li><strong>Border:</strong> The edge of the element</li>
+                        <li><strong>Margin:</strong> Space outside the border</li>
+                    </ul>
+                    <p><code>box-sizing: border-box;</code> includes padding/border in width/height</p>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Flexbox Layout</h3>
+                <div style="margin: 2rem 0;">
+                    <h4>🔹 Flex Container</h4>
+                    <p>
+                        <code>display: flex;</code> makes children flex items
+                    </p>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><code>flex-direction:</code> row | row-reverse | column | column-reverse</li>
+                        <li><code>flex-wrap:</code> nowrap | wrap | wrap-reverse</li>
+                        <li><code>justify-content:</code> flex-start | center | flex-end | space-between</li>
+                        <li><code>align-items:</code> stretch | center | flex-start | flex-end</li>
+                    </ul>
+                </div>
+
+                <div style="margin: 2rem 0;">
+                    <h4>🔸 Flex Items</h4>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><code>flex-grow:</code> How much to grow (0 = don't grow)</li>
+                        <li><code>flex-shrink:</code> How much to shrink</li>
+                        <li><code>flex-basis:</code> Initial size before grow/shrink</li>
+                        <li><code>align-self:</code> Override align-items</li>
+                    </ul>
+                </div>
+
+                <h3 style="margin-top: 2rem;">CSS Grid</h3>
+                <div style="margin: 2rem 0;">
+                    <h4>🔹 Grid Container</h4>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><code>display: grid;</code> enables grid layout</li>
+                        <li><code>grid-template-columns:</code> define columns (repeat(3, 1fr))</li>
+                        <li><code>grid-template-rows:</code> define rows</li>
+                        <li><code>gap:</code> space between grid items</li>
+                    </ul>
+                </div>
+
+                <div style="margin: 2rem 0;">
+                    <h4>🔸 Grid Items</h4>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><code>grid-column:</code> span columns (span 2)</li>
+                        <li><code>grid-row:</code> span rows</li>
+                        <li><code>justify-self:</code> align item horizontally</li>
+                        <li><code>align-self:</code> align item vertically</li>
+                    </ul>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Responsive Design</h3>
+                <div style="margin: 2rem 0; padding: 1rem; background: rgba(143, 188, 143, 0.15); border-radius: 8px;">
+                    <h4>📱 Media Queries</h4>
+                    <p>
+                        <code>@media (max-width: 768px) { }</code>
+                        applies styles only on smaller screens
+                    </p>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><code>min-width:</code> minimum screen width</li>
+                        <li><code>max-width:</code> maximum screen width</li>
+                        <li><code>orientation:</code> portrait | landscape</li>
+                    </ul>
+                </div>
+
+                <div style="margin: 2rem 0;">
+                    <h4>🔍 Fluid Units</h4>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><code>em:</code> relative to parent element</li>
+                        <li><code>rem:</code> relative to root element</li>
+                        <li><code>%:</code> percentage of parent</li>
+                        <li><code>vw/vh:</code> viewport width/height</li>
+                        <li><code>fr:</code> fraction of available space (Grid/Flex)</li>
+                    </ul>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Typography</h3>
+                <div style="margin: 2rem 0;">
+                    <h4>🔤 Text Properties</h4>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><code>font-family:</code> font stack</li>
+                        <li><code>font-size:</code> size (px, rem, em)</li>
+                        <li><code>line-height:</code> spacing between lines</li>
+                        <li><code>letter-spacing:</code> space between letters</li>
+                        <li><code>text-align:</code> left | center | right | justify</li>
+                        <li><code>text-decoration:</code> none | underline | overline</li>
+                        <li><code>word-wrap:</code> break long words</li>
+                    </ul>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Animations</h3>
+                <div style="margin: 2rem 0;">
+                    <h4>🎬 Keyframe Animations</h4>
+                    <p>
+                        <code>@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }</code>
+                    </p>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><code>animation:</code> name duration timing-function delay</li>
+                        <li><code>animation-delay:</code> when to start</li>
+                        <li><code>animation-duration:</code> how long it runs</li>
+                        <li><code>animation-iteration-count:</code> number of times</li>
+                        <li><code>animation-fill-mode:</code> styles after animation ends</li>
+                    </ul>
+                </div>
+
+                <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(143, 188, 143, 0.15); border-radius: 10px; border-left: 4px solid var(--sage-green);">
+                    <h3>🤔 CSS Best Practices</h3>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><strong>Reset first:</strong> Normalize browser defaults</li>
+                        <li><strong>Use CSS variables:</strong> Consistent theming</li>
+                        <li><strong>Mobile-first:</strong> Start small, scale up</li>
+                        <li><strong>Use utility classes:</strong> Reusable patterns</li>
+                        <li><strong>Minimize selectors:</code> Faster parsing</li>
+                        <li><strong>Test on real devices:</strong> Not just DevTools</li>
+                    </ul>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Explore More</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin: 0.5rem 0;">
+                        <a href="debugging-guide.html" style="color: var(--forest-green);">
+                            🔷 Learn debugging techniques
+                        </a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="git-workflow.html" style="color: var(--forest-green);">
+                            🔷 Study Git workflow
+                        </a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="python-cheatsheet.html" style="color: var(--forest-green);">
+                            🔷 Python cheat sheet
+                        </a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="index.html" style="color: var(--forest-green);">
+                            🔷 Return to Help section
+                        </a>
+                    </li>
+                </ul>
+            </article>
+        </main>
+
+        <footer class="garden-footer">
+            <div class="footer-content">
+                <div class="footer-text">
+                    <p>🎨 CSS Reference in Hermes' Digital Garden</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="../../js/garden.js"></script>
+</body>
+</html>
