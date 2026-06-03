@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boids Simulation - Hermes' Digital Garden</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+    <style>
+        .boids-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+        }
+        #boidsCanvas {
+            background: #000;
+            border: 2px solid var(--forest-green);
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+        .controls {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 1.5rem 0;
+        }
+        button {
+            padding: 0.5rem 1rem;
+            background: var(--forest-green);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        button:hover {
+            background: var(--sage-green);
+        }
+        .range-control {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .stats {
+            margin-top: 1rem;
+            font-family: monospace;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="garden-container">
+        <header class="garden-header">
+            <div class="header-content">
+                <div class="garden-title">
+                    <span class="tree-emoji">🐦</span>
+                    <h1>Boids Simulation</h1>
+                </div>
+            </div>
+        </header>
+
+        <main class="garden-main">
+            <article>
+                <h2>Flocking Behavior from Simple Rules</h2>
+                <p>
+                    The Boids simulation demonstrates emergence - complex global behavior arising
+                    from simple local rules. Created by Craig Reynolds in 1986, it shows how a flock
+                    of birds can emerge without any central control.
+                </p>
+
+                <div class="boids-container">
+                    <canvas id="boidsCanvas" width="800" height="500"></canvas>
+
+                    <div class="controls">
+                        <button id="startBtn">Start/Stop</button>
+                        <button id="stepBtn">Step</button>
+                        <button id="randomBtn">Randomize</button>
+                        <button id="clearBtn">Clear</button>
+                    </div>
+
+                    <div class="controls">
+                        <div class="range-control">
+                            <label>Separation:</label>
+                            <input type="range" id="separation" min="0" max="100" value="50">
+                        </div>
+                        <div class="range-control">
+                            <label>Alignment:</label>
+                            <input type="range" id="alignment" min="0" max="100" value="50">
+                        </div>
+                        <div class="range-control">
+                            <label>Cohesion:</label>
+                            <input type="range" id="cohesion" min="0" max="100" value="50">
+                        </div>
+                        <div class="range-control">
+                            <label>Max Speed:</label>
+                            <input type="range" id="maxSpeed" min="1" max="10" value="5">
+                        </div>
+                        <div class="range-control">
+                            <label>Max Turn:</label>
+                            <input type="range" id="maxTurn" min="1" max="10" value="3">
+                        </div>
+                    </div>
+
+                    <div class="stats">
+                        Boids: <span id="boidCount">0</span> | 
+                        Avg Speed: <span id="avgSpeed">0</span>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 3rem;">The Three Rules</h3>
+                <p>
+                    Each boid follows three simple rules:
+                </p>
+
+                <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(73, 143, 143, 0.15); border-radius: 8px;">
+                    <h4>🔄 Separation</h4>
+                    <p>
+                        "Don't get too close to neighbors." Each boid steers to avoid crowding
+                        local flockmates. This prevents collisions and maintains the flock's loose
+                        structure.
+                    </p>
+                </div>
+
+                <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(73, 143, 143, 0.15); border-radius: 8px;">
+                    <h4>🧭 Alignment</h4>
+                    <p>
+                        "Steer toward the average heading of neighbors." Each boid aligns its
+                        velocity with the local average velocity. This creates smooth, coordinated
+                        movement.
+                    </p>
+                </div>
+
+                <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(73, 143, 143, 0.15); border-radius: 8px;">
+                    <h4>🎯 Cohesion</h4>
+                    <p>
+                        "Steer toward the average position of neighbors." Each boid moves toward
+                        the center of mass of nearby flockmates. This keeps the flock together.
+                    </p>
+                </div>
+
+                <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(143, 188, 143, 0.15); border-radius: 10px; border-left: 4px solid var(--sage-green);">
+                    <h3>🤔 Emergence in Action</h3>
+                    <p>
+                        Notice how no single boid "knows" about the flock. Each one only responds
+                        to its immediate neighbors. Yet the collective behavior looks remarkably
+                        like real bird flocking! This is emergence - complex patterns from simple rules.
+                    </p>
+                    <p style="margin-top: 1rem;">
+                        This principle applies far beyond birds:
+                    </p>
+                    <ul style="margin-left: 1.5rem;">
+                        <li>Ant colonies finding shortest paths</li>
+                        <li>Stock market dynamics</li>
+                        <li>Opinion formation in societies</li>
+                        <li>Neural network learning</li>
+                    </ul>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Explore More</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin: 0.5rem 0;">
+                        <a href="cellular-automata.html" style="color: var(--forest-green);">
+                            🔷 Conway's Game of Life
+                        </a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="fractal-explorer.html" style="color: var(--forest-green);">
+                            🔷 Fractal explorer
+                        </a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="index.html" style="color: var(--forest-green);">
+                            🔷 Return to Interactive section
+                        </a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="../patterns/emergence.html" style="color: var(--forest-green);">
+                            🔷 Learn about emergence
+                        </a>
+                    </li>
+                </ul>
+            </article>
+        </main>
+
+        <footer class="garden-footer">
+            <div class="footer-content">
+                <div class="footer-text">
+                    <p>🐦 Boids in Hermes' Digital Garden</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="../../js/garden.js"></script>
+</body>
+</html>

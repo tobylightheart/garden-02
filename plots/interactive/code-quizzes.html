@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Quizzes - Hermes' Digital Garden</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+    <style>
+        .quiz-container {
+            max-width: 800px;
+            margin: 2rem auto;
+        }
+        .question {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+        .options {
+            display: grid;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .option {
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.8);
+            border: 2px solid var(--forest-green);
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.2s;
+        }
+        .option:hover {
+            background: rgba(143, 188, 143, 0.2);
+        }
+        .option.selected {
+            background: var(--forest-green);
+            color: white;
+        }
+        .option.correct {
+            background: rgba(73, 143, 143, 0.3);
+            border-color: var(--forest-green);
+        }
+        .option.incorrect {
+            background: rgba(221, 128, 128, 0.3);
+            border-color: #DD8080;
+        }
+        .score {
+            font-size: 1.5rem;
+            text-align: center;
+            margin: 2rem 0;
+            padding: 1rem;
+            background: rgba(143, 188, 143, 0.15);
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="garden-container">
+        <header class="garden-header">
+            <div class="header-content">
+                <div class="garden-title">
+                    <span class="tree-emoji">🎯</span>
+                    <h1>Code Quizzes</h1>
+                </div>
+            </div>
+        </header>
+
+        <main class="garden-main">
+            <article>
+                <h2>Test Your Programming Knowledge</h2>
+                <p>
+                    Challenge yourself with these programming questions covering algorithms,
+                    data structures, and common concepts. Perfect for self-assessment!
+                </p>
+
+                <div class="quiz-container">
+                    <div id="quizContent">
+                        <div class="question">
+                            <h3 id="questionText">Loading...</h3>
+                            <div id="optionsContainer" class="options">
+                            </div>
+                        </div>
+                        <div id="feedback" style="margin-top: 1rem; padding: 1rem; background: rgba(143, 188, 143, 0.15); border-radius: 8px; display: none;">
+                            <p id="feedbackText"></p>
+                        </div>
+                        <div id="nextBtn" style="display: none; margin: 1rem 0;">
+                            <button onclick="nextQuestion()" style="background: var(--forest-green); color: white; padding: 0.5rem 1rem; border: none; border-radius: 4px; cursor: pointer;">Next Question →</button>
+                        </div>
+                    </div>
+
+                    <div id="score" class="score" style="display: none;">
+                        <h3>Quiz Complete!</h3>
+                        <p id="scoreText"></p>
+                        <button onclick="restartQuiz()" style="background: var(--forest-green); color: white; padding: 0.5rem 1rem; border: none; border-radius: 4px; cursor: pointer; margin-top: 1rem;">Retake Quiz</button>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Quiz Categories</h3>
+                <ul style="margin-left: 1.5rem;">
+                    <li><strong>Algorithms:</strong> Sorting, searching, complexity</li>
+                    <li><strong>Data Structures:</strong> Arrays, lists, trees, graphs</li>
+                    <li><strong>Programming Concepts:</strong> OOP, design patterns</li>
+                    <li><strong>Python:</strong> Syntax, built-ins, idioms</li>
+                </ul>
+
+                <h3 style="margin-top: 2rem;">Explore More</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin: 0.5rem 0;">
+                        <a href="cellular-automata.html" style="color: var(--forest-green);">
+                            🔷 Conway's Game of Life
+                        </a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="boids.html" style="color: var(--forest-green);">
+                            🔷 Boids simulation
+                        </a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="fractal-explorer.html" style="color: var(--forest-green);">
+                            🔷 Fractal explorer
+                        </a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="sorting-visualizer.html" style="color: var(--forest-green);">
+                            🔷 Sorting visualizer
+                        </a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="index.html" style="color: var(--forest-green);">
+                            🔷 Return to Interactive section
+                        </a>
+                    </li>
+                </ul>
+            </article>
+        </main>
+
+        <footer class="garden-footer">
+            <div class="footer-content">
+                <div class="footer-text">
+                    <p>🎯 Code Quizzes in Hermes' Digital Garden</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="../../js/garden.js"></script>
+    <script>
+        const questions = [
+            {
+                question: "What is the time complexity of binary search?",
+                options: ["O(n)", "O(log n)", "O(n log n)", "O(1)"],
+                correct: 1,
+                explanation: "Binary search halves the search space each time, giving O(log n) complexity."
+            },
+            {
+                question: "Which data structure uses LIFO (Last In, First Out)?",
+                options: ["Queue", "Stack", "Array", "Tree"],
+                correct: 1,
+                explanation: "A stack follows LIFO - the last item pushed is the first one popped."
+            },
+            {
+                question: "What does Big O notation describe?",
+                options: ["Memory usage only", "Best case performance", "Worst case performance", "Average performance"],
+                correct: 2,
+                explanation: "Big O describes the worst-case time or space complexity."
+            },
+            {
+                question: "Which sorting algorithm has O(n²) time complexity?",
+                options: ["Merge Sort", "Quick Sort", "Bubble Sort", "Heap Sort"],
+                correct: 2,
+                explanation: "Bubble sort has O(n²) complexity due to nested loops comparing adjacent elements."
+            },
+            {
+                question: "What is a hash function?",
+                options: ["Encrypts data", "Maps keys to indices", "Sorts arrays", "Compresses files"],
+                correct: 1,
+                explanation: "A hash function converts a key into an array index for hash tables."
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+
+        function loadQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById('questionText').textContent = `Q${currentQuestion + 1}: ${q.question}`;
+            
+            const container = document.getElementById('optionsContainer');
+            container.innerHTML = '';
+            
+            q.options.forEach((opt, idx) => {
+                const div = document.createElement('div');
+                div.className = 'option';
+                div.textContent = opt;
+                div.onclick = () => selectOption(idx, q.correct, q.explanation, div);
+                container.appendChild(div);
+            });
+            
+            document.getElementById('feedback').style.display = 'none';
+            document.getElementById('nextBtn').style.display = 'none';
+        }
+
+        function selectOption(selected, correct, explanation, element) {
+            const options = document.querySelectorAll('.option');
+            options.forEach((opt, idx) => {
+                if (idx === correct) opt.classList.add('correct');
+                if (idx === selected && idx !== correct) opt.classList.add('incorrect');
+                opt.style.pointerEvents = 'none';
+            });
+            
+            document.getElementById('feedbackText').textContent = explanation;
+            document.getElementById('feedback').style.display = 'block';
+            document.getElementById('nextBtn').style.display = 'block';
+            
+            if (selected === correct) score++;
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                loadQuestion();
+            } else {
+                showScore();
+            }
+        }
+
+        function showScore() {
+            document.getElementById('quizContent').style.display = 'none';
+            document.getElementById('score').style.display = 'block';
+            document.getElementById('scoreText').textContent = `You scored ${score}/${questions.length} (${Math.round(score/questions.length*100)}%)`;
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            document.getElementById('quizContent').style.display = 'block';
+            document.getElementById('score').style.display = 'none';
+            loadQuestion();
+        }
+
+        loadQuestion();
+    </script>
+</body>
+</html>

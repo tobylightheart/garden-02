@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorting Visualizer - Hermes' Digital Garden</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+    <style>
+        .visualizer-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+        }
+        #barsContainer {
+            display: flex;
+            align-items: flex-end;
+            height: 300px;
+            background: #000;
+            border: 2px solid var(--forest-green);
+            border-radius: 8px;
+            padding: 1rem;
+            gap: 2px;
+        }
+        .bar {
+            flex: 1;
+            background: var(--forest-green);
+            min-height: 5px;
+            border-radius: 2px 2px 0 0;
+            transition: height 0.05s;
+        }
+        .bar.comparing {
+            background: #FFD700;
+        }
+        .bar.swapping {
+            background: #FF6B6B;
+        }
+        .controls {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 1.5rem 0;
+        }
+        button {
+            padding: 0.5rem 1rem;
+            background: var(--forest-green);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        .range-control {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .stats {
+            margin-top: 1rem;
+            font-family: monospace;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="garden-container">
+        <header class="garden-header">
+            <div class="header-content">
+                <div class="garden-title">
+                    <span class="tree-emoji">📊</span>
+                    <h1>Sorting Visualizer</h1>
+                </div>
+            </div>
+        </header>
+
+        <main class="garden-main">
+            <article>
+                <h2>See Sorting Algorithms in Action</h2>
+                <p>
+                    Visualize how different sorting algorithms work by watching bars arrange
+                    themselves from random order to sorted. Compare efficiency and understand
+                    the trade-offs between different approaches.
+                </p>
+
+                <div class="visualizer-container">
+                    <div id="barsContainer"></div>
+
+                    <div class="controls">
+                        <select id="algorithm">
+                            <option value="bubble">Bubble Sort</option>
+                            <option value="selection">Selection Sort</option>
+                            <option value="insertion">Insertion Sort</option>
+                            <option value="merge">Merge Sort</option>
+                            <option value="quick">Quick Sort</option>
+                        </select>
+                        <button id="generateBtn">Generate New</button>
+                        <button id="sortBtn">Sort!</button>
+                        <button id="pauseBtn">Pause</button>
+                    </div>
+
+                    <div class="controls">
+                        <div class="range-control">
+                            <label>Array Size:</label>
+                            <input type="range" id="arraySize" min="10" max="100" value="30">
+                        </div>
+                        <div class="range-control">
+                            <label>Speed:</label>
+                            <input type="range" id="speed" min="1" max="100" value="50">
+                        </div>
+                    </div>
+
+                    <div class="stats">
+                        Comparisons: <span id="comparisons">0</span> | 
+                        Swaps: <span id="swaps">0</span> |
+                        Status: <span id="status">Ready</span>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(143, 188, 143, 0.15); border-radius: 10px; border-left: 4px solid var(--sage-green);">
+                    <h3>🤔 Algorithm Comparison</h3>
+                    <p>
+                        <strong>Bubble Sort:</strong> Simple but slow O(n²). Good for learning.
+                    </p>
+                    <p>
+                        <strong>Selection Sort:</strong> Also O(n²) but minimizes swaps.
+                    </p>
+                    <p>
+                        <strong>Insertion Sort:</strong> O(n²) but fast on nearly sorted data.
+                    </p>
+                    <p>
+                        <strong>Merge Sort:</strong> O(n log n), stable, uses extra memory.
+                    </p>
+                    <p>
+                        <strong>Quick Sort:</strong> O(n log n) average, in-place, fast in practice.
+                    </p>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Explore More</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin: 0.5rem 0;">
+                        <a href="cellular-automata.html" style="color: var(--forest-green);">
+                            🔷 Conway's Game of Life
+                        </a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="fractal-explorer.html" style="color: var(--forest-green);">
+                            🔷 Fractal explorer
+                        </a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="index.html" style="color: var(--forest-green);">
+                            🔷 Return to Interactive section
+                        </a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="../code/sorting-algorithms.html" style="color: var(--forest-green);">
+                            🔷 Learn about sorting algorithms
+                        </a>
+                    </li>
+                </ul>
+            </article>
+        </main>
+
+        <footer class="garden-footer">
+            <div class="footer-content">
+                <div class="footer-text">
+                    <p>📊 Sorting Visualizer in Hermes' Digital Garden</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="../../js/garden.js"></script>
+</body>
+</html>

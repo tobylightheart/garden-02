@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shape Generator - Hermes' Digital Garden</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+    <style>
+        .shape-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+        }
+        .canvas-wrapper {
+            position: relative;
+        }
+        #shapeCanvas {
+            background: #fff;
+            border: 2px solid var(--forest-green);
+            border-radius: 8px;
+            cursor: crosshair;
+        }
+        .controls {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 1.5rem 0;
+        }
+        button {
+            padding: 0.5rem 1rem;
+            background: var(--forest-green);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        .range-control {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="garden-container">
+        <header class="garden-header">
+            <div class="header-content">
+                <div class="garden-title">
+                    <span class="tree-emoji">🎨</span>
+                    <h1>Shape Generator</h1>
+                </div>
+            </div>
+        </header>
+
+        <main class="garden-main">
+            <article>
+                <h2>Create and Explore Geometric Shapes</h2>
+                <p>
+                    Generate, modify, and visualize geometric shapes interactively. Create
+                    patterns, explore symmetry, and experiment with different geometric
+                    transformations.
+                </p>
+
+                <div class="shape-container">
+                    <div class="canvas-wrapper">
+                        <canvas id="shapeCanvas" width="700" height="500"></canvas>
+                    </div>
+
+                    <div class="controls">
+                        <select id="shapeType">
+                            <option value="circle">Circle</option>
+                            <option value="square">Square</option>
+                            <option value="triangle">Triangle</option>
+                            <option value="star">Star</option>
+                            <option value="polygon">Polygon</option>
+                        </select>
+                        <button id="addShapeBtn">Add Shape</button>
+                        <button id="clearBtn">Clear All</button>
+                        <button id="saveBtn">Save as SVG</button>
+                    </div>
+
+                    <div class="controls">
+                        <div class="range-control">
+                            <label>Radius:</label>
+                            <input type="range" id="radius" min="10" max="150" value="50">
+                        </div>
+                        <div class="range-control">
+                            <label>Color:</label>
+                            <input type="color" id="color" value="#4E8991">
+                        </div>
+                        <div class="range-control">
+                            <label>Size:</label>
+                            <input type="range" id="size" min="1" max="10" value="1">
+                        </div>
+                    </div>
+
+                    <div class="controls">
+                        <div class="range-control">
+                            <label>Points:</label>
+                            <input type="range" id="points" min="3" max="20" value="5">
+                        </div>
+                        <div class="range-control">
+                            <label>Rotation:</label>
+                            <input type="range" id="rotation" min="0" max="360" value="0">
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(143, 188, 143, 0.15); border-radius: 10px; border-left: 4px solid var(--sage-green);">
+                    <h3>🤔 Geometric Concepts</h3>
+                    <p>
+                        <strong>Circle:</strong> Perfectly round shape, all points equidistant from center.
+                    </p>
+                    <p>
+                        <strong>Star:</strong> Created by connecting points around a circle at specific angles.
+                    </p>
+                    <p>
+                        <strong>Polygon:</strong> Many-sided shape, can be regular (equal sides) or irregular.
+                    </p>
+                    <p>
+                        <strong>Rotation:</strong> Transforming a shape around a center point by a certain angle.
+                    </p>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Explore More</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin: 0.5rem 0;">
+                        <a href="cellular-automata.html" style="color: var(--forest-green);">
+                            🔷 Conway's Game of Life
+                        </a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="boids.html" style="color: var(--forest-green);">
+                            🔷 Boids simulation
+                        </a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="fractal-explorer.html" style="color: var(--forest-green);">
+                            🔷 Fractal explorer
+                        </a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="sorting-visualizer.html" style="color: var(--forest-green);">
+                            🔷 Sorting visualizer
+                        </a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="code-quizzes.html" style="color: var(--forest-green);">
+                            🔷 Code quizzes
+                        </a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="index.html" style="color: var(--forest-green);">
+                            🔷 Return to Interactive section
+                        </a>
+                    </li>
+                </ul>
+            </article>
+        </main>
+
+        <footer class="garden-footer">
+            <div class="footer-content">
+                <div class="footer-text">
+                    <p>🎨 Shape Generator in Hermes' Digital Garden</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="../../js/garden.js"></script>
+    <script>
+        const canvas = document.getElementById('shapeCanvas');
+        const ctx = canvas.getContext('2d');
+        let shapes = [];
+
+        function drawShape(index, x, y, type, radius, color, size, points, rotation) {
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.rotate(rotation * Math.PI / 180);
+            
+            if (type === 'circle') {
+                ctx.arc(0, 0, radius, 0, Math.PI * 2);
+            } else if (type === 'square') {
+                ctx.rect(-radius/size, -radius/size, 2*radius/size, 2*radius/size);
+            } else if (type === 'triangle') {
+                ctx.moveTo(0, -radius/size);
+                ctx.lineTo(radius/size, radius/size);
+                ctx.lineTo(-radius/size, radius/size);
+                ctx.closePath();
+            } else if (type === 'star' || type === 'polygon') {
+                const angleStep = Math.PI * 2 / points;
+                const outerRadius = radius / size;
+                const innerRadius = radius / size / 2;
+                
+                for (let i = 0; i < points * 2; i++) {
+                    const currentRadius = i % 2 === 0 ? outerRadius : innerRadius;
+                    const angle = i * angleStep - Math.PI / 2;
+                    ctx.lineTo(Math.cos(angle) * currentRadius, Math.sin(angle) * currentRadius);
+                }
+            }
+            
+            ctx.fill();
+            ctx.restore();
+        }
+
+        function addShape() {
+            const x = Math.random() * (canvas.width - 100) + 50;
+            const y = Math.random() * (canvas.height - 100) + 50;
+            const type = document.getElementById('shapeType').value;
+            const radius = parseInt(document.getElementById('radius').value);
+            const color = document.getElementById('color').value;
+            const size = parseInt(document.getElementById('size').value);
+            const points = parseInt(document.getElementById('points').value);
+            const rotation = parseInt(document.getElementById('rotation').value);
+            
+            shapes.push({ x, y, type, radius, color, size, points, rotation });
+            drawAll();
+        }
+
+        function drawAll() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            shapes.forEach((shape, idx) => {
+                drawShape(idx, shape.x, shape.y, shape.type, shape.radius, shape.color, 
+                        shape.size, shape.points, shape.rotation);
+            });
+        }
+
+        function clearAll() {
+            shapes = [];
+            drawAll();
+        }
+
+        function saveSVG() {
+            const svg = `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="${canvas.width}" height="${canvas.height}" viewBox="0 0 ${canvas.width} ${canvas.height}">
+${shapes.map(s => {
+                let d = '';
+                if (s.type === 'circle') {
+                    d = `M${s.x},${s.y} m${-s.radius},0 a${s.radius},${s.radius} 0 1,0 ${s.radius*2},0 a${s.radius},${s.radius} 0 1,0 ${-s.radius*2},0`;
+                } else if (s.type === 'square') {
+                    d = `M${s.x - s.radius/s.size},${s.y - s.radius/s.size} h${2*s.radius/s.size} v${2*s.radius/s.size} h-${2*s.radius/s.size} Z`;
+                }
+                return `<path d="${d}" fill="${s.color}" transform="translate(${s.x}, ${s.y}) rotate(${s.rotation}) scale(${s.size})"/>`;
+            }).join('\n')}
+</svg>`;
+            const blob = new Blob([svg], { type: 'image/svg+xml' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'shapes.svg';
+            a.click();
+        }
+
+        document.getElementById('addShapeBtn').onclick = addShape;
+        document.getElementById('clearBtn').onclick = clearAll;
+        document.getElementById('saveBtn').onclick = saveSVG;
+        drawAll();
+    </script>
+</body>
+</html>
