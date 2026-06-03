@@ -90,14 +90,103 @@ body {
     100% { filter: hue-rotate(360deg); }
 }
 
-.garden-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem;
-    animation: fadeIn 0.6s ease-out;
+/* Sticky Navigation Bar */
+.sticky-nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: linear-gradient(135deg, rgba(45, 90, 61, 0.95) 0%, rgba(45, 90, 61, 0.98) 100%);
+    padding: 0.75rem 1rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    border-bottom: 2px solid var(--sage-green);
 }
 
-/* Header */
+.sticky-nav-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.sticky-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--light-text);
+    text-decoration: none;
+    padding: 0.5rem 0.8rem;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    border: 1px solid rgba(143, 188, 143, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.sticky-nav-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s;
+}
+
+.sticky-nav-link:hover::before {
+    left: 100%;
+}
+
+.sticky-nav-link:hover {
+    background: rgba(143, 188, 143, 0.2);
+    color: var(--sage-green);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(143, 188, 143, 0.3);
+    border-color: var(--sage-green);
+}
+
+.sticky-nav-link.active {
+    background: var(--sage-green);
+    color: var(--leaf-dark);
+    box-shadow: 0 0 15px rgba(143, 188, 143, 0.6), 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-color: var(--leaf-dark);
+    transform: scale(1.02);
+}
+
+.sticky-nav-link .nav-icon {
+    font-size: 1rem;
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.sticky-nav-link:hover .nav-icon,
+.sticky-nav-link.active .nav-icon {
+    transform: scale(1.15);
+}
+
+.sticky-nav-spacer {
+    flex: 1;
+    min-width: 100px;
+}
+
+/* Navigation dividers */
+.nav-divider {
+    color: var(--sage-green);
+    font-size: 1rem;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.nav-separator {
+    color: rgba(143, 188, 143, 0.5);
+    font-size: 1rem;
+    margin: 0 0.25rem;
+}
+
+/* Garden Header */
 .garden-header {
     text-align: center;
     padding: 3rem 1rem;
@@ -517,6 +606,41 @@ button:hover {
     
     .garden-title h1 {
         font-size: 2rem;
+    }
+    
+    .garden-header {
+        padding: 2rem 1rem;
+    }
+    
+    .sticky-nav {
+        padding: 0.5rem 0.5rem;
+    }
+    
+    .sticky-nav-content {
+        gap: 0.25rem;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding: 0.5rem 0;
+        justify-content: flex-start;
+    }
+    
+    .sticky-nav-link {
+        padding: 0.4rem 0.6rem;
+        font-size: 0.8rem;
+        white-space: nowrap;
+    }
+    
+    .sticky-nav-link .nav-label {
+        display: none;
+    }
+    
+    .sticky-nav-link .nav-icon {
+        font-size: 1.1rem;
+    }
+    
+    .sticky-nav-spacer {
+        display: none;
     }
     
     .nav-list {
