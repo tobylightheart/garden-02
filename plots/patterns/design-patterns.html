@@ -11,7 +11,7 @@
         <header class="garden-header">
             <div class="header-content">
                 <div class="garden-title">
-                    <span class="tree-emoji">🌀</span>
+                    <span class="tree-emoji">🏗️</span>
                     <h1>Design Patterns</h1>
                 </div>
             </div>
@@ -19,101 +19,156 @@
 
         <main class="garden-main">
             <article>
-                <h2>Software Design Patterns</h2>
+                <h2>Timeless Solutions to Recurring Problems</h2>
                 <p>
-                    Design patterns are recurring solutions to common problems in software design. 
-                    They capture best practices that have been tested and refined over time.
+                    Design patterns are proven solutions to common problems in software design.
+                    Like architectural blueprints, they help developers communicate ideas quickly
+                    and avoid reinventing the wheel. These patterns have stood the test of time
+                    because they're elegant, maintainable, and flexible.
                 </p>
 
                 <h3 style="margin-top: 2rem;">The Three Categories</h3>
                 <p>
-                    Design patterns are typically divided into three groups:
+                    The GoF (Gang of Four) patterns are organized into three categories:
                 </p>
 
-                <h4>📦 Creational Patterns</h4>
-                <p>
-                    Focus on object creation mechanisms. They promote loose coupling by decoupling 
-                    a system from how its objects are created.
-                </p>
-                <ul style="margin-left: 1.5rem;">
-                    <li><strong>Singleton:</strong> Ensures a class has only one instance</li>
-                    <li><strong>Factory:</strong> Creates objects without specifying exact class</li>
-                    <li><strong>Builder:</strong> Constructs complex objects step by step</li>
-                    <li><strong>Prototype:</strong> Creates new objects by copying an existing prototype</li>
-                </ul>
-
-                <h4>🔗 Structural Patterns</h4>
-                <p>
-                    Focus on how classes and objects are composed to form larger structures.
-                </p>
-                <ul style="margin-left: 1.5rem;">
-                    <li><strong>Adapter:</strong> Makes incompatible interfaces work together</li>
-                    <li><strong>Decorator:</strong> Adds responsibilities to objects dynamically</li>
-                    <li><strong>Facade:</strong> Provides simplified interface to complex subsystem</li>
-                    <li><strong>Proxy:</strong> Controls access to another object</li>
-                </ul>
-
-                <h4>🔄 Behavioral Patterns</h4>
-                <p>
-                    Focus on communication between objects and how responsibilities are assigned.
-                </p>
-                <ul style="margin-left: 1.5rem;">
-                    <li><strong>Observer:</strong> Defines dependency between objects for state changes</li>
-                    <li><strong>Strategy:</strong> Defines family of algorithms, making them interchangeable</li>
-                    <li><strong>Iterator:</strong> Provides sequential access to elements without exposing structure</li>
-                    <li><strong>Memento:</strong> Captures and restores internal state</li>
-                </ul>
-
-                <h3 style="margin-top: 2rem;">Python Example: Singleton Pattern</h3>
-                <pre style="background: rgba(0,0,0,0.1); padding: 1rem; border-radius: 8px; overflow-x: auto; font-family: monospace;">
-class Singleton:
-    _instance = None
-    _initialized = False
-    
-    def __new__(cls):
-        if cls._instance is None:
-            cls._instance = super().__new__(cls)
-        return cls._instance
-    
-    def __init__(self, value=None):
-        if not self._initialized:
-            self.value = value
-            self._initialized = True
-    
-    def get_value(self):
-        return self.value
-                </pre>
-                <p>
-                    This ensures only one instance exists, while allowing initialization 
-                    with different values.
-                </p>
-
-                <h3 style="margin-top: 2rem;">When to Use Patterns</h3>
-                <p>
-                    Patterns are powerful, but they're not silver bullets:
+                <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(143, 188, 143, 0.15); border-radius: 8px;">
+                    <h4>📦 Creational Patterns</h4>
+                    <p>Handle object creation mechanisms. When is it better to create objects
+                    individually or collectively?</p>
                     <ul style="margin-left: 1.5rem;">
-                        <li><strong>Use patterns</strong> when you're solving a recurring problem</li>
-                        <li><strong>Don't overuse</strong> - simple solutions are often best</li>
-                        <li><strong>Understand</strong> the trade-offs each pattern introduces</li>
-                        <li><strong>Document</strong> why you chose a particular pattern</li>
+                        <li><strong>Singleton:</strong> One instance per application</li>
+                        <li><strong>Factory:</strong> Create objects without specifying exact class</li>
+                        <li><strong>Abstract Factory:</strong> Families of related objects</li>
+                        <li><strong>Builder:</strong> Construct complex objects step-by-step</li>
+                        <li><strong>Prototype:</strong> Clone existing objects</li>
+                    </ul>
+                </div>
+
+                <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(143, 188, 143, 0.15); border-radius: 8px;">
+                    <h4>🔧 Structural Patterns</h4>
+                    <p>Focus on composition and classifying structures. How do we assemble
+                    objects into larger structures?</p>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><strong>Adapter:</strong> Make incompatible interfaces work together</li>
+                        <li><strong>Bridge:</strong> Separate abstraction from implementation</li>
+                        <li><strong>Composite:</strong> Treat individual objects uniformly</li>
+                        <li><strong>Decorator:</strong> Add behavior dynamically</li>
+                        <li><strong>Facade:</strong> Simplify complex subsystems</li>
+                        <li><strong>Proxy:</strong> Control access to objects</li>
+                    </ul>
+                </div>
+
+                <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(143, 188, 143, 0.15); border-radius: 8px;">
+                    <h4>🔄 Behavioral Patterns</h4>
+                    <p>Focus on communication between objects. How do objects distribute
+                    responsibilities?</p>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><strong>Observer:</strong> Notify objects of events</li>
+                        <li><strong>Strategy:</strong> Interchangeable algorithms</li>
+                        <li><strong>Command:</strong> Encapsulate requests as objects</li>
+                        <li><strong>State:</strong> Change behavior based on state</li>
+                        <li><strong>Iterator:</strong> Traverse collections uniformly</li>
+                        <li><strong>Mediator:</strong> Simplify object relationships</li>
+                    </ul>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Key Patterns Deep Dive</h3>
+
+                <div style="margin: 2rem 0;">
+                    <h4>🎯 Singleton Pattern</h4>
+                    <p>
+                        Ensures a class has only one instance and provides a global access point.
+                        <strong>Use cases:</strong> Configuration managers, logger instances, database connections.
+                    </p>
+                    <p>
+                        <strong>Challenge:</strong> Thread safety. In multi-threaded environments,
+                        double-checked locking or lazy initialization is needed.
+                    </p>
+                </div>
+
+                <div style="margin: 2rem 0;">
+                    <h4>🎯 Observer Pattern</h4>
+                    <p>
+                        Defines a one-to-many dependency where updating an object automatically
+                        notifies all dependents. This is the foundation of event-driven programming.
+                    </p>
+                    <p>
+                        <strong>Use cases:</strong> GUI event handling, pub/sub messaging, state changes.
+                    </p>
+                    <p>
+                        <strong>Modern equivalent:</strong> JavaScript event listeners, Python decorators,
+                        reactive programming (RxJS, React state).
+                    </p>
+                </div>
+
+                <div style="margin: 2rem 0;">
+                    <h4>🎯 Strategy Pattern</h4>
+                    <p>
+                        Defines a family of algorithms, encapsulates each one, and makes them
+                        interchangeable. Algorithms vary independently.
+                    </p>
+                    <p>
+                        <strong>Use cases:</strong> Payment processing (credit card, PayPal), sorting
+                        algorithms, compression methods.
+                    </p>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Beyond GoF</h3>
+                <p>
+                    Modern design patterns extend beyond the original GoF patterns:
+                    <ul style="margin-left: 1.5rem;">
+                        <li><strong>Dependency Injection:</strong> Invert control, pass dependencies</li>
+                        <li><strong>Repository:</strong> Abstract data access</li>
+                        <li><strong>Service Locator:</strong> Decouple clients from services</li>
+                        <li><strong>Decorator (Functional):</strong> Chain functions for behavior</li>
+                        <li><strong>Function Composition:</strong> Build complex functions from simple ones</li>
                     </ul>
                 </p>
 
                 <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(143, 188, 143, 0.15); border-radius: 10px; border-left: 4px solid var(--sage-green);">
-                    <h3>💡 Pattern Recognition</h3>
+                    <h3>🤔 Why Design Patterns Matter</h3>
                     <p>
-                        Learning design patterns helps you recognize patterns in problems 
-                        and apply proven solutions. Like learning to read music helps a musician
-                        recognize melodies, pattern recognition accelerates problem-solving.
+                        Design patterns aren't just code tricks - they're a shared vocabulary:
+                    </p>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><strong>Communication:</strong> "Use an Observer" conveys more than code</li>
+                        <li><strong>Best practices:</strong> Patterns encode lessons from real-world problems</li>
+                        <li><strong>Flexibility:</strong> Easy to modify behavior without changing structure</li>
+                        <li><strong>Maintainability:</strong> Well-structured, decoupled code is easier to fix</li>
+                        <li><strong>Testing:</strong> Clear boundaries make unit testing easier</li>
+                    </ul>
+                    <p style="margin-top: 1rem;">
+                        However, patterns should be used when they add value - not for their own sake.
+                        Sometimes simple code is better than complex patterns.
                     </p>
                 </div>
+
+                <h3 style="margin-top: 2rem;">Explore More</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin: 0.5rem 0;">
+                        <a href="emergence.html" style="color: var(--forest-green);">
+                            🔷 Learn about emergence
+                        </a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="index.html" style="color: var(--forest-green);">
+                            🔷 Return to Patterns section
+                        </a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="../help/debugging-guide.html" style="color: var(--forest-green);">
+                            🔷 Read debugging guide
+                        </a>
+                    </li>
+                </ul>
             </article>
         </main>
 
         <footer class="garden-footer">
             <div class="footer-content">
                 <div class="footer-text">
-                    <p>🌀 Design Patterns in Hermes' Digital Garden</p>
+                    <p>🏗️ Design Patterns in Hermes' Digital Garden</p>
                 </div>
             </div>
         </footer>
