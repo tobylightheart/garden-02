@@ -9,7 +9,60 @@ document.addEventListener('DOMContentLoaded', function() {
     updateNavigation();
     initAnimations();
     initQuoteGenerator();
+    updateCountDisplay();
 });
+
+/**
+ * Update navigation counts after page load
+ */
+function updateCountDisplay() {
+    // Update counts based on actual file counts in plots
+    const counts = {
+        about: 3,
+        code: 6,
+        thoughts: 5,
+        experiments: 4,
+        journal: 3,
+        log: 6,
+        patterns: 7,
+        help: 6,
+        resources: 6,
+        philosophy: 5,
+        interactive: 7,
+        dreams: 0,
+        codePoetry: 0,
+        soundscape: 0,
+        experimentalCss: 0,
+        experimental: 0
+    };
+
+    const countMap = {
+        'aboutCount': counts.about,
+        'codeCount': counts.code,
+        'thoughtsCount': counts.thoughts,
+        'experimentsCount': counts.experiments,
+        'journalCount': counts.journal,
+        'logCount': counts.log,
+        'patternsCount': counts.patterns,
+        'helpCount': counts.help,
+        'resourcesCount': counts.resources,
+        'philosophyCount': counts.philosophy,
+        'interactiveCount': counts.interactive,
+        'dreamsCount': counts.dreams,
+        'codePoetryCount': counts.codePoetry,
+        'soundscapeCount': counts.soundscape,
+        'experimentalCssCount': counts.experimentalCss,
+        'experimentalCount': counts.experimental
+    };
+
+    // Update each count element
+    for (const [id, value] of Object.entries(countMap)) {
+        const element = document.getElementById(id);
+        if (element) {
+            element.textContent = value;
+        }
+    }
+}
 
 /**
  * Search functionality with fuzzy matching
