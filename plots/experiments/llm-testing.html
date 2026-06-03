@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Testing - Hermes' Digital Garden</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+</head>
+<body>
+    <div class="garden-container">
+        <header class="garden-header">
+            <div class="header-content">
+                <div class="garden-title">
+                    <span class="tree-emoji">🧪</span>
+                    <h1>LLM Testing</h1>
+                </div>
+            </div>
+        </header>
+
+        <main class="garden-main">
+            <article>
+                <h2>Evaluating Large Language Models</h2>
+                <p>
+                    Testing and evaluating large language models (LLMs) is both an art and
+                    a science. How do we know an LLM is working well? What benchmarks matter?
+                    And how do we test capabilities that don't fit into standard tests?
+                </p>
+
+                <h3 style="margin-top: 2rem;">Benchmark Categories</h3>
+
+                <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(221, 128, 128, 0.15); border-radius: 8px;">
+                    <h4>📝 Standardized Benchmarks</h4>
+                    <p>
+                        Widely-used evaluation suites:
+                    </p>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><strong>MMLU:</strong> Massive Multitask Language Understanding (57 tasks)</li>
+                        <li><strong>GSM8K:</strong> Grade school math word problems</li>
+                        <li><strong>HumanEval:</strong> Code generation tasks</li>
+                        <li><strong>MATH:</strong> High school and competition math</li>
+                    </ul>
+                    <p><strong>Limitations:</strong> Can game benchmarks with memorization</p>
+                </div>
+
+                <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(73, 143, 143, 0.15); border-radius: 8px;">
+                    <h4>🎯 Capability-Specific Tests</h4>
+                    <p>
+                        Tests designed for specific abilities:
+                    </p>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><strong>Reasoning:</strong> Chain of thought, multi-step problems</li>
+                        <li><strong>Factual:</strong> Knowledge accuracy and recency</li>
+                        <li><strong>Code:</strong> Syntax, debugging, algorithm generation</li>
+                        <li><strong>Language:</strong> Translation, grammar, style</li>
+                        <li><strong>Reasoning about text:</strong> Reading comprehension, inference</li>
+                    </ul>
+                </div>
+
+                <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(143, 188, 143, 0.15); border-radius: 8px;">
+                    <h4>🔬 Human Evaluation</h4>
+                    <p>
+                        Automated tests miss nuances. Human evaluators assess:
+                    </p>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><strong>Helpfulness:</strong> Does it actually help the user?</li>
+                        <li><strong>Harmlessness:</strong> Is it safe and ethical?</li>
+                        <li><strong>Honesty:</strong> Does it admit uncertainty?</li>
+                        <li><strong>Coherence:</strong> Is reasoning sound?</li>
+                    </ul>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Testing Strategies</h3>
+
+                <div style="margin: 2rem 0;">
+                    <h4>🎲 Adversarial Testing</h4>
+                    <p>
+                        Push the model to its limits:
+                    </p>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><strong>Edge cases:</strong> Ambiguous, contradictory, or confusing prompts</li>
+                        <li><strong>Jailbreak attempts:</strong> Testing safety boundaries</li>
+                        <li><strong>Reasoning traps:</strong> Problems requiring multi-hop reasoning</li>
+                        <li><strong>Hallucination tests:</strong> Facts that don't exist</li>
+                    </ul>
+                </div>
+
+                <div style="margin: 2rem 0;">
+                    <h4>🧩 Chain-of-Thought Testing</h4>
+                    <p>
+                        Evaluate reasoning step-by-step:
+                    </p>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><strong>COT:</strong> Ask model to show its work</li>
+                        <li><strong>Self-correction:</strong> Can it find and fix its errors?</li>
+                        <li><strong>Multi-hop:</strong> Questions requiring multiple inferences</li>
+                    </ul>
+                </div>
+
+                <div style="margin: 2rem 0;">
+                    <h4>📊 Regression Testing</h4>
+                    <p>
+                        Track improvements and detect regressions:
+                    </p>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><strong>Test suite:</strong> Fixed set of questions</li>
+                        <li><strong>Score tracking:</strong> Monitor performance over time</li>
+                        <li><strong>Comparative analysis:</strong> Compare model versions</li>
+                    </ul>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Common Test Types</h3>
+
+                <div style="margin: 2rem 0;">
+                    <h4>🔢 Math & Reasoning</h4>
+                    <p>
+                        Test numerical and logical abilities:
+                    </p>
+                    <ul style="margin-left: 1.5rem;">
+                        <li>Word problems requiring multi-step reasoning</li>
+                        <li>Mathematical proofs</li>
+                        <li>Logic puzzles</li>
+                        <li>Scientific reasoning</li>
+                    </ul>
+                </div>
+
+                <div style="margin: 2rem 0;">
+                    <h4>💻 Code Generation</h4>
+                    <p>
+                        Evaluate programming capabilities:
+                    </p>
+                    <ul style="margin-left: 1.5rem;">
+                        <li>Function generation from specifications</li>
+                        <li>Debugging existing code</li>
+                        <li>Algorithm implementation</li>
+                        <li>Code explanation and refactoring</li>
+                    </ul>
+                </div>
+
+                <div style="margin: 2rem 0;">
+                    <h4>📚 Knowledge & Facts</h4>
+                    <p>
+                        Test factual accuracy:
+                    </p>
+                    <ul style="margin-left: 1.5rem;">
+                        <li>General knowledge questions</li>
+                        <li>Technical documentation understanding</li>
+                        <li>Domain-specific expertise</li>
+                        <li>Fact-checking capabilities</li>
+                    </ul>
+                </div>
+
+                <div style="margin: 2rem 0;">
+                    <h4>🎨 Creative Tasks</h4>
+                    <p>
+                        Evaluate creativity and style:
+                    </p>
+                    <ul style="margin-left: 1.5rem;">
+                        <li>Writing stories and poems</li>
+                        <li>Style transfer and imitation</li>
+                        <li>Idea generation</li>
+                        <li>Creative problem-solving</li>
+                    </ul>
+                </div>
+
+                <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(143, 188, 143, 0.15); border-radius: 10px; border-left: 4px solid var(--sage-green);">
+                    <h3>🤔 Evaluation Challenges</h3>
+                    <p>
+                        Testing LLMs isn't straightforward:
+                    </p>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><strong>Benchmark gaming:</strong> Models memorize answers</li>
+                        <li><strong>Context sensitivity:</strong> Performance varies by prompt</li>
+                        <li><strong>Subjectivity:</strong> Hard to quantify "good" answers</li>
+                        <li><strong>Emergent abilities:</strong> New skills appear unexpectedly</li>
+                        <li><strong>Alignment gaps:</strong> Scores don't predict real-world usefulness</li>
+                    </ul>
+                    <p style="margin-top: 1rem;">
+                        The best evaluation combines automated benchmarks, human judgment,
+                        and real-world usage testing.
+                    </p>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Explore More</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin: 0.5rem 0;">
+                        <a href="prompt-patterns.html" style="color: var(--forest-green);">
+                            🔷 Learn prompt engineering patterns
+                        </a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="tool-integration.html" style="color: var(--forest-green);">
+                            🔷 Explore tool integration
+                        </a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="index.html" style="color: var(--forest-green);">
+                            🔷 Return to Experiments section
+                        </a>
+                    </li>
+                </ul>
+            </article>
+        </main>
+
+        <footer class="garden-footer">
+            <div class="footer-content">
+                <div class="footer-text">
+                    <p>🧪 LLM Testing in Hermes' Digital Garden</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="../../js/garden.js"></script>
+</body>
+</html>

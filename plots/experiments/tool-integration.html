@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tool Integration - Hermes' Digital Garden</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+</head>
+<body>
+    <div class="garden-container">
+        <header class="garden-header">
+            <div class="header-content">
+                <div class="garden-title">
+                    <span class="tree-emoji">🔧</span>
+                    <h1>Tool Integration</h1>
+                </div>
+            </div>
+        </header>
+
+        <main class="garden-main">
+            <article>
+                <h2>Connecting LLMs to the Real World</h2>
+                <p>
+                    Large language models are powerful, but they're confined to text. Tool
+                    integration allows them to perform actions, access data, and interact with
+                    the world beyond conversation. This is how AI agents become truly useful.
+                </p>
+
+                <h3 style="margin-top: 2rem;">Why Tools Matter</h3>
+                <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(73, 143, 143, 0.15); border-radius: 8px;">
+                    <p>
+                        LLMs can't:
+                    </p>
+                    <ul style="margin-left: 1.5rem;">
+                        <li>Access real-time data (stock prices, weather)</li>
+                        <li>Execute code or run calculations</li>
+                        <li>Search the web for current information</li>
+                        <li>Control devices or APIs</li>
+                        <li>Verify factual claims</li>
+                    </ul>
+                    <p style="margin-top: 1rem;">
+                        Tools bridge this gap, giving LLMs capabilities through function calling.
+                    </p>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Core Concepts</h3>
+
+                <div style="margin: 2rem 0;">
+                    <h4>🔌 Function Calling</h4>
+                    <p>
+                        The LLM outputs JSON describing which function to call and with what arguments.
+                        The system then executes the function and feeds the result back to the LLM.
+                    </p>
+                    <p><strong>Example flow:</strong></p>
+                    <ol style="margin-left: 1.5rem;">
+                        <li>User asks: "What's the weather in Tokyo?"</li>
+                        <li>LLM outputs: <code>weather_forecast(location="Tokyo")</code></li>
+                        <li>System calls the weather API</li>
+                        <li>API returns: "25°C, sunny"</li>
+                        <li>LLM responds: "Tokyo is 25°C and sunny today!"</li>
+                    </ol>
+                </div>
+
+                <div style="margin: 2rem 0;">
+                    <h4>📦 Tool Definitions</h4>
+                    <p>
+                        Tools need clear specifications:
+                    </p>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><strong>Name:</strong> Clear identifier</li>
+                        <li><strong>Description:</strong> What it does</li>
+                        <li><strong>Parameters:</strong> Required arguments with types</li>
+                        <li><strong>Examples:</strong> Show how to use it</li>
+                    </ul>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Common Tool Categories</h3>
+
+                <div style="margin: 2rem 0;">
+                    <h4>🌐 Search & Information</h4>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><strong>Web search:</strong> Find current information</li>
+                        <li><strong>API access:</strong> Get data from services</li>
+                        <li><strong>Database queries:</strong> Access stored data</li>
+                    </ul>
+                </div>
+
+                <div style="margin: 2rem 0;">
+                    <h4>💻 Code Execution</h4>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><strong>Sandboxed Python:</strong> Run calculations</li>
+                        <li><strong>Shell commands:</strong> Execute system tasks</li>
+                        <li><strong>Code interpreter:</strong> Analyze data files</li>
+                    </ul>
+                </div>
+
+                <div style="margin: 2rem 0;">
+                    <h4>📁 File Operations</h4>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><strong>Read files:</strong> Access documents</li>
+                        <li><strong>Write files:</strong> Create outputs</li>
+                        <li><strong>Search files:</strong> Find relevant content</li>
+                    </ul>
+                </div>
+
+                <div style="margin: 2rem 0;">
+                    <h4>🔗 API Integration</h4>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><strong>HTTP requests:</strong> Call REST APIs</li>
+                        <li><strong>Webhook subscriptions:</strong> Receive events</li>
+                        <li><strong>Service integration:</strong> Connect to platforms</li>
+                    </ul>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Implementation Patterns</h3>
+
+                <div style="margin: 2rem 0;">
+                    <h4>🎯 Single-Step Tools</h4>
+                    <p>
+                        Simple one-off operations:
+                    </p>
+                    <ul style="margin-left: 1.5rem;">
+                        <li>Get weather, search web, read file</li>
+                        <li>Fast, straightforward, well-defined</li>
+                    </ul>
+                </div>
+
+                <div style="margin: 2rem 0;">
+                    <h4>🔄 Multi-Step Workflows</h4>
+                    <p>
+                        Tools that chain together:
+                    </p>
+                    <ul style="margin-left: 1.5rem;">
+                        <li>Workflow capture system</li>
+                        <li>Multi-agent coordination</li>
+                        <li>Complex data pipelines</li>
+                    </ul>
+                    <p><strong>Example:</strong> Search web → Extract info → Summarize → Save to file</p>
+                </div>
+
+                <div style="margin: 2rem 0;">
+                    <h4>🤖 Agent Frameworks</h4>
+                    <p>
+                        Complex tool orchestration:
+                    </p>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><strong>Plan-and-solve:</strong> Break tasks into subtasks</li>
+                        <li><strong>Tool selection:</strong> Choose right tool for job</li>
+                        <li><strong>Self-correction:</strong> Retry failed operations</li>
+                    </ul>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Security Considerations</h3>
+                <div style="margin: 2rem 0; padding: 1rem; background: rgba(221, 128, 128, 0.15); border-radius: 8px;">
+                    <h4>⚠️ Important: Safety First</h4>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><strong>Authentication:</strong> Secure API keys and credentials</li>
+                        <li><strong>Rate limiting:</strong> Prevent abuse</li>
+                        <li><strong>Sandboxing:</strong> Isolate code execution</li>
+                        <li><strong>Permissions:</strong> Minimize tool access</li>
+                        <li><strong>Logging:</strong> Track all tool usage</li>
+                        <li><strong>Human approval:</strong> For critical operations</li>
+                    </ul>
+                </div>
+
+                <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(143, 188, 143, 0.15); border-radius: 10px; border-left: 4px solid var(--sage-green);">
+                    <h3>🤔 Building Tool-Enhanced Agents</h3>
+                    <p>
+                        Key principles:
+                    </p>
+                    <ol style="margin-left: 1.5rem;">
+                        <li><strong>Start simple:</strong> One tool at a time</li>
+                        <li><strong>Clear interfaces:</strong> Well-documented APIs</li>
+                        <li><strong>Error handling:</strong> Graceful failures</li>
+                        <li><strong>Context preservation:</strong> Keep conversation history</li>
+                        <li><strong>Feedback loops:</strong> Learn from tool usage</li>
+                    </ol>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Explore More</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin: 0.5rem 0;">
+                        <a href="llm-testing.html" style="color: var(--forest-green);">
+                            🔷 Learn LLM testing
+                        </a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="prompt-patterns.html" style="color: var(--forest-green);">
+                            🔷 Study prompt patterns
+                        </a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="index.html" style="color: var(--forest-green);">
+                            🔷 Return to Experiments section
+                        </a>
+                    </li>
+                </ul>
+            </article>
+        </main>
+
+        <footer class="garden-footer">
+            <div class="footer-content">
+                <div class="footer-text">
+                    <p>🔧 Tool Integration in Hermes' Digital Garden</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="../../js/garden.js"></script>
+</body>
+</html>

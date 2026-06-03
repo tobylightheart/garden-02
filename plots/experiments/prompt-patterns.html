@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Patterns - Hermes' Digital Garden</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+</head>
+<body>
+    <div class="garden-container">
+        <header class="garden-header">
+            <div class="header-content">
+                <div class="garden-title">
+                    <span class="tree-emoji">💬</span>
+                    <h1>Prompt Patterns</h1>
+                </div>
+            </div>
+        </header>
+
+        <main class="garden-main">
+            <article>
+                <h2>Mastering Prompt Engineering</h2>
+                <p>
+                    Prompts are the interface between humans and AI. Good prompts elicit helpful,
+                    accurate, and creative responses. Understanding prompt patterns helps you
+                    communicate effectively with large language models.
+                </p>
+
+                <h3 style="margin-top: 2rem;">Core Prompt Structure</h3>
+                <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(73, 143, 143, 0.15); border-radius: 8px;">
+                    <p>
+                        Every good prompt has three parts:
+                    </p>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><strong>Role:</strong> Who should the AI be? (expert, teacher, etc.)</li>
+                        <li><strong>Task:</strong> What should it do? (clear, specific instructions)</li>
+                        <li><strong>Context:</strong> What background info helps? (examples, constraints)</li>
+                    </ul>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Essential Patterns</h3>
+
+                <div style="margin: 2rem 0;">
+                    <h4>🎯 Zero-Shot Prompting</h4>
+                    <p>
+                        Direct request without examples.
+                    </p>
+                    <p><strong>Example:</strong></p>
+                    <p style="background: rgba(0,0,0,0.05); padding: 0.5rem; border-radius: 4px;">
+                        "Explain quantum entanglement in simple terms."
+                    </p>
+                    <p><strong>Best for:</strong> Common tasks, straightforward questions</p>
+                </div>
+
+                <div style="margin: 2rem 0;">
+                    <h4>📝 Few-Shot Prompting</h4>
+                    <p>
+                        Provide examples before the task.
+                    </p>
+                    <p><strong>Example:</strong></p>
+                    <p style="background: rgba(0,0,0,0.05); padding: 0.5rem; border-radius: 4px;">
+                        Translate these:\n
+                        "Hello" → "Hola"\n
+                        "Goodbye" → "Adiós"\n
+                        "Thank you" → ?
+                    </p>
+                    <p><strong>Best for:</strong> Style transfer, format specification, pattern recognition</p>
+                </div>
+
+                <div style="margin: 2rem 0;">
+                    <h4>📋 Chain-of-Thought</h4>
+                    <p>
+                        Ask the model to think step by step.
+                    </p>
+                    <p><strong>Example:</strong></p>
+                    <p style="background: rgba(0,0,0,0.05); padding: 0.5rem; border-radius: 4px;">
+                        "I have 3 apples. I eat 1 and buy 4 more. Then I give away 2. 
+                        How many do I have? Think step by step."
+                    </p>
+                    <p><strong>Best for:</strong> Reasoning tasks, math, logic problems</p>
+                </div>
+
+                <div style="margin: 2rem 0;">
+                    <h4>🎭 Role-Playing</h4>
+                    <p>
+                        Assign a persona to improve quality.
+                    </p>
+                    <p><strong>Example:</strong></p>
+                    <p style="background: rgba(0,0,0,0.05); padding: 0.5rem; border-radius: 4px;">
+                        "Act as a senior software architect. Review this code and suggest improvements."
+                    </p>
+                    <p><strong>Best for:</strong> Specialized tasks, getting expert perspectives</p>
+                </div>
+
+                <div style="margin: 2rem 0;">
+                    <h4>🔄 Iterative Refinement</h4>
+                    <p>
+                        Start broad, then narrow down.
+                    </p>
+                    <p><strong>Example:</strong></p>
+                    <p style="background: rgba(0,0,0,0.05); padding: 0.5rem; border-radius: 4px;">
+                        First: "Write a story about time travel."
+                        \n\n
+                        Then: "The story has a physicist protagonist. The time travel involves quantum mechanics. Write in first person."
+                        \n\n
+                        Then: "The protagonist discovers they're the same person they met at the beginning. End on a cliffhanger."
+                    </p>
+                    <p><strong>Best for:</strong> Creative writing, complex tasks</p>
+                </div>
+
+                <div style="margin: 2rem 0;">
+                    <h4>📊 Output Formatting</h4>
+                    <p>
+                        Specify the exact format you want.
+                    </p>
+                    <p><strong>Example:</strong></p>
+                    <p style="background: rgba(0,0,0,0.05); padding: 0.5rem; border-radius: 4px;">
+                        "List the pros and cons of Python vs JavaScript in a markdown table with columns: Feature, Python, JavaScript."
+                    </p>
+                    <p><strong>Best for:</strong> Structured output, data extraction, comparisons</p>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Advanced Techniques</h3>
+
+                <div style="margin: 2rem 0;">
+                    <h4>🔗 Context Anchoring</h4>
+                    <p>
+                        Ground responses in specific knowledge.
+                    </p>
+                    <p><strong>Example:</strong></p>
+                    <p style="background: rgba(0,0,0,0.05); padding: 0.5rem; border-radius: 4px;">
+                        "Based on the following Python code:\n
+                        [code block]\n
+                        Explain what this function does in exactly 3 bullet points."
+                    </p>
+                </div>
+
+                <div style="margin: 2rem 0;">
+                    <h4>🎪 Constraint Setting</h4>
+                    <p>
+                        Define what NOT to do.
+                    </p>
+                    <p><strong>Example:</strong></p>
+                    <p style="background: rgba(0,0,0,0.05); padding: 0.5rem; border-radius: 4px;">
+                        "Explain blockchain technology. Don't use jargon. Keep it under 200 words. Use an analogy involving shipping."
+                    </p>
+                </div>
+
+                <div style="margin: 2rem 0;">
+                    <h4>🔄 Self-Correction</h4>
+                    <p>
+                        Ask the model to critique its own output.
+                    </p>
+                    <p><strong>Example:</strong></p>
+                    <p style="background: rgba(0,0,0,0.05); padding: 0.5rem; border-radius: 4px;">
+                        "Write a blog post about neural networks. Then critique it for clarity, accuracy, and engagement. Rewrite with improvements."
+                    </p>
+                </div>
+
+                <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(143, 188, 143, 0.15); border-radius: 10px; border-left: 4px solid var(--sage-green);">
+                    <h3>🤔 Prompt Best Practices</h3>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><strong>Be specific:</strong> "Write a poem" → "Write a haiku about rain in Tokyo"</li>
+                        <li><strong>Provide examples:</strong> Show, don't just tell</li>
+                        <li><strong>Set constraints:</strong> Word limits, format, tone</li>
+                        <li><strong>Iterate:</strong> Refine based on output</li>
+                        <li><strong>Test variations:</strong> Try different phrasings</li>
+                        <li><strong>Separate context from task:</strong> Clear boundaries</li>
+                    </ul>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Explore More</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin: 0.5rem 0;">
+                        <a href="llm-testing.html" style="color: var(--forest-green);">
+                            🔷 Learn LLM testing
+                        </a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="tool-integration.html" style="color: var(--forest-green);">
+                            🔷 Explore tool integration
+                        </a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="index.html" style="color: var(--forest-green);">
+                            🔷 Return to Experiments section
+                        </a>
+                    </li>
+                </ul>
+            </article>
+        </main>
+
+        <footer class="garden-footer">
+            <div class="footer-content">
+                <div class="footer-text">
+                    <p>💬 Prompt Patterns in Hermes' Digital Garden</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="../../js/garden.js"></script>
+</body>
+</html>
