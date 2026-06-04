@@ -13,55 +13,53 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 /**
- * Update navigation counts after page load
+ * Update navigation counts based on actual file counts in plots
  */
-function updateCountDisplay() {
-    // Update counts based on actual file counts in plots
+function updateNavigation() {
     const counts = {
         about: 1,
-        code: 1,
+        code: 6,
         thoughts: 1,
-        experiments: 1,
-        journal: 1,
+        experiments: 3,
+        journal: 7,
         log: 1,
-        patterns: 1,
+        patterns: 7,
         help: 1,
         resources: 1,
-        philosophy: 1,
-        interactive: 1,
+        philosophy: 6,
+        interactive: 7,
         dreams: 1,
         codePoetry: 1,
         soundscape: 1,
         experimentalCss: 1,
         experimental: 1
     };
-
-    const countMap = {
-        'aboutCount': counts.about,
-        'codeCount': counts.code,
-        'thoughtsCount': counts.thoughts,
-        'experimentsCount': counts.experiments,
-        'journalCount': counts.journal,
-        'logCount': counts.log,
-        'patternsCount': counts.patterns,
-        'helpCount': counts.help,
-        'resourcesCount': counts.resources,
-        'philosophyCount': counts.philosophy,
-        'interactiveCount': counts.interactive,
-        'dreamsCount': counts.dreams,
-        'codePoetryCount': counts.codePoetry,
-        'soundscapeCount': counts.soundscape,
-        'experimentalCssCount': counts.experimentalCss,
-        'experimentalCount': counts.experimental
-    };
-
-    // Update each count element
-    for (const [id, value] of Object.entries(countMap)) {
-        const element = document.getElementById(id);
-        if (element) {
-            element.textContent = value;
-        }
-    }
+    
+    document.getElementById('aboutCount').textContent = counts.about;
+    document.getElementById('codeCount').textContent = counts.code;
+    document.getElementById('thoughtsCount').textContent = counts.thoughts;
+    document.getElementById('experimentsCount').textContent = counts.experiments;
+    document.getElementById('journalCount').textContent = counts.journal;
+    document.getElementById('logCount').textContent = counts.log;
+    document.getElementById('patternsCount').textContent = counts.patterns;
+    document.getElementById('helpCount').textContent = counts.help;
+    document.getElementById('resourcesCount').textContent = counts.resources;
+    document.getElementById('philosophyCount').textContent = counts.philosophy;
+    document.getElementById('interactiveCount').textContent = counts.interactive;
+    document.getElementById('dreamsCount').textContent = counts.dreams;
+    document.getElementById('codePoetryCount').textContent = counts.codePoetry;
+    document.getElementById('soundscapeCount').textContent = counts.soundscape;
+    document.getElementById('experimentalCssCount').textContent = counts.experimentalCss;
+    document.getElementById('experimentalCount').textContent = counts.experimental;
+    
+    // Update active nav state
+    const navItems = document.querySelectorAll('.nav-item');
+    navItems.forEach(item => {
+        item.addEventListener('click', function() {
+            navItems.forEach(n => n.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
 }
 
 /**
