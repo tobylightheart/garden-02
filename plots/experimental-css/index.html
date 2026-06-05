@@ -119,6 +119,26 @@
         .demo-code .c-number { color: #f07178; }
         .demo-code .c-comment { color: #65737e; font-style: italic; }
         
+        .usage-tips {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(102, 126, 234, 0.1);
+            border-left: 3px solid #667eea;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .usage-tips h4 {
+            margin: 0 0 0.5rem 0;
+            color: #e0d4fc;
+            font-size: 0.95rem;
+        }
+        
+        .usage-tips p {
+            margin: 0;
+            color: #a0a0c0;
+            font-size: 0.85rem;
+        }
+        
         /* === LIVING COLOR === */
         .living-color {
             width: 100px;
@@ -599,102 +619,77 @@
         .twisting-demo {
             width: 150px;
             height: 150px;
-            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            position: relative;
             transform-style: preserve-3d;
             animation: twist 3s ease-in-out infinite;
         }
         
-        .twisting-demo::before {
+        .twisting-demo::before,
+        .twisting-demo::after {
             content: '';
             position: absolute;
-            inset: 0;
-            background: repeating-linear-gradient(
-                45deg,
-                transparent,
-                transparent 10px,
-                rgba(255, 255, 255, 0.2) 10px,
-                rgba(255, 255, 255, 0.2) 20px
-            );
+            width: 100%;
+            height: 100%;
+            background: inherit;
+            border-radius: inherit;
+            animation: twist 3s ease-in-out infinite;
+        }
+        
+        .twisting-demo::before {
+            transform: translateZ(-20px) rotateY(60deg);
+        }
+        
+        .twisting-demo::after {
+            transform: translateZ(20px) rotateY(-60deg);
         }
         
         @keyframes twist {
-            0% { transform: rotateY(0deg) rotateX(0deg); }
-            50% { transform: rotateY(180deg) rotateX(180deg); }
-            100% { transform: rotateY(360deg) rotateX(360deg); }
+            0%, 100% { transform: rotateY(0deg); }
+            50% { transform: rotateY(180deg); }
         }
         
-        /* === PAPER AIRPLANE === */
-        .paper-plane {
-            width: 0;
-            height: 0;
-            border-left: 50px solid transparent;
-            border-right: 50px solid transparent;
-            border-bottom: 80px solid #667eea;
+        /* === LIQUID Ripples === */
+        .liquid-ripples {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
             position: relative;
-            animation: fly 3s ease-in-out infinite;
+            overflow: hidden;
         }
         
-        .paper-plane::after {
+        .liquid-ripples::before {
             content: '';
             position: absolute;
-            top: 50%;
-            left: 0;
-            transform: translateY(-50%);
-            width: 0;
-            height: 0;
-            border-left: 30px solid transparent;
-            border-right: 30px solid transparent;
-            border-top: 50px solid rgba(102, 126, 234, 0.3);
+            inset: -30px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,0.4), transparent 60%);
+            animation: ripples 2s ease-out infinite;
         }
         
-        @keyframes fly {
-            0% { transform: translate(0, 0) rotate(-10deg); }
-            50% { transform: translate(100px, -50px) rotate(0deg); }
-            100% { transform: translate(0, 0) rotate(-10deg); }
+        @keyframes ripples {
+            0% { transform: scale(0.5); opacity: 1; }
+            100% { transform: scale(2); opacity: 0; }
         }
         
-        /* === SHIMMER === */
-        .shimmer-demo {
-            width: 150px;
-            height: 150px;
-            background: linear-gradient(
-                90deg,
-                rgba(255, 255, 255, 0) 0%,
-                rgba(255, 255, 255, 0.3) 50%,
-                rgba(255, 255, 255, 0) 100%
-            );
-            background-size: 200% 100%;
-            border-radius: 10px;
-            animation: shimmer 3s linear infinite;
-        }
-        
-        @keyframes shimmer {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
-        
-        /* === EXPANDING === */
-        .expanding-demo {
+        /* === EXPANDING RIPPLE === */
+        .expand-ripple {
             width: 100px;
             height: 100px;
-            background: #667eea;
+            background: #f093fb;
             border-radius: 50%;
             position: relative;
-            animation: expand 2s ease-in-out infinite;
+            overflow: hidden;
         }
         
-        .expanding-demo::before {
+        .expand-ripple::before {
             content: '';
             position: absolute;
-            inset: -20px;
+            inset: -50px;
             border-radius: 50%;
-            border: 2px solid #f093fb;
-            animation: expandRipple 2s ease-out infinite;
-        }
-        
-        @keyframes expand {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
+            background: radial-gradient(circle, rgba(255,255,255,0.3), transparent 70%);
+            animation: expandRipple 1.5s ease-out infinite;
         }
         
         @keyframes expandRipple {
@@ -821,6 +816,10 @@
                             &nbsp;&nbsp;<span class="c-number">100%</span> { <span class="c-function">background</span>: #667eea; }<br>
                             }
                         </div>
+                        <div class="usage-tips">
+                            <h4>💡 When to use:</h4>
+                            <p>Brand avatars, profile pictures, or any UI element that needs to feel alive and organic. Great for creating warmth in interfaces.</p>
+                        </div>
                     </div>
                     
                     <div class="animation-demo">
@@ -840,6 +839,10 @@
                             &nbsp;&nbsp;}<br>
                             }
                         </div>
+                        <div class="usage-tips">
+                            <h4>💡 When to use:</h4>
+                            <p>Loaders, transitions between states, or abstract art pieces. Perfect for showing transformation and flow in your design.</p>
+                        </div>
                     </div>
                     
                     <div class="animation-demo">
@@ -853,6 +856,10 @@
                             &nbsp;&nbsp;<span class="c-function">from</span> { <span class="c-function">transform</span>: <span class="c-function">rotate</span>(<span class="c-number">0deg</span>); }<br>
                             &nbsp;&nbsp;<span class="c-function">to</span> { <span class="c-function">transform</span>: <span class="c-function">rotate</span>(<span class="c-number">360deg</span>); }<br>
                             }
+                        </div>
+                        <div class="usage-tips">
+                            <h4>💡 When to use:</h4>
+                            <p>Water-themed designs, fluid interfaces, or any element needing smooth, flowing motion. Great for creative backgrounds.</p>
                         </div>
                     </div>
                     
@@ -871,6 +878,10 @@
                             &nbsp;&nbsp;&nbsp;&nbsp;<span class="c-function">box-shadow</span>: <span class="c-function">0 0 20px</span> #f093fb;<br>
                             &nbsp;&nbsp;}<br>
                             }
+                        </div>
+                        <div class="usage-tips">
+                            <h4>💡 When to use:</h4>
+                            <p>Call-to-action buttons, notifications, or elements that need to grab attention. Excellent for sci-fi or cyberpunk themes.</p>
                         </div>
                     </div>
                 </div>
@@ -897,62 +908,220 @@
                             <span class="c-function">@keyframes</span> floatUp {<br>
                             &nbsp;&nbsp;<span class="c-number">0%</span> { <span class="c-function">opacity</span>: <span class="c-number">0</span>; }<br>
                             &nbsp;&nbsp;<span class="c-number">50%</span> { <span class="c-function">opacity</span>: <span class="c-number">1</span>; }<br>
-                            &nbsp;&nbsp;<span class="c-number">100%</span> { <span class="c-function">transform</span>: <span class="c-function">translateY</span>(-<span class="c-number">60px</span>); <span class="c-function">opacity</span>: <span class="c-number">0</span>; }<br>
+                            &nbsp;&nbsp;<span class="c-number">100%</span> { <span class="c-function">transform</span>: <span class="c-function">translateY</span>(<span class="c-string">-60px</span>); <span class="c-function">opacity</span>: <span class="c-number">0</span>; }<br>
                             }
+                        </div>
+                        <div class="usage-tips">
+                            <h4>💡 When to use:</h4>
+                            <p>Magical interfaces, fantasy themes, or adding subtle life to backgrounds. Perfect for creating depth and atmosphere.</p>
                         </div>
                     </div>
                     
                     <div class="animation-demo">
-                        <h3 class="demo-title">🔮 Eternal Glow</h3>
+                        <h3 class="demo-title">🧊 Glass Morphism</h3>
                         <div class="demo-content">
-                            <div class="eternal-glow"></div>
+                            <div class="glass-morph"></div>
                         </div>
                         <div class="demo-code">
-                            <span class="c-comment">/* Multi-layered glow */</span><br>
-                            <span class="c-function">@keyframes</span> eternalGlow {<br>
-                            &nbsp;&nbsp;<span class="c-function">from</span>, <span class="c-function">to</span> { <span class="c-function">transform</span>: <span class="c-function">scale</span>(<span class="c-number">1</span>); <span class="c-function">opacity</span>: <span class="c-number">1</span>; }<br>
-                            &nbsp;&nbsp;<span class="c-function">50%</span> { <span class="c-function">transform</span>: <span class="c-function">scale</span>(<span class="c-number">1.2</span>); <span class="c-function">opacity</span>: <span class="c-number">0.6</span>; }<br>
-                            }
+                            <span class="c-comment">/* Frosted glass with shine */</span><br>
+                            <span class="c-function">backdrop-filter</span>: <span class="c-function">blur</span>(<span class="c-number">10px</span>);<br>
+                            <span class="c-function">border</span>: <span class="c-function">1px solid</span> <span class="c-string">rgba(255, 255, 255, 0.2)</span>;<br>
+                            <span class="c-function">animation</span>: <span class="c-function">glass</span> <span class="c-number">3s</span> <span class="c-function">ease-in-out</span> <span class="c-function">infinite</span>;<br>
+                            <span class="c-comment">/* Plus ::before shine effect */</span><br>
+                        </div>
+                        <div class="usage-tips">
+                            <h4>💡 When to use:</h4>
+                            <p>Modern UI cards, overlays, or any interface element needing a premium, frosted look. Very popular in modern web design.</p>
                         </div>
                     </div>
                     
                     <div class="animation-demo">
-                        <h3 class="demo-title">🎨 Color Shift</h3>
+                        <h3 class="demo-title">🌈 Color Shift</h3>
                         <div class="demo-content">
                             <div class="color-shift"></div>
                         </div>
                         <div class="demo-code">
-                            <span class="c-comment">/* Hue rotation */</span><br>
+                            <span class="c-comment">/* Rainbow rotation effect */</span><br>
                             <span class="c-function">@keyframes</span> colorShift {<br>
                             &nbsp;&nbsp;<span class="c-number">0%</span> { <span class="c-function">filter</span>: <span class="c-function">hue-rotate</span>(<span class="c-number">0deg</span>); }<br>
                             &nbsp;&nbsp;<span class="c-number">100%</span> { <span class="c-function">filter</span>: <span class="c-function">hue-rotate</span>(<span class="c-number">360deg</span>); }<br>
                             }
                         </div>
+                        <div class="usage-tips">
+                            <h4>💡 When to use:</h4>
+                            <p>Playful UI elements, creative branding, or attention-grabbing highlights. Use sparingly to avoid overwhelming users.</p>
+                        </div>
                     </div>
                     
                     <div class="animation-demo">
-                        <h3 class="demo-title">💧 Fluid Blob</h3>
+                        <h3 class="demo-title">✨ Eternal Glow</h3>
                         <div class="demo-content">
-                            <div class="fluid-blob"></div>
+                            <div class="eternal-glow"></div>
                         </div>
                         <div class="demo-code">
-                            <span class="c-comment">/* Organic blob morphing */</span><br>
-                            <span class="c-function">@keyframes</span> fluid {<br>
-                            &nbsp;&nbsp;<span class="c-function">0%</span> { <span class="c-function">border-radius</span>: <span class="c-string">40% 60% 70% 30%</span>; }<br>
-                            &nbsp;&nbsp;<span class="c-number">25%</span> { <span class="c-function">border-radius</span>: <span class="c-string">60% 40% 30% 70%</span>; }<br>
-                            &nbsp;&nbsp;<span class="c-number">50%</span> { <span class="c-function">border-radius</span>: <span class="c-string">70% 30% 60% 40%</span>; }<br>
-                            &nbsp;&nbsp;<span class="c-number">75%</span> { <span class="c-function">border-radius</span>: <span class="c-string">30% 70% 50% 50%</span>; }<br>
-                            }
+                            <span class="c-comment">/* Dual-layer glow effect */</span><br>
+                            <span class="c-function">animation</span>: <span class="c-function">eternal</span> <span class="c-number">5s</span> <span class="c-function">ease-in-out</span> <span class="c-function">infinite</span>;<br>
+                            <span class="c-comment">/* ::before and ::after for depth */</span><br>
+                        </div>
+                        <div class="usage-tips">
+                            <h4>💡 When to use:</h4>
+                            <p>Hero elements, featured content, or mystical/fantasy themes. The dual glow creates a sense of depth and importance.</p>
                         </div>
                     </div>
                 </div>
             </section>
             
             <section class="animation-section">
-                <h2>🌀 Spatial & Dimensional</h2>
-                <p>Three-dimensional and spatial animations that create depth and movement through perspective and layering.</p>
+                <h2>🎨 Creative Motion</h2>
+                <p>Playful and artistic animations that push the boundaries of CSS creativity. These effects are perfect for demonstrating what's possible with modern CSS.</p>
                 
                 <div class="animation-grid">
+                    <div class="animation-demo">
+                        <h3 class="demo-title">🔮 Fluid Blob</h3>
+                        <div class="demo-content">
+                            <div class="fluid-blob"></div>
+                        </div>
+                        <div class="demo-code">
+                            <span class="c-comment">/* Organic blob morphing */</span><br>
+                            <span class="c-function">@keyframes</span> fluid {<br>
+                            &nbsp;&nbsp;<span class="c-number">0%</span>, <span class="c-number">100%</span> { <span class="c-function">border-radius</span>: <span class="c-string">40% 60% 70% 30%</span> / <span class="c-string">40% 50% 60% 50%</span>; }<br>
+                            &nbsp;&nbsp;<span class="c-number">25%</span> { <span class="c-function">border-radius</span>: <span class="c-string">60% 40% 30% 70%</span> / <span class="c-string">50% 60% 40% 50%</span>; }<br>
+                            &nbsp;&nbsp;<span class="c-number">50%</span> { <span class="c-function">border-radius</span>: <span class="c-string">70% 30% 60% 40%</span> / <span class="c-string">60% 30% 70% 40%</span>; }<br>
+                            }
+                        </div>
+                        <div class="usage-tips">
+                            <h4>💡 When to use:</h4>
+                            <p>Abstract backgrounds, organic design elements, or fluid-themed interfaces. The organic shapes feel natural and flowing.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="animation-demo">
+                        <h3 class="demo-title">⚽ Sphere Roll</h3>
+                        <div class="demo-content">
+                            <div class="sphere-roll"></div>
+                        </div>
+                        <div class="demo-code">
+                            <span class="c-comment">/* 3D ball rotation */</span><br>
+                            <span class="c-function">@keyframes</span> sphereRoll {<br>
+                            &nbsp;&nbsp;<span class="c-number">0%</span> { <span class="c-function">transform</span>: <span class="c-function">rotate</span>(<span class="c-number">0deg</span>); }<br>
+                            &nbsp;&nbsp;<span class="c-number">100%</span> { <span class="c-function">transform</span>: <span class="c-function">rotate</span>(<span class="c-number">360deg</span>); }<br>
+                            }<br>
+                            <span class="c-comment">/* ::before adds a shine highlight */</span><br>
+                        </div>
+                        <div class="usage-tips">
+                            <h4>💡 When to use:</h4>
+                            <p>Sports themes, loading indicators, or 3D-style elements. The highlight gives the illusion of a real ball.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="animation-demo">
+                        <h3 class="demo-title">🕸️ Infinite Mesh</h3>
+                        <div class="demo-content">
+                            <div class="infinite-mesh"></div>
+                        </div>
+                        <div class="demo-code">
+                            <span class="c-comment">/* Moving grid pattern */</span><br>
+                            <span class="c-function">@keyframes</span> infiniteMesh {<br>
+                            &nbsp;&nbsp;<span class="c-number">0%</span> { <span class="c-function">transform</span>: <span class="c-function">translate</span>(<span class="c-string">0, 0</span>) <span class="c-function">rotate</span>(<span class="c-number">0deg</span>); }<br>
+                            &nbsp;&nbsp;<span class="c-number">100%</span> { <span class="c-function">transform</span>: <span class="c-function">translate</span>(<span class="c-string">20px, 20px</span>) <span class="c-function">rotate</span>(<span class="c-number">360deg</span>); }<br>
+                            }
+                        </div>
+                        <div class="usage-tips">
+                            <h4>💡 When to use:</h4>
+                            <p>Technical backgrounds, tech-themed interfaces, or creating depth through pattern motion. The rotating grid feels dynamic.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="animation-demo">
+                        <h3 class="demo-title">🌬️ Breathing Box</h3>
+                        <div class="demo-content">
+                            <div class="breathing-box"></div>
+                        </div>
+                        <div class="demo-code">
+                            <span class="c-comment">/* Calming breathing animation */</span><br>
+                            <span class="c-function">@keyframes</span> breathe {<br>
+                            &nbsp;&nbsp;<span class="c-number">0%</span>, <span class="c-number">100%</span> { <span class="c-function">transform</span>: <span class="c-function">scale</span>(<span class="c-number">1</span>); <span class="c-function">opacity</span>: <span class="c-number">1</span>; }<br>
+                            &nbsp;&nbsp;<span class="c-number">50%</span> { <span class="c-function">transform</span>: <span class="c-function">scale</span>(<span class="c-number">1.5</span>); <span class="c-function">opacity</span>: <span class="c-number">0.7</span>; }<br>
+                            }
+                        </div>
+                        <div class="usage-tips">
+                            <h4>💡 When to use:</h4>
+                            <p>Meditation apps, wellness interfaces, or calming UI elements. The slow breathing motion helps reduce user anxiety.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="animation-section">
+                <h2>🎭 Dramatic Effects</h2>
+                <p>High-impact animations that create dramatic visual interest. These effects are perfect for showcasing CSS capabilities and creating memorable user experiences.</p>
+                
+                <div class="animation-grid">
+                    <div class="animation-demo">
+                        <h3 class="demo-title">💥 Shatter</h3>
+                        <div class="demo-content">
+                            <div class="shatter-demo"></div>
+                        </div>
+                        <div class="demo-code">
+                            <span class="c-comment">/* Exploding effect */</span><br>
+                            <span class="c-function">@keyframes</span> shatter {<br>
+                            &nbsp;&nbsp;<span class="c-number">0%</span> { <span class="c-function">transform</span>: <span class="c-function">scale</span>(<span class="c-number">1</span>); <span class="c-function">opacity</span>: <span class="c-number">1</span>; }<br>
+                            &nbsp;&nbsp;<span class="c-number">40%</span> { <span class="c-function">transform</span>: <span class="c-function">scale</span>(<span class="c-number">1.05</span>); <span class="c-function">opacity</span>: <span class="c-number">0.8</span>; }<br>
+                            &nbsp;&nbsp;<span class="c-number">100%</span> { <span class="c-function">transform</span>: <span class="c-function">scale</span>(<span class="c-number">0</span>); <span class="c-function">opacity</span>: <span class="c-number">0</span>; }<br>
+                            }
+                        </div>
+                        <div class="usage-tips">
+                            <h4>💡 When to use:</h4>
+                            <p>Button clicks, destructive actions, or attention-grabbing highlights. The explosive motion creates dramatic emphasis.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="animation-demo">
+                        <h3 class="demo-title">🌈 Rainbow Text</h3>
+                        <div class="demo-content">
+                            <div class="rainbow-text">Rainbow</div>
+                        </div>
+                        <div class="demo-code">
+                            <span class="c-comment">/* Text color cycling */</span><br>
+                            <span class="c-function">@keyframes</span> rainbow {<br>
+                            &nbsp;&nbsp;<span class="c-number">0%</span> { <span class="c-function">color</span>: #667eea; }<br>
+                            &nbsp;&nbsp;<span class="c-number">15%</span> { <span class="c-function">color</span>: #764ba2; }<br>
+                            &nbsp;&nbsp;<span class="c-number">30%</span> { <span class="c-function">color</span>: #f093fb; }<br>
+                            &nbsp;&nbsp;<span class="c-number">45%</span> { <span class="c-function">color</span>: #f5576c; }<br>
+                            &nbsp;&nbsp;<span class="c-number">60%</span> { <span class="c-function">color</span>: #4facfe; }<br>
+                            &nbsp;&nbsp;<span class="c-number">75%</span> { <span class="c-function">color</span>: #00f5d4; }<br>
+                            &nbsp;&nbsp;<span class="c-number">100%</span> { <span class="c-function">color</span>: #667eea; }<br>
+                            }
+                        </div>
+                        <div class="usage-tips">
+                            <h4>💡 When to use:</h4>
+                            <p>Headlines, playful branding, or creative showcases. The vibrant colors draw immediate attention.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="animation-demo">
+                        <h3 class="demo-title">⬜ Pulsing Grid</h3>
+                        <div class="demo-content">
+                            <div class="pulsing-grid">
+                                <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+                                <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+                                <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+                            </div>
+                        </div>
+                        <div class="demo-code">
+                            <span class="c-comment">/* Staggered cell pulsing */</span><br>
+                            <span class="c-function">animation</span>: <span class="c-function">gridPulse</span> <span class="c-number">2s</span> <span class="c-function">ease-in-out</span> <span class="c-function">infinite</span>;<br>
+                            <span class="c-comment">/* Each cell has different delay */</span><br>
+                            <span class="c-function">:nth-child(1)</span> { <span class="c-function">animation-delay</span>: <span class="c-number">0s</span>; }<br>
+                            <span class="c-function">:nth-child(2)</span> { <span class="c-function">animation-delay</span>: <span class="c-number">0.2s</span>; }<br>
+                            <span class="c-function">:nth-child(3)</span> { <span class="c-function">animation-delay</span>: <span class="c-number">0.4s</span>; }<br>
+                        </div>
+                        <div class="usage-tips">
+                            <h4>💡 When to use:</h4>
+                            <p>Background patterns, loading screens, or tech interfaces. The staggered animation creates a mesmerizing effect.</p>
+                        </div>
+                    </div>
+                    
                     <div class="animation-demo">
                         <h3 class="demo-title">🪐 Orbiting</h3>
                         <div class="demo-content">
@@ -963,122 +1132,190 @@
                             </div>
                         </div>
                         <div class="demo-code">
-                            <span class="c-comment">/* Orbital mechanics */</span><br>
+                            <span class="c-comment">/* Concentric orbiting circles */</span><br>
                             <span class="c-function">@keyframes</span> orbit1 {<br>
-                            &nbsp;&nbsp;<span class="c-function">from</span> { <span class="c-function">transform</span>: <span class="c-function">translate</span>(-<span class="c-number">50%</span>, -<span class="c-number">50%</span>) <span class="c-function">rotate</span>(<span class="c-number">0deg</span>); }<br>
-                            &nbsp;&nbsp;<span class="c-function">to</span> { <span class="c-function">transform</span>: <span class="c-function">translate</span>(-<span class="c-number">50%</span>, -<span class="c-number">50%</span>) <span class="c-function">rotate</span>(<span class="c-number">360deg</span>); }<br>
-                            }
+                            &nbsp;&nbsp;<span class="c-function">from</span> { <span class="c-function">transform</span>: <span class="c-function">rotate</span>(<span class="c-number">0deg</span>); }<br>
+                            &nbsp;&nbsp;<span class="c-function">to</span> { <span class="c-function">transform</span>: <span class="c-function">rotate</span>(<span class="c-number">360deg</span>); }<br>
+                            }<br>
+                            <span class="c-comment">/* Counter-rotation for orbit-2 */</span><br>
                         </div>
-                    </div>
-                    
-                    <div class="animation-demo">
-                        <h3 class="demo-title">🎬 Paper Plane</h3>
-                        <div class="demo-content">
-                            <div class="paper-plane"></div>
-                        </div>
-                        <div class="demo-code">
-                            <span class="c-comment">/* Flight path animation */</span><br>
-                            <span class="c-function">@keyframes</span> fly {<br>
-                            &nbsp;&nbsp;<span class="c-function">0%</span> { <span class="c-function">transform</span>: <span class="c-function">translate</span>(<span class="c-number">0</span>, <span class="c-number">0</span>); }<br>
-                            &nbsp;&nbsp;<span class="c-function">50%</span> { <span class="c-function">transform</span>: <span class="c-function">translate</span>(<span class="c-number">100px</span>, -<span class="c-number">50px</span>); }<br>
-                            &nbsp;&nbsp;<span class="c-function">100%</span> { <span class="c-function">transform</span>: <span class="c-function">translate</span>(<span class="c-number">0</span>, <span class="c-number">0</span>); }<br>
-                            }
-                        </div>
-                    </div>
-                    
-                    <div class="animation-demo">
-                        <h3 class="demo-title">🌊 Liquid Fill</h3>
-                        <div class="demo-content">
-                            <div class="liquid-fill"></div>
-                        </div>
-                        <div class="demo-code">
-                            <span class="c-comment">/* Liquid surface animation */</span><br>
-                            <span class="c-function">@keyframes</span> liquidFill {<br>
-                            &nbsp;&nbsp;<span class="c-number">0%</span> { <span class="c-function">border-radius</span>: <span class="c-string">0 0 50% 50%</span>; }<br>
-                            &nbsp;&nbsp;<span class="c-number">50%</span> { <span class="c-function">border-radius</span>: <span class="c-string">0 0 40% 60%</span>; }<br>
-                            }
-                        </div>
-                    </div>
-                    
-                    <div class="animation-demo">
-                        <h3 class="demo-title">🦎 Snake</h3>
-                        <div class="demo-content">
-                            <div class="snake-demo"></div>
-                        </div>
-                        <div class="demo-code">
-                            <span class="c-comment">/* Clip-path polygon animation */</span><br>
-                            <span class="c-function">@keyframes</span> snake {<br>
-                            &nbsp;&nbsp;<span class="c-number">0%</span> { <span class="c-function">clip-path</span>: <span class="c-function">polygon</span>(<span class="c-string">50% 50%, 0% 0%, 0% 100%</span>); }<br>
-                            &nbsp;&nbsp;<span class="c-number">100%</span> { <span class="c-function">clip-path</span>: <span class="c-function">polygon</span>(<span class="c-string">50% 50%, 0% 0%, 0% 100%, 100% 100%</span>); }<br>
-                            }
+                        <div class="usage-tips">
+                            <h4>💡 When to use:</h4>
+                            <p>Planetary themes, loading indicators with multiple elements, or creating depth through motion. The orbital motion feels cosmic.</p>
                         </div>
                     </div>
                 </div>
             </section>
             
             <section class="animation-section">
-                <h2>⚡ Dynamic & Reactive</h2>
-                <p>Fast-paced animations with dramatic effects that capture attention through timing, contrast, and movement.</p>
+                <h2>💧 Liquid Effects</h2>
+                <p>Fluid and organic animations that mimic water, liquid, and other organic movements. These effects are great for creating natural, flowing visual experiences.</p>
                 
                 <div class="animation-grid">
                     <div class="animation-demo">
-                        <h3 class="demo-title">📦 Breathing Box</h3>
+                        <h3 class="demo-title">📈 Liquid Fill</h3>
                         <div class="demo-content">
-                            <div class="breathing-box"></div>
+                            <div class="liquid-fill"></div>
                         </div>
                         <div class="demo-code">
-                            <span class="c-comment">/* Calming breathing effect */</span><br>
-                            <span class="c-function">@keyframes</span> breathe {<br>
+                            <span class="c-comment">/* Animated fill level */</span><br>
+                            <span class="c-function">@keyframes</span> liquidFill {<br>
+                            &nbsp;&nbsp;<span class="c-number">0%</span>, <span class="c-number">100%</span> { <span class="c-function">border-radius</span>: <span class="c-string">0 0 50% 50%</span> / <span class="c-string">20% 20% 80% 80%</span>; }<br>
+                            &nbsp;&nbsp;<span class="c-number">50%</span> { <span class="c-function">border-radius</span>: <span class="c-string">0 0 40% 60%</span> / <span class="c-string">25% 25% 75% 75%</span>; }<br>
+                            }
+                        </div>
+                        <div class="usage-tips">
+                            <h4>💡 When to use:</h4>
+                            <p>Progress bars, battery indicators, or any UI showing levels. The organic shape change makes it feel more natural than a simple bar.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="animation-demo">
+                        <h3 class="demo-title">🌀 Twisting</h3>
+                        <div class="demo-content">
+                            <div class="twisting-demo"></div>
+                        </div>
+                        <div class="demo-code">
+                            <span class="c-comment">/* 3D rotation with depth */</span><br>
+                            <span class="c-function">transform-style</span>: <span class="c-function">preserve-3d</span>;<br>
+                            <span class="c-function">animation</span>: <span class="c-function">twist</span> <span class="c-number">3s</span> <span class="c-function">ease-in-out</span> <span class="c-function">infinite</span>;<br>
+                            <span class="c-comment">/* ::before and ::after create 3D effect */</span><br>
+                        </div>
+                        <div class="usage-tips">
+                            <h4>💡 When to use:</h4>
+                            <p>3D-themed interfaces, abstract art, or elements needing depth. The rotating layers create a true 3D illusion.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="animation-demo">
+                        <h3 class="demo-title">💧 Liquid Ripples</h3>
+                        <div class="demo-content">
+                            <div class="liquid-ripples"></div>
+                        </div>
+                        <div class="demo-code">
+                            <span class="c-comment">/* Ripple spreading effect */</span><br>
+                            <span class="c-function">@keyframes</span> ripples {<br>
+                            &nbsp;&nbsp;<span class="c-number">0%</span> { <span class="c-function">transform</span>: <span class="c-function">scale</span>(<span class="c-number">0.5</span>); <span class="c-function">opacity</span>: <span class="c-number">1</span>; }<br>
+                            &nbsp;&nbsp;<span class="c-number">100%</span> { <span class="c-function">transform</span>: <span class="c-function">scale</span>(<span class="c-number">2</span>); <span class="c-function">opacity</span>: <span class="c-number">0</span>; }<br>
+                            }
+                        </div>
+                        <div class="usage-tips">
+                            <h4>💡 When to use:</h4>
+                            <p>Water-themed UI, notification ripples, or any element needing a fluid response. The ripple mimics real water physics.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="animation-demo">
+                        <h3 class="demo-title">🔊 Expand Ripple</h3>
+                        <div class="demo-content">
+                            <div class="expand-ripple"></div>
+                        </div>
+                        <div class="demo-code">
+                            <span class="c-comment">/* Light burst effect */</span><br>
+                            <span class="c-function">@keyframes</span> expandRipple {<br>
                             &nbsp;&nbsp;<span class="c-number">0%</span> { <span class="c-function">transform</span>: <span class="c-function">scale</span>(<span class="c-number">1</span>); <span class="c-function">opacity</span>: <span class="c-number">1</span>; }<br>
-                            &nbsp;&nbsp;<span class="c-number">50%</span> { <span class="c-function">transform</span>: <span class="c-function">scale</span>(<span class="c-number">1.5</span>); <span class="c-function">opacity</span>: <span class="c-number">0.7</span>; }<br>
+                            &nbsp;&nbsp;<span class="c-number">100%</span> { <span class="c-function">transform</span>: <span class="c-function">scale</span>(<span class="c-number">3</span>); <span class="c-function">opacity</span>: <span class="c-number">0</span>; }<br>
                             }
                         </div>
-                    </div>
-                    
-                    <div class="animation-demo">
-                        <h3 class="demo-title">💥 Shatter</h3>
-                        <div class="demo-content">
-                            <div class="shatter-demo"></div>
-                        </div>
-                        <div class="demo-code">
-                            <span class="c-comment">/* Shattering effect */</span><br>
-                            <span class="c-function">@keyframes</span> shatter {<br>
-                            &nbsp;&nbsp;<span class="c-number">0%</span> { <span class="c-function">transform</span>: <span class="c-function">scale</span>(<span class="c-number">1</span>); <span class="c-function">opacity</span>: <span class="c-number">1</span>; }<br>
-                            &nbsp;&nbsp;<span class="c-number">100%</span> { <span class="c-function">transform</span>: <span class="c-function">scale</span>(<span class="c-number">0</span>); <span class="c-function">opacity</span>: <span class="c-number">0</span>; }<br>
-                            }
+                        <div class="usage-tips">
+                            <h4>💡 When to use:</h4>
+                            <p>Button clicks, sound wave visualizations, or any element responding to user interaction. The expanding glow feels responsive.</p>
                         </div>
                     </div>
-                    
+                </div>
+            </section>
+            
+            <section class="animation-section">
+                <h2>🎪 Visual Tricks</h2>
+                <p>Creative CSS techniques that play with perception, light, and motion. These effects demonstrate the creative potential of CSS animations.</p>
+                
+                <div class="animation-grid">
                     <div class="animation-demo">
-                        <h3 class="demo-title">🌈 Rainbow Text</h3>
-                        <div class="demo-content">
-                            <div class="rainbow-text">Rainbow</div>
-                        </div>
-                        <div class="demo-code">
-                            <span class="c-comment">/* Color cycling */</span><br>
-                            <span class="c-function">@keyframes</span> rainbow {<br>
-                            &nbsp;&nbsp;<span class="c-number">0%</span> { <span class="c-function">color</span>: #667eea; }<br>
-                            &nbsp;&nbsp;<span class="c-number">15%</span> { <span class="c-function">color</span>: #764ba2; }<br>
-                            &nbsp;&nbsp;<span class="c-number">30%</span> { <span class="c-function">color</span>: #f093fb; }<br>
-                            &nbsp;&nbsp;<span class="c-number">45%</span> { <span class="c-function">color</span>: #f5576c; }<br>
-                            &nbsp;&nbsp;<span class="c-number">60%</span> { <span class="c-function">color</span>: #4facfe; }<br>
-                            }
-                        </div>
-                    </div>
-                    
-                    <div class="animation-demo">
-                        <h3 class="demo-title">🔥 Flicker</h3>
+                        <h3 class="demo-title">👻 Flicker</h3>
                         <div class="demo-content">
                             <div class="flicker-demo"></div>
                         </div>
                         <div class="demo-code">
-                            <span class="c-comment">/* Flickering light */</span><br>
+                            <span class="c-comment">/* Random flickering effect */</span><br>
                             <span class="c-function">@keyframes</span> flicker {<br>
-                            &nbsp;&nbsp;<span class="c-number">0%</span>, <span class="c-number">100%</span> { <span class="c-function">opacity</span>: <span class="c-number">1</span>; }<br>
-                            &nbsp;&nbsp;<span class="c-number">20%</span>, <span class="c-number">63%</span> { <span class="c-function">opacity</span>: <span class="c-number">0.4</span>; }<br>
+                            &nbsp;&nbsp;<span class="c-number">0%</span>, <span class="c-number">19.999%</span>, <span class="c-number">22%</span>, <span class="c-number">62.999%</span>, <span class="c-number">64%</span>, <span class="c-number">64.999%</span>, <span class="c-number">70%</span>, <span class="c-number">100%</span> { <span class="c-function">opacity</span>: <span class="c-number">1</span>; }<br>
+                            &nbsp;&nbsp;<span class="c-number">20%</span>, <span class="c-number">21.999%</span>, <span class="c-number">63%</span>, <span class="c-number">63.999%</span>, <span class="c-number">65%</span>, <span class="c-number">69.999%</span> { <span class="c-function">opacity</span>: <span class="c-number">0.4</span>; }<br>
                             }
                         </div>
+                        <div class="usage-tips">
+                            <h4>💡 When to use:</h4>
+                            <p>Light bulbs, old signs, horror themes, or creating tension. The unpredictable flicker feels authentic and organic.</p>
+                        </div>
                     </div>
+                    
+                    <div class="animation-demo">
+                        <h3 class="demo-title">🎈 Squish</h3>
+                        <div class="demo-content">
+                            <div class="squish-demo"></div>
+                        </div>
+                        <div class="demo-code">
+                            <span class="c-comment">/* Elastic deformation */</span><br>
+                            <span class="c-function">@keyframes</span> squish {<br>
+                            &nbsp;&nbsp;<span class="c-number">0%</span>, <span class="c-number">100%</span> { <span class="c-function">border-radius</span>: <span class="c-number">50%</span>; <span class="c-function">transform</span>: <span class="c-function">scale</span>(<span class="c-number">1, 1</span>); }<br>
+                            &nbsp;&nbsp;<span class="c-number">25%</span> { <span class="c-function">border-radius</span>: <span class="c-string">60% 40% 33% 67%</span> / <span class="c-string">55% 45% 55% 45%</span>; <span class="c-function">transform</span>: <span class="c-function">scale</span>(<span class="c-number">1.1, 0.9</span>); }<br>
+                            &nbsp;&nbsp;<span class="c-number">50%</span> { <span class="c-function">border-radius</span>: <span class="c-string">33% 67% 55% 45%</span> / <span class="c-string">45% 55% 45% 55%</span>; <span class="c-function">transform</span>: <span class="c-function">scale</span>(<span class="c-number">0.9, 1.1</span>); }<br>
+                            }
+                        </div>
+                        <div class="usage-tips">
+                            <h4>💡 When to use:</h4>
+                            <p>Bouncy UI elements, playful buttons, or anything needing a fun, elastic feel. The squishing motion feels tactile and responsive.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="animation-demo">
+                        <h3 class="demo-title">🐍 Snake</h3>
+                        <div class="demo-content">
+                            <div class="snake-demo"></div>
+                        </div>
+                        <div class="demo-code">
+                            <span class="c-comment">/* Clip-path polygon morphing */</span><br>
+                            <span class="c-function">@keyframes</span> snake {<br>
+                            &nbsp;&nbsp;<span class="c-number">0%</span> { <span class="c-function">clip-path</span>: <span class="c-function">polygon</span>(<span class="c-string">50% 50%, 0% 0%, 0% 100%</span>); }<br>
+                            &nbsp;&nbsp;<span class="c-number">25%</span> { <span class="c-function">clip-path</span>: <span class="c-function">polygon</span>(<span class="c-string">50% 50%, 100% 0%, 0% 100%</span>); }<br>
+                            &nbsp;&nbsp;<span class="c-number">50%</span> { <span class="c-function">clip-path</span>: <span class="c-function">polygon</span>(<span class="c-string">50% 50%, 100% 0%, 100% 100%</span>); }<br>
+                            &nbsp;&nbsp;<span class="c-number">75%</span> { <span class="c-function">clip-path</span>: <span class="c-function">polygon</span>(<span class="c-string">50% 50%, 100% 0%, 100% 100%, 0% 100%</span>); }<br>
+                            &nbsp;&nbsp;<span class="c-number">100%</span> { <span class="c-function">clip-path</span>: <span class="c-function">polygon</span>(<span class="c-string">50% 50%, 0% 0%, 0% 100%, 100% 100%</span>); }<br>
+                            }
+                        </div>
+                        <div class="usage-tips">
+                            <h4>💡 When to use:</h4>
+                            <p>Snake game themes, abstract art, or polygonal design systems. The clip-path animation creates a mesmerizing geometric effect.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="animation-section">
+                <h2>🎓 Quick Reference Guide</h2>
+                <p>Choosing the right animation for your use case:</p>
+                <table style="width: 100%; border-collapse: collapse; margin-top: 1rem;">
+                    <tr style="background: rgba(255,255,255,0.05);">
+                        <th style="padding: 1rem; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1);">Animation</th>
+                        <th style="padding: 1rem; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1);">Best For</th>
+                        <th style="padding: 1rem; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1);">Complexity</th>
+                    </tr>
+                    <tr><td style="padding: 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.05);">Living Color</td><td style="padding: 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.05);">Avatars, brand elements</td><td style="padding: 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.05);">Low</td></tr>
+                    <tr><td style="padding: 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.05);">Neon Pulse</td><td style="padding: 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.05);">Buttons, CTAs, notifications</td><td style="padding: 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.05);">Low</td></tr>
+                    <tr><td style="padding: 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.05);">Glass Morphism</td><td style="padding: 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.05);">Modern cards, overlays</td><td style="padding: 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.05);">Medium</td></tr>
+                    <tr><td style="padding: 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.05);">Liquid Effects</td><td style="padding: 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.05);">Progress bars, water themes</td><td style="padding: 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.05);">Medium</td></tr>
+                    <tr><td style="padding: 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.05);">3D Twisting</td><td style="padding: 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.05);">Abstract, tech interfaces</td><td style="padding: 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.05);">High</td></tr>
+                    <tr><td style="padding: 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.05);">Particle Effects</td><td style="padding: 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.05);">Magical, atmospheric</td><td style="padding: 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.05);">Medium</td></tr>
+                </table>
+                
+                <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(255,255,255,0.05); border-radius: 10px; border-left: 4px solid #667eea;">
+                    <h3 style="margin-top: 0; color: #e0d4fc;">💡 Pro Tips</h3>
+                    <ul style="margin-left: 1.5rem; color: #a0a0c0;">
+                        <li><strong>Performance:</strong> Use <code>transform</code> and <code>opacity</code> for smooth 60fps animations</li>
+                        <li><strong>Timing:</strong> Match animation duration to the content's purpose (fast for feedback, slow for ambiance)</li>
+                        <li><strong>Accessibility:</strong> Respect <code>prefers-reduced-motion</code> for users who need less motion</li>
+                        <li><strong>Combination:</strong> Layer multiple animations using <code>animation</code> shorthand for complex effects</li>
+                        <li><strong>Testing:</strong> Check animations on mobile devices where GPU acceleration varies</li>
+                    </ul>
                 </div>
             </section>
         </main>
