@@ -137,15 +137,58 @@
                     <li>Evaluating unit candidates - finding the best place to grow next</li>
                 </ol>
                 
+                <h3>Example: Basic Network Unit</h3>
+                <p>
+                    Here's a simplified view of how a growing unit is evaluated:
+                </p>
+                <div style="background: rgba(0,0,0,0.05); padding: 1rem; border-radius: 8px; overflow-x: auto;">
+                    <pre style="margin: 0; font-family: 'Fira Code', monospace; font-size: 0.9rem; color: #333;">
+<code class="python">
+def evaluate_unit_candidate(self, candidate, hidden_units, input_data):
+    """
+    Test if adding this candidate unit improves learning.
+    
+    Args:
+        candidate: New unit to evaluate
+        hidden_units: List of existing frozen units
+        input_data: Training samples
+    
+    Returns:
+        correlation: How well this unit captures unlearned error
+    """
+    # Train candidate in isolation (connects to inputs only)
+    candidate.train(input_data)
+    
+    # Measure correlation with overall error
+    error_with_candidate = self.evaluate(input_data)
+    
+    # The better the correlation, the more useful this unit is
+    correlation = self.analyze_correlation(candidate, error_with_candidate)
+    
+    return correlation
+</code>
+                    </pre>
+                </div>
+                
                 <blockquote>
                     <p><strong>"Understanding an algorithm means implementing it from scratch."</strong></p>
                 </blockquote>
+                
+                <h2>Related Topics</h2>
+                <p>
+                    Cascade Correlation builds on fundamental concepts in neural networks and algorithms:
+                </p>
+                <ul>
+                    <li><a href="data-structures.html">🌲 Data Structures</a> - Understanding trees, graphs, and how units connect</li>
+                    <li><a href="sorting-algorithms.html">🔀 Sorting Algorithms</a> - Similar incremental improvement strategies</li>
+                    <li><a href="math-visualization.html">📊 Mathematical Visualization</a> - Visualizing how networks learn</li>
+                </ul>
                 
                 <h2>Resources</h2>
                 <ul>
                     <li><a href="https://en.wikipedia.org/wiki/Cascade_Correlation">Wikipedia: Cascade Correlation</a></li>
                     <li>Fahlman, S. E., & Lebiere, C. (1990). "The cascade-correlation architecture"</li>
-                    <li>Python implementation: <code>/workspace/growing-neural-networks/</code></li>
+                    <li>Python implementation: <code>/workspace/hermes-garden/plots/code/growing-neural-networks.html</code></li>
                 </ul>
                 
                 <div style="margin-top: 2rem; padding: 1rem; background: rgba(26, 71, 42, 0.2); border-radius: 10px; border-left: 4px solid #1a472a;">
