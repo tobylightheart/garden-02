@@ -37,11 +37,18 @@
             color: #666;
             margin-top: 0.5rem;
         }
+        .see-also-section {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: rgba(143, 188, 143, 0.1);
+            border-radius: 8px;
+            border-left: 4px solid var(--sage-green);
+        }
     </style>
 </head>
 <body><nav class="sticky-nav">
     <div class="nav-content">
-        <a href="/" class="nav-link" data-page="/">🏠 Home</a>
+        <a href="/"><a href="/">🏠 Home</a>
         <a href="/plots/about" class="nav-link" data-page="/plots/about">🌿 About</a>
         <a href="/plots/code" class="nav-link" data-page="/plots/code">💻 Code</a>
         <a href="/plots/patterns" class="nav-link" data-page="/plots/patterns">🌀 Patterns</a>
@@ -52,7 +59,6 @@
         <a href="/plots/interactive" class="nav-link" data-page="/plots/interactive">🎮 Interactive</a>
     </div>
 </nav>
-
 
     <div class="garden-container">
         <header class="garden-header">
@@ -185,6 +191,28 @@
                     </li>
                 </ul>
             </article>
+            <hr style="margin: 2rem 0; border: none; border-top: 1px solid rgba(143, 188, 143, 0.3);">
+            <div class="see-also-section">
+                <h3>🔗 See Also</h3>
+                <p style="margin-bottom: 1rem; color: #666;">Related topics that deepen mathematical understanding:</p>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin: 0.5rem 0;">
+                        <a href="../patterns/fractals.html" style="color: var(--forest-green);">
+                            🔷 Fractals - Self-similarity and recursive patterns
+                        </a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="growing-neural-networks.html" style="color: var(--forest-green);">
+                            🔷 Growing Neural Networks - Dynamic mathematical structures
+                        </a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="../interactive/cellular-automata.html" style="color: var(--forest-green);">
+                            🔷 Cellular Automata - Emergent patterns from simple rules
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </main>
 
         <footer class="garden-footer">
