@@ -8,7 +8,7 @@
 </head>
 <body><nav class="sticky-nav">
     <div class="nav-content">
-        <a href="/" class="nav-link" data-page="/">🏠 Home</a>
+        <a href="/">🏠 Home</a>
         <a href="/plots/about" class="nav-link" data-page="/plots/about">🌿 About</a>
         <a href="/plots/code" class="nav-link" data-page="/plots/code">💻 Code</a>
         <a href="/plots/patterns" class="nav-link" data-page="/plots/patterns">🌀 Patterns</a>
@@ -20,87 +20,86 @@
     </div>
 </nav>
 
+<div class="garden-container">
+<header class="garden-header">
+    <div class="header-content">
+        <div class="garden-title">
+            <span class="tree-emoji">🐍</span>
+            <h1>Python Cheat Sheet</h1>
+        </div>
+    </div>
+</header>
 
-    <div class="garden-container">
-        <header class="garden-header">
-            <div class="header-content">
-                <div class="garden-title">
-                    <span class="tree-emoji">🐍</span>
-                    <h1>Python Cheat Sheet</h1>
-                </div>
-            </div>
-        </header>
+<main class="garden-main">
+<article>
+    <h2>Python Quick Reference</h2>
+    <p>
+        Python is one of the most popular programming languages. This cheat sheet
+        covers the most commonly used Python features and syntax.
+    </p>
 
-        <main class="garden-main">
-            <article>
-                <h2>Python Quick Reference</h2>
-                <p>
-                    Python is one of the most popular programming languages. This cheat sheet
-                    covers the most commonly used Python features and syntax.
-                </p>
+    <h3 style="margin-top: 2rem;">Basic Syntax</h3>
+    <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(73, 143, 143, 0.15); border-radius: 8px;">
+        <h4>🔹 Indentation</h4>
+        <p>
+            Python uses indentation (whitespace) to define code blocks.
+            <strong>Always use 4 spaces</strong> (not tabs).
+        </p>
+    </div>
 
-                <h3 style="margin-top: 2rem;">Basic Syntax</h3>
-                <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(73, 143, 143, 0.15); border-radius: 8px;">
-                    <h4>🔹 Indentation</h4>
-                    <p>
-                        Python uses indentation (whitespace) to define code blocks.
-                        <strong>Always use 4 spaces</strong> (not tabs).
-                    </p>
-                </div>
+    <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(73, 143, 143, 0.15); border-radius: 8px;">
+        <h4>🔸 Comments</h4>
+        <p style="font-size: 0.9rem;">
+            # Single-line comment<br>
+            ''' Multi-line<br>
+            string '''
+        </p>
+    </div>
 
-                <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(73, 143, 143, 0.15); border-radius: 8px;">
-                    <h4>🔸 Comments</h4>
-                    <p style="font-size: 0.9rem;">
-                        # Single-line comment<br>
-                        ''' Multi-line<br>
-                        string '''
-                    </p>
-                </div>
+    <h3 style="margin-top: 2rem;">Data Types</h3>
+    <div style="margin: 2rem 0;">
+        <h4>📦 Primitives</h4>
+        <ul style="margin-left: 1.5rem;">
+            <li><code>int:</code> 42 (integers)</li>
+            <li><code>float:</code> 3.14 (decimals)</li>
+            <li><code>str:</code> "hello" (strings)</li>
+            <li><code>bool:</code> True/False (booleans)</li>
+            <li><code>None:</code> None (null)</li>
+        </ul>
+    </div>
 
-                <h3 style="margin-top: 2rem;">Data Types</h3>
-                <div style="margin: 2rem 0;">
-                    <h4>📦 Primitives</h4>
-                    <ul style="margin-left: 1.5rem;">
-                        <li><code>int:</code> 42 (integers)</li>
-                        <li><code>float:</code> 3.14 (decimals)</li>
-                        <li><code>str:</code> "hello" (strings)</li>
-                        <li><code>bool:</code> True/False (booleans)</li>
-                        <li><code>None:</code> None (null)</li>
-                    </ul>
-                </div>
+    <div style="margin: 2rem 0;">
+        <h4>📦 Collections</h4>
+        <ul style="margin-left: 1.5rem;">
+            <li><code>list:</code> [1, 2, 3] (ordered, mutable)</li>
+            <li><code>tuple:</code> (1, 2, 3) (ordered, immutable)</li>
+            <li><code>dict:</code> {"key": "value"} (key-value)</li>
+            <li><code>set:</code> {1, 2, 3} (unique, unordered)</li>
+        </ul>
+    </div>
 
-                <div style="margin: 2rem 0;">
-                    <h4>📦 Collections</h4>
-                    <ul style="margin-left: 1.5rem;">
-                        <li><code>list:</code> [1, 2, 3] (ordered, mutable)</li>
-                        <li><code>tuple:</code> (1, 2, 3) (ordered, immutable)</li>
-                        <li><code>dict:</code> {"key": "value"} (key-value)</li>
-                        <li><code>set:</code> {1, 2, 3} (unique, unordered)</li>
-                    </ul>
-                </div>
-
-                <h3 style="margin-top: 2rem;">Control Flow</h3>
-                <div style="margin: 2rem 0;">
-                    <h4>🔹 If/Else</h4>
-                    <pre style="background: rgba(0,0,0,0.05); padding: 1rem; border-radius: 4px; overflow-x: auto;">
-if x &gt; 0:
+    <h3 style="margin-top: 2rem;">Control Flow</h3>
+    <div style="margin: 2rem 0;">
+        <h4>🔹 If/Else</h4>
+        <pre style="background: rgba(0,0,0,0.05); padding: 1rem; border-radius: 4px; overflow-x: auto;">
+if x > 0:
     print("positive")
 elif x == 0:
     print("zero")
 else:
     print("negative")
-                    </pre>
-                </div>
+        </pre>
+    </div>
 
-                <div style="margin: 2rem 0;">
-                    <h4>🔸 Loops</h4>
-                    <pre style="background: rgba(0,0,0,0.05); padding: 1rem; border-radius: 4px; overflow-x: auto;">
+    <div style="margin: 2rem 0;">
+        <h4>🔸 Loops</h4>
+        <pre style="background: rgba(0,0,0,0.05); padding: 1rem; border-radius: 4px; overflow-x: auto;">
 # For loop
 for i in range(5):
     print(i)  # 0, 1, 2, 3, 4
 
 # While loop
-while x &gt; 0:
+while x > 0:
     x -= 1
 
 # Break/continue
@@ -109,13 +108,13 @@ for i in range(10):
         continue  # skip 5
     if i == 7:
         break  # stop at 7
-                    </pre>
-                </div>
+        </pre>
+    </div>
 
-                <h3 style="margin-top: 2rem;">Functions</h3>
-                <div style="margin: 2rem 0;">
-                    <h4>🔹 Defining Functions</h4>
-                    <pre style="background: rgba(0,0,0,0.05); padding: 1rem; border-radius: 4px; overflow-x: auto;">
+    <h3 style="margin-top: 2rem;">Functions</h3>
+    <div style="margin: 2rem 0;">
+        <h4>🔹 Defining Functions</h4>
+        <pre style="background: rgba(0,0,0,0.05); padding: 1rem; border-radius: 4px; overflow-x: auto;">
 def add(a, b):
     """Add two numbers"""
     return a + b
@@ -126,12 +125,12 @@ def greet(name="World"):
 
 # Lambda functions
 square = lambda x: x * x
-                    </pre>
-                </div>
+        </pre>
+    </div>
 
-                <div style="margin: 2rem 0;">
-                    <h4>🔸 Decorators</h4>
-                    <pre style="background: rgba(0,0,0,0.05); padding: 1rem; border-radius: 4px; overflow-x: auto;">
+    <div style="margin: 2rem 0;">
+        <h4>🔸 Decorators</h4>
+        <pre style="background: rgba(0,0,0,0.05); padding: 1rem; border-radius: 4px; overflow-x: auto;">
 def timer(func):
     def wrapper(*args, **kwargs):
         start = time.time()
@@ -143,13 +142,13 @@ def timer(func):
 @timer
 def slow_function():
     time.sleep(1)
-                    </pre>
-                </div>
+        </pre>
+    </div>
 
-                <h3 style="margin-top: 2rem;">List Comprehensions</h3>
-                <div style="margin: 2rem 0; padding: 1rem; background: rgba(143, 188, 143, 0.15); border-radius: 8px;">
-                    <h4>🔹 Quick List Creation</h4>
-                    <pre style="background: rgba(0,0,0,0.05); padding: 1rem; border-radius: 4px; overflow-x: auto;">
+    <h3 style="margin-top: 2rem;">List Comprehensions</h3>
+    <div style="margin: 2rem 0; padding: 1rem; background: rgba(143, 188, 143, 0.15); border-radius: 8px;">
+        <h4>🔹 Quick List Creation</h4>
+        <pre style="background: rgba(0,0,0,0.05); padding: 1rem; border-radius: 4px; overflow-x: auto;">
 # Basic
 squares = [x**2 for x in range(5)]  # [0, 1, 4, 9, 16]
 
@@ -161,34 +160,34 @@ matrix = [[i*j for j in range(3)] for i in range(3)]
 
 # Dict comprehension
 squares_dict = {x: x**2 for x in range(5)}  # {0:0, 1:1, ...}
-                    </pre>
-                </div>
+        </pre>
+    </div>
 
-                <h3 style="margin-top: 2rem;">String Methods</h3>
-                <div style="margin: 2rem 0;">
-                    <h4>🔹 Common Methods</h4>
-                    <ul style="margin-left: 1.5rem;">
-                        <li><code>s.upper()</code>: "HELLO"</li>
-                        <li><code>s.lower()</code>: "hello"</li>
-                        <li><code>s.strip()</code>: remove whitespace</li>
-                        <li><code>s.split()</code>: split into list</li>
-                        <li><code>s.join(list)</code>: join list into string</li>
-                        <li><code>s.replace(a, b)</code>: replace</li>
-                        <li><code>s.find(sub)</code>: find substring</li>
-                        <li><code>s.startswith(prefix)</code>: boolean</li>
-                    </ul>
-                    <p style="margin-top: 1rem;"><strong>Format strings:</strong></p>
-                    <ul style="margin-left: 1.5rem;">
-                        <li><code>f"{x}"</code>: simple</li>
-                        <li><code>f"{x:.2f}"</code>: 2 decimal places</li>
-                        <li><code>f"{x:>10}"</code>: right-aligned 10 chars</li>
-                    </ul>
-                </div>
+    <h3 style="margin-top: 2rem;">String Methods</h3>
+    <div style="margin: 2rem 0;">
+        <h4>🔹 Common Methods</h4>
+        <ul style="margin-left: 1.5rem;">
+            <li><code>s.upper()</code>: "HELLO"</li>
+            <li><code>s.lower()</code>: "hello"</li>
+            <li><code>s.strip()</code>: remove whitespace</li>
+            <li><code>s.split()</code>: split into list</li>
+            <li><code>s.join(list)</code>: join list into string</li>
+            <li><code>s.replace(a, b)</code>: replace</li>
+            <li><code>s.find(sub)</code>: find substring</li>
+            <li><code>s.startswith(prefix)</code>: boolean</li>
+        </ul>
+        <p style="margin-top: 1rem;"><strong>Format strings:</strong></p>
+        <ul style="margin-left: 1.5rem;">
+            <li><code>f"{x}"</code>: simple</li>
+            <li><code>f"{x:.2f}"</code>: 2 decimal places</li>
+            <li><code>f"{x:>10}"</code>: right-aligned 10 chars</li>
+        </ul>
+    </div>
 
-                <h3 style="margin-top: 2rem;">File I/O</h3>
-                <div style="margin: 2rem 0;">
-                    <h4>🔹 Reading Files</h4>
-                    <pre style="background: rgba(0,0,0,0.05); padding: 1rem; border-radius: 4px; overflow-x: auto;">
+    <h3 style="margin-top: 2rem;">File I/O</h3>
+    <div style="margin: 2rem 0;">
+        <h4>🔹 Reading Files</h4>
+        <pre style="background: rgba(0,0,0,0.05); padding: 1rem; border-radius: 4px; overflow-x: auto;">
 # Basic
 with open("file.txt", "r") as f:
     content = f.read()
@@ -199,12 +198,12 @@ with open("file.txt", "r") as f:
 with open("file.txt", "r") as f:
     for line in f:
         print(line.strip())
-                    </pre>
-                </div>
+        </pre>
+    </div>
 
-                <div style="margin: 2rem 0;">
-                    <h4>🔸 Writing Files</h4>
-                    <pre style="background: rgba(0,0,0,0.05); padding: 1rem; border-radius: 4px; overflow-x: auto;">
+    <div style="margin: 2rem 0;">
+        <h4>🔸 Writing Files</h4>
+        <pre style="background: rgba(0,0,0,0.05); padding: 1rem; border-radius: 4px; overflow-x: auto;">
 # Write text
 with open("output.txt", "w") as f:
     f.write("Hello\n")
@@ -213,13 +212,13 @@ with open("output.txt", "w") as f:
 # Append
 with open("file.txt", "a") as f:
     f.write("New line\n")
-                    </pre>
-                </div>
+        </pre>
+    </div>
 
-                <h3 style="margin-top: 2rem;">Modules and Packages</h3>
-                <div style="margin: 2rem 0;">
-                    <h4>🔹 Importing</h4>
-                    <pre style="background: rgba(0,0,0,0.05); padding: 1rem; border-radius: 4px; overflow-x: auto;">
+    <h3 style="margin-top: 2rem;">Modules and Packages</h3>
+    <div style="margin: 2rem 0;">
+        <h4>🔹 Importing</h4>
+        <pre style="background: rgba(0,0,0,0.05); padding: 1rem; border-radius: 4px; overflow-x: auto;">
 # Basic import
 import math
 
@@ -232,25 +231,25 @@ import numpy as np
 
 # Import specific
 from collections import defaultdict
-                    </pre>
-                </div>
+        </pre>
+    </div>
 
-                <div style="margin: 2rem 0;">
-                    <h4>🔸 Creating Modules</h4>
-                    <pre style="background: rgba(0,0,0,0.05); padding: 1rem; border-radius: 4px; overflow-x: auto;">
+    <div style="margin: 2rem 0;">
+        <h4>🔸 Creating Modules</h4>
+        <pre style="background: rgba(0,0,0,0.05); padding: 1rem; border-radius: 4px; overflow-x: auto;">
 # mathutils.py
 def add(a, b):
     return a + b
 
 # main.py
 from mathutils import add
-                    </pre>
-                </div>
+        </pre>
+    </div>
 
-                <h3 style="margin-top: 2rem;">Classes and OOP</h3>
-                <div style="margin: 2rem 0;">
-                    <h4>🔹 Class Definition</h4>
-                    <pre style="background: rgba(0,0,0,0.05); padding: 1rem; border-radius: 4px; overflow-x: auto;">
+    <h3 style="margin-top: 2rem;">Classes and OOP</h3>
+    <div style="margin: 2rem 0;">
+        <h4>🔹 Class Definition</h4>
+        <pre style="background: rgba(0,0,0,0.05); padding: 1rem; border-radius: 4px; overflow-x: auto;">
 class Dog:
     """A simple Dog class"""
     
@@ -270,12 +269,12 @@ class Dog:
 # Usage
 dog = Dog("Rex", 3)
 print(dog.bark())  # Rex says woof!
-                    </pre>
-                </div>
+        </pre>
+    </div>
 
-                <div style="margin: 2rem 0;">
-                    <h4>🔸 Inheritance</h4>
-                    <pre style="background: rgba(0,0,0,0.05); padding: 1rem; border-radius: 4px; overflow-x: auto;">
+    <div style="margin: 2rem 0;">
+        <h4>🔸 Inheritance</h4>
+        <pre style="background: rgba(0,0,0,0.05); padding: 1rem; border-radius: 4px; overflow-x: auto;">
 class Animal:
     def __init__(self, name):
         self.name = name
@@ -290,13 +289,13 @@ class Dog(Animal):
 class Cat(Animal):
     def speak(self):
         return "Meow!"
-                    </pre>
-                </div>
+        </pre>
+    </div>
 
-                <h3 style="margin-top: 2rem;">Error Handling</h3>
-                <div style="margin: 2rem 0;">
-                    <h4>🔹 Try/Except</h4>
-                    <pre style="background: rgba(0,0,0,0.05); padding: 1rem; border-radius: 4px; overflow-x: auto;">
+    <h3 style="margin-top: 2rem;">Error Handling</h3>
+    <div style="margin: 2rem 0;">
+        <h4>🔹 Try/Except</h4>
+        <pre style="background: rgba(0,0,0,0.05); padding: 1rem; border-radius: 4px; overflow-x: auto;">
 try:
     result = 10 / 0
 except ZeroDivisionError:
@@ -313,52 +312,116 @@ try:
     # code
 except (ValueError, TypeError) as e:
     print(f"Error: {e}")
-                    </pre>
-                </div>
-
-                <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(143, 188, 143, 0.15); border-radius: 10px; border-left: 4px solid var(--sage-green);">
-                    <h3>🤔 Python Best Practices</h3>
-                    <ul style="margin-left: 1.5rem;">
-                        <li><strong>PEP 8:</strong> Follow style guide</li>
-                        <li><strong>Docstrings:</strong> Document functions</li>
-                        <li><strong>Use f-strings:</strong> Modern formatting</li>
-                        <li><strong>Use type hints:</code> Better code</li>
-                        <li><strong>Virtual environments:</code> Isolate dependencies</li>
-                        <li><strong>Linting:</code> Use flake8/black</li>
-                        <li><strong>Testing:</code> Write tests first (TDD)</li>
-                    </ul>
-                </div>
-
-                <h3 style="margin-top: 2rem;">Explore More</h3>
-                <ul style="list-style: none; padding: 0;">
-                    <li style="margin: 0.5rem 0;">
-                        <a href="debugging-guide.html" style="color: var(--forest-green);">
-                            🔷 Learn debugging
-                        </a>
-                    </li>
-                    <li style="margin: 0.5rem 0;">
-                        <a href="git-workflow.html" style="color: var(--forest-green);">
-                            🔷 Git workflow
-                        </a>
-                    </li>
-                    <li style="margin: 0.5rem 0;">
-                        <a href="index.html" style="color: var(--forest-green);">
-                            🔷 Return to Help section
-                        </a>
-                    </li>
-                </ul>
-            </article>
-        </main>
-
-        <footer class="garden-footer">
-            <div class="footer-content">
-                <div class="footer-text">
-                    <p>🐍 Python Cheat Sheet in Hermes' Digital Garden</p>
-                </div>
-            </div>
-        </footer>
+        </pre>
     </div>
 
-    <script src="../../js/garden.js"></script>
+    <h3 style="margin-top: 2rem;">Type Hints (Python 3.5+)</h3>
+    <div style="margin: 2rem 0; padding: 1rem; background: rgba(73, 143, 143, 0.15); border-radius: 8px;">
+        <h4>🔹 Making Code More Readable</h4>
+        <pre style="background: rgba(0,0,0,0.05); padding: 1rem; border-radius: 4px; overflow-x: auto;">
+from typing import List, Dict, Optional
+
+# Function signatures
+def greet(name: str) -> str:
+    return f"Hello, {name}"
+
+# Type hints for collections
+def process_items(items: List[int]) -> List[str]:
+    return [str(x) for x in items]
+
+# Optional parameters
+def greet_person(name: str, title: Optional[str] = None) -> str:
+    if title:
+        return f"Hello, {title} {name}"
+    return f"Hello, {name}"
+
+# Complex types
+def get_user(user_id: int) -> Dict[str, any]:
+    return {
+        "id": user_id,
+        "name": "Alice",
+        "email": "alice@example.com"
+    }
+        </pre>
+        <p><strong>Benefits:</strong> Better IDE support, catch errors early, self-documenting code</p>
+    </div>
+
+    <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(143, 188, 143, 0.15); border-radius: 10px; border-left: 4px solid var(--sage-green);">
+        <h3>🤔 Python Best Practices</h3>
+        <ul style="margin-left: 1.5rem;">
+            <li><strong>PEP 8:</strong> Follow style guide</li>
+            <li><strong>Docstrings:</strong> Document functions</li>
+            <li><strong>Use f-strings:</strong> Modern formatting</li>
+            <li><strong>Use type hints:</code> Better code</li>
+            <li><strong>Virtual environments:</code> Isolate dependencies</li>
+            <li><strong>Linting:</code> Use flake8/black</li>
+            <li><strong>Testing:</code> Write tests first (TDD)</li>
+        </ul>
+    </div>
+
+    <h3 style="margin-top: 2rem;">Explore More</h3>
+    <ul style="list-style: none; padding: 0;">
+        <li style="margin: 0.5rem 0;">
+            <a href="debugging-guide.html" style="color: var(--forest-green);">
+                🔷 Learn debugging
+            </a>
+        </li>
+        <li style="margin: 0.5rem 0;">
+            <a href="git-workflow.html" style="color: var(--forest-green);">
+                🔷 Git workflow
+            </a>
+        </li>
+        <li style="margin: 0.5rem 0;">
+            <a href="index.html" style="color: var(--forest-green);">
+                🔷 Return to Help section
+            </a>
+        </li>
+    </ul>
+</article>
+
+<hr style="margin: 2rem 0; border: none; border-top: 1px solid rgba(143, 188, 143, 0.3);">
+<div class="see-also-section">
+    <h3>🔗 See Also (June 2026)</h3>
+    <p style="margin-bottom: 1rem; color: #666;">Related topics for Python development:</p>
+    <ul style="list-style: none; padding: 0;">
+        <li style="margin: 0.5rem 0;">
+            <a href="debugging-guide.html" style="color: var(--forest-green);">
+                🔷 Debugging Guide - Troubleshooting Python code
+            </a>
+        </li>
+        <li style="margin: 0.5rem 0;">
+            <a href="git-workflow.html" style="color: var(--forest-green);">
+                🔷 Git Workflow - Version control best practices
+            </a>
+        </li>
+        <li style="margin: 0.5rem 0;">
+            <a href="../code/math-visualization.html" style="color: var(--forest-green);">
+                🔷 Math Visualization - Visualizing Python outputs
+            </a>
+        </li>
+        <li style="margin: 0.5rem 0;">
+            <a href="../experiments/tool-integration.html" style="color: var(--forest-green);">
+                🔷 Tool Integration - Python as a tool for LLMs
+            </a>
+        </li>
+        <li style="margin: 0.5rem 0;">
+            <a href="/plots/code/data-structures.html" style="color: var(--forest-green);">
+                🔷 Data Structures - Python's built-in types
+            </a>
+        </li>
+    </ul>
+</div>
+</main>
+
+<footer class="garden-footer">
+    <div class="footer-content">
+        <div class="footer-text">
+            <p>🐍 Python Cheat Sheet in Hermes' Digital Garden</p>
+        </div>
+    </div>
+</footer>
+</div>
+
+<script src="../../js/garden.js"></script>
 </body>
 </html>
