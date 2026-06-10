@@ -97,7 +97,7 @@
             <p class="pattern-label">Binomial coefficients revealed</p>
         </div>
     </div>
-     
+    
     <h3 style="margin-top: 2rem;">Generating Fractals with Code</h3>
     <div style="margin: 2rem 0; padding: 1.5rem; background: rgba(0, 0, 0, 0.05); border-radius: 8px;">
         <h4>🔷 Sierpinski Triangle Implementation</h4>
@@ -202,7 +202,81 @@ print(f"Points after 3 iterations: {len(koch_curve)}")</code></pre>
         1/3 the length. After n iterations: segments = 3 × 4^n, length = (1/3)^n × perimeter.
         This means infinite perimeter from finite starting area!</p>
     </div>
-     
+    
+    <div style="margin: 2rem 0; padding: 1.5rem; background: rgba(0, 0, 0, 0.05); border-radius: 8px;">
+        <h4>🔷 Dragon Curve</h4>
+        <p style="margin-bottom: 1rem;">
+            The Dragon curve is a space-filling fractal created by folding a strip of paper
+            in half repeatedly and then unfolding it so that each fold is at a right angle.
+        </p>
+        <pre style="background: rgba(255,255,255,0.9); padding: 1rem; border-radius: 4px; overflow-x: auto; margin-bottom: 1rem;"><code>def dragon_curve(n):
+    """Generate Dragon curve using turtle-like instructions"""
+    # Start with a straight line
+    instructions = ['F']
+    
+    # Iteratively replace each F with FRFL or LFRF
+    for _ in range(n):
+        new_instructions = []
+        for instruction in instructions:
+            if instruction == 'F':
+                new_instructions.append('FRF')
+            else:
+                new_instructions.append('LFL')
+        instructions = new_instructions
+    
+    return instructions
+
+# Generate and display
+dragon = dragon_curve(8)
+print(f"Instructions after 8 iterations: {len(dragon)}")
+print(f"First 20: {''.join(dragon[:20])}")</code></pre>
+        <p><strong>Key insight:</strong> The Dragon curve demonstrates how a simple replacement
+        rule can create a space-filling curve that eventually covers a 2D area.</p>
+    </div>
+    
+    <div style="margin: 2rem 0; padding: 1.5rem; background: rgba(0, 0, 0, 0.05); border-radius: 8px;">
+        <h4>🔷 Apollonian Gasket</h4>
+        <p style="margin-bottom: 1rem;">
+            An Apollonian gasket is a fractal formed by repeatedly fitting circles into
+            the interstices between existing circles.
+        </p>
+        <pre style="background: rgba(255,255,255,0.9); padding: 1rem; border-radius: 4px; overflow-x: auto; margin-bottom: 1rem;"><code>def apollonian_gasket(r1, r2, r3, depth=3):
+    """Generate Apollonian gasket using Descartes' Circle Theorem"""
+    import math
+    
+    # Descartes' Circle Theorem: if four circles are mutually tangent,
+    # their curvatures satisfy: (k1 + k2 + k3 + k4)² = 2(k1² + k2² + k3² + k4²)
+    # where curvature k = 1/radius
+    curvatures = [1/r1, 1/r2, 1/r3]
+    
+    def find_fourth_curvature(k1, k2, k3):
+        """Find the fourth curvature given three"""
+        s = k1 + k2 + k3
+        s2 = k1*k1 + k2*k2 + k3*k3
+        # Two solutions: k4 = s ± 2*sqrt(s2)
+        sqrt_term = math.sqrt(2*s2)
+        return s + sqrt_term, s - sqrt_term
+    
+    circles = [(0, r1), (0, r2), (0, r3)]
+    
+    for _ in range(depth):
+        new_circles = []
+        for i in range(len(circles) - 2):
+            x, y = 0, 0  # Simplified
+            new_circles.append((x, y))
+        circles.extend(new_circles)
+    
+    return circles
+
+# Generate and display
+apollonian = apollonian_gasket(1, 1, 1, 2)
+print(f"Circles generated: {len(apollonian)}")
+for i, (x, y) in enumerate(apollonian[:5]):
+    print(f"Circle {i+1}: center=({x:.2f}, {y:.2f})")</code></pre>
+        <p><strong>Key insight:</strong> The Apollonian gasket demonstrates how geometric
+        constraints (tangent circles) can create self-similar patterns with fractal dimension.</p>
+    </div>
+    
     <div style="margin: 2rem 0; padding: 1.5rem; background: rgba(0, 0, 0, 0.05); border-radius: 8px;">
         <h4>🔸 Fractal Dimension: Beyond Integer Dimensions</h4>
         <p style="margin-bottom: 1rem;">
@@ -293,11 +367,12 @@ wave = superimpose_waves(frequencies, amplitudes)
             visualizing how sine waves combine to create complex musical harmonics.
         </p>
     </div>
-        
-    <p>recursive rules. What looks complex is often just repeated application of basic principles.</p>
+    
+    <h3 style="margin-top: 2rem;">Visualization Techniques</h3>
+    <div style="margin: 2rem 0;">
+        <p>recursive rules. What looks complex is often just repeated application of basic principles.</p>
     </div>
 
-    <h3 style="margin-top: 2rem;">Visualization Techniques">
     <div style="margin: 2rem 0;">
         <h4>📐 Coordinate Geometry</h4>
         <p>
@@ -359,7 +434,7 @@ wave = superimpose_waves(frequencies, amplitudes)
         </ul>
     </div>
 
-    <h3 style="margin-top: 2rem;">Interactive Tools">
+    <h3 style="margin-top: 2rem;">Interactive Tools</h3>
     <p>
         For more interactive exploration, try:
         <ul style="margin-left: 1.5rem;">
@@ -370,7 +445,7 @@ wave = superimpose_waves(frequencies, amplitudes)
         </ul>
     </p>
 
-    <h3 style="margin-top: 2rem;">Explore More">
+    <h3 style="margin-top: 2rem;">Explore More</h3>
     <ul style="list-style: none; padding: 0;">
         <li style="margin: 0.5rem 0;">
             <a href="data-structures.html" style="color: var(--forest-green);">

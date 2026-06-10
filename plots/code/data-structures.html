@@ -300,90 +300,106 @@ class PriorityQueue:
             raise IndexError("Priority queue is empty")
         return self.heap[0][1]
 
-# Test - Task scheduler
+# Test
 pq = PriorityQueue()
-pq.push("task1", priority=3)  # Low priority
-pq.push("task3", priority=1)  # High priority
-pq.push("task2", priority=2)  # Medium priority
-
-while True:
-    try:
-        task = pq.pop()
-        print(f"Executing: {task}")
-    except IndexError:
-        break
-
-print(f"Execution order: task3, task2, task1 (by priority)")</code></pre>
+pq.push("task3", 3)
+pq.push("task1", 1)
+pq.push("task2", 2)
+print(f"Next task: {pq.pop()}")  # task1 (highest priority)
+print(f"Next task: {pq.pop()}")  # task2
+print(f"Next task: {pq.pop()}")  # task3</code></pre>
                 
-                <h5 style="margin-top: 1rem;">Graph Implementation</h5>
-                <pre style="background: rgba(255,255,255,0.9); padding: 1rem; border-radius: 4px; overflow-x: auto; margin: 1rem 0;"><code>from collections import defaultdict, deque
+                <h5 style="margin-top: 1rem;">Graph Representation</h5>
+                <pre style="background: rgba(255,255,255,0.9); padding: 1rem; border-radius: 4px; overflow-x: auto; margin: 1rem 0;"><code>from collections import defaultdict
 
 class Graph:
     def __init__(self):
-        self.graph = defaultdict(list)
+        self.adjacency_list = defaultdict(list)
     
     def add_edge(self, u, v):
         """Add directed edge: O(1)"""
-        self.graph[u].append(v)
+        self.adjacency_list[u].append(v)
+    
+    def neighbors(self, node):
+        """Get all neighbors: O(degree of node)"""
+        return self.adjacency_list[node]
     
     def bfs(self, start):
         """Breadth-first search: O(V + E)"""
         visited = set()
-        queue = deque([start])
+        queue = [start]
         visited.add(start)
         
-        result = []
         while queue:
-            vertex = queue.popleft()
-            result.append(vertex)
-            
-            for neighbor in self.graph[vertex]:
+            node = queue.pop(0)
+            for neighbor in self.adjacency_list[node]:
                 if neighbor not in visited:
                     visited.add(neighbor)
                     queue.append(neighbor)
         
-        return result
-    
-    def dfs(self, start, visited=None):
-        """Depth-first search: O(V + E)"""
-        if visited is None:
-            visited = set()
-        visited.add(start)
-        
-        for neighbor in self.graph[start]:
-            if neighbor not in visited:
-                self.dfs(neighbor, visited)
-        
         return visited
 
-# Test - Simple graph (0 -> 1, 0 -> 2, 1 -> 3)
+# Test
 g = Graph()
 g.add_edge(0, 1)
 g.add_edge(0, 2)
 g.add_edge(1, 3)
+g.add_edge(2, 3)
+reachable = g.bfs(0)
+print(f"Nodes reachable from 0: {reachable}")</code></pre>
+                
+                <h5 style="margin-top: 1rem;">Hash Table with Collision Handling</h5>
+                <pre style="background: rgba(255,255,255,0.9); padding: 1rem; border-radius: 4px; overflow-x: auto; margin: 1rem 0;"><code>class HashTable:
+    def __init__(self, capacity=16):
+        self.capacity = capacity
+        self.table = [[] for _ in range(capacity)]
+    
+    def _hash(self, key):
+        """Simple hash function"""
+        return hash(key) % self.capacity
+    
+    def insert(self, key, value):
+        """Insert or update: O(1) average"""
+        index = self._hash(key)
+        bucket = self.table[index]
+        
+        for i, (k, v) in enumerate(bucket):
+            if k == key:
+                bucket[i] = (key, value)  # Update
+                return
+        
+        bucket.append((key, value))  # Insert
+    
+    def get(self, key):
+        """Get value: O(1) average"""
+        index = self._hash(key)
+        bucket = self.table[index]
+        
+        for k, v in bucket:
+            if k == key:
+                return v
+        return None
+    
+    def delete(self, key):
+        """Delete key: O(1) average"""
+        index = self._hash(key)
+        bucket = self.table[index]
+        
+        for i, (k, v) in enumerate(bucket):
+            if k == key:
+                del bucket[i]
+                return True
+        return False
 
-print(f"BFS from 0: {g.bfs(0)}")
-print(f"DFS from 0: {g.dfs(0)}")</code></pre>
+# Test
+ht = HashTable()
+ht.insert("apple", 1)
+ht.insert("banana", 2)
+ht.insert("orange", 3)
+print(f"Get banana: {ht.get('banana')}")
+ht.delete("banana")
+print(f"Get banana after delete: {ht.get('banana')}")</code></pre>
             </div>
-
-            <h3 style="margin-top: 2rem;">Explore More">
-            <ul style="list-style: none; padding: 0;">
-                <li style="margin: 0.5rem 0;">
-                    <a href="sorting-algorithms.html" style="color: var(--forest-green);">
-                        🔷 Learn sorting algorithms
-                    </a>
-                </li>
-                <li style="margin: 0.5rem 0;">
-                    <a href="growing-neural-networks.html" style="color: var(--forest-green);">
-                        🔷 Growing neural networks
-                    </a>
-                </li>
-                <li style="margin: 0.5rem 0;">
-                    <a href="index.html" style="color: var(--forest-green);">
-                        🔷 Return to Code section
-                    </a>
-                </li>
-            </ul>
         </article>
     </main>
 
@@ -396,6 +412,6 @@ print(f"DFS from 0: {g.dfs(0)}")</code></pre>
     </footer>
 </div>
 
-    <script src="../../js/garden.js"></script>
+<script src="../../js/garden.js"></script>
 </body>
 </html>
