@@ -193,6 +193,293 @@
                     </p>
                 </div>
 
+                <h3 style="margin-top: 2rem;">Setting Up an LLM Testing Pipeline</h3>
+                
+                <div style="margin: 2rem 0; padding: 1.5rem; background: rgba(73, 143, 143, 0.1); border-radius: 8px;">
+                    <h4>🔧 Building a Test Framework</h4>
+                    <p>
+                        Here's a practical Python framework for testing LLMs with customizable benchmarks:
+                    </p>
+                    
+                    <h5 style="margin-top: 1rem;">Test Suite Manager</h5>
+                    <pre style="background: rgba(255,255,255,0.9); padding: 1rem; border-radius: 4px; overflow-x: auto; margin: 1rem 0;"><code>import json
+import random
+from dataclasses import dataclass
+from typing import List, Dict, Callable, Optional
+from functools import wraps
+
+@dataclass
+class TestQuestion:
+    """A single test question"""
+    id: str
+    prompt: str
+    expected_keywords: List[str]  # Keywords to check in response
+    max_tokens: int = 1000
+    category: str = "general"
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'prompt': self.prompt,
+            'expected_keywords': self.expected_keywords,
+            'max_tokens': self.max_tokens,
+            'category': self.category
+        }
+
+@dataclass
+class TestResults:
+    """Results for a single test run"""
+    question_id: str
+    model_name: str
+    response: str
+    score: float  # 0.0 to 1.0
+    matched_keywords: List[str]
+    total_keywords: int
+    tokens_used: int
+    errors: List[str]
+
+class LLMTestSuite:
+    """Manages a collection of LLM test questions and evaluates models"""
+    
+    def __init__(self, questions: List[TestQuestion]):
+        self.questions = questions
+        self.results_history = []
+    
+    def add_question(self, question: TestQuestion):
+        """Add a new test question to the suite"""
+        self.questions.append(question)
+    
+    def randomize(self):
+        """Shuffle questions for varied testing"""
+        random.shuffle(self.questions)
+    
+    def evaluate_response(self, response: str, expected_keywords: List[str]) -> float:
+        """Calculate how well response matches expected keywords"""
+        response_lower = response.lower()
+        matched = sum(1 for kw in expected_keywords if kw.lower() in response_lower)
+        return matched / len(expected_keywords)
+    
+    def run_test(self, question: TestQuestion, model_response: str) -> TestResults:
+        """Run a single test and return results"""
+        expected_keywords = question.expected_keywords
+        matched = []
+        
+        for kw in expected_keywords:
+            if kw.lower() in model_response.lower():
+                matched.append(kw)
+        
+        score = self.evaluate_response(model_response, expected_keywords)
+        
+        return TestResults(
+            question_id=question.id,
+            model_name="test_model",
+            response=model_response[:200],  # Truncate for display
+            score=score,
+            matched_keywords=matched,
+            total_keywords=len(expected_keywords),
+            tokens_used=question.max_tokens,
+            errors=[]
+        )
+    
+    def run_suite(self, model_response_fn, num_retries=2) -> List[TestResults]:
+        """Run all tests with a model (function that returns response)"""
+        results = []
+        
+        for question in self.questions:
+            for attempt in range(num_retries):
+                try:
+                    response = model_response_fn(question)
+                    break
+                except Exception as e:
+                    if attempt == num_retries - 1:
+                        results.append(TestResults(
+                            question_id=question.id,
+                            model_name="test_model",
+                            response=f"Error: {str(e)}",
+                            score=0.0,
+                            matched_keywords=[],
+                            total_keywords=len(question.expected_keywords),
+                            tokens_used=0,
+                            errors=[f"Failed after {num_retries} retries: {e}"]
+                        ))
+                        continue
+            
+            results.append(self.run_test(question, response))
+        
+        return results
+
+# Example usage
+if __name__ == "__main__":
+    # Create test questions
+    questions = [
+        TestQuestion(
+            id="math_word_problem",
+            prompt="A train leaves station A at 60 mph and another leaves station B at 40 mph. "
+                   "They are 500 miles apart and heading towards each other. When will they meet?",
+            expected_keywords=["2 hours", "500 miles", "meeting point"],
+            category="math"
+        ),
+        TestQuestion(
+            id="code_generation",
+            prompt="Write a Python function that reverses a string without using built-in functions.",
+            expected_keywords=["python", "function", "reverse", "string"],
+            category="code"
+        ),
+        TestQuestion(
+            id="logic_reasoning",
+            prompt="If all bloops are crangles and some crangles are zippies, what can we conclude?",
+            expected_keywords=["bloops", "crangles", "zippies", "cannot conclude", "uncertain"],
+            category="logic"
+        )
+    ]
+    
+    # Create test suite
+    suite = LLMTestSuite(questions)
+    suite.randomize()
+    
+    print(f"Running {len(suite.questions)} tests...\n")
+    
+    # In real usage, you'd call an LLM API here
+    # For demo, we simulate responses
+    def mock_model_response(question):
+        # Simulate a response - in real use, call your LLM
+        return f"This is a mock response for question {question.id}."
+    
+    # Run tests
+    results = suite.run_suite(mock_model_response)
+    
+    # Print summary
+    total = len(results)
+    passed = sum(1 for r in results if r.score > 0.5)
+    print(f"Results: {passed}/{total} tests passed (score > 0.5)")
+    for r in results:
+        print(f"\n{r.question_id}: score={r.score:.2f}")
+        print(f"  Matched: {r.matched_keywords}/{r.total_keywords} keywords")
+        if r.errors:
+            print(f"  Errors: {r.errors}")</code></pre>
+                </div>
+
+                <div style="margin: 2rem 0; padding: 1.5rem; background: rgba(221, 128, 128, 0.1); border-radius: 8px;">
+                    <h4>📈 Benchmark Aggregation and Visualization</h4>
+                    <p>
+                        Track performance across multiple benchmarks over time:
+                    </p>
+                    
+                    <h5 style="margin-top: 1rem;">Performance Tracker</h5>
+                    <pre style="background: rgba(255,255,255,0.9); padding: 1rem; border-radius: 4px; overflow-x: auto; margin: 1rem 0;"><code>import json
+from dataclasses import dataclass, asdict
+from typing import List, Dict
+from datetime import datetime
+
+@dataclass
+class BenchmarkResult:
+    """Results for one benchmark run"""
+    benchmark_name: str
+    model_version: str
+    date: str
+    score: float
+    samples: int
+    time_taken: float
+    details: Dict[str, float]  # Per-task scores
+    
+    def to_dict(self):
+        return asdict(self)
+
+class BenchmarkTracker:
+    """Track and aggregate benchmark results"""
+    
+    def __init__(self):
+        self.results: List[BenchmarkResult] = []
+    
+    def add_result(self, result: BenchmarkResult):
+        self.results.append(result)
+    
+    def get_average_score(self, benchmark_name: str) -> float:
+        """Get average score for a specific benchmark"""
+        benchmark_results = [r for r in self.results if r.benchmark_name == benchmark_name]
+        if not benchmark_results:
+            return 0.0
+        return sum(r.score for r in benchmark_results) / len(benchmark_results)
+    
+    def get_model_comparison(self, model_versions: List[str]) -> Dict[str, float]:
+        """Compare average scores across model versions"""
+        comparison = {}
+        for version in model_versions:
+            scores = []
+            for result in self.results:
+                if result.model_version == version:
+                    scores.append(result.score)
+            comparison[version] = sum(scores) / len(scores) if scores else 0.0
+        return comparison
+    
+    def export_to_json(self, filename: str):
+        """Export results to JSON file"""
+        with open(filename, 'w') as f:
+            json.dump([r.to_dict() for r in self.results], f, indent=2)
+    
+    def print_summary(self):
+        """Print a text summary of results"""
+        print("=" * 60)
+        print("BENCHMARK SUMMARY")
+        print("=" * 60)
+        
+        benchmarks = set(r.benchmark_name for r in self.results)
+        for benchmark in sorted(benchmarks):
+            benchmark_results = [r for r in self.results if r.benchmark_name == benchmark]
+            avg_score = sum(r.score for r in benchmark_results) / len(benchmark_results)
+            print(f"\n{benchmark}:")
+            print(f"  Average score: {avg_score:.2%}")
+            print(f"  Runs: {len(benchmark_results)}")
+            for r in benchmark_results[:3]:  # Show first 3
+                print(f"    - {r.model_version}: {r.score:.2%}")
+        
+        print("\n" + "=" * 60)
+
+# Example usage
+if __name__ == "__main__":
+    tracker = BenchmarkTracker()
+    
+    # Simulate some results
+    results = [
+        BenchmarkResult(
+            benchmark_name="MMLU",
+            model_version="model-v1",
+            date="2025-01-15",
+            score=0.72,
+            samples=100,
+            time_taken=45.2,
+            details={"science": 0.75, "history": 0.70, "math": 0.78}
+        ),
+        BenchmarkResult(
+            benchmark_name="MMLU",
+            model_version="model-v2",
+            date="2025-01-20",
+            score=0.78,
+            samples=100,
+            time_taken=42.1,
+            details={"science": 0.80, "history": 0.76, "math": 0.81}
+        ),
+        BenchmarkResult(
+            benchmark_name="HumanEval",
+            model_version="model-v2",
+            date="2025-01-20",
+            score=0.65,
+            samples=50,
+            time_taken=38.5,
+            details={"functions": 0.62, "classes": 0.68}
+        )
+    ]
+    
+    for r in results:
+        tracker.add_result(r)
+    
+    tracker.print_summary()
+    
+    # Export to JSON
+    tracker.export_to_json("benchmark_results.json")
+    print("\nResults exported to benchmark_results.json")</code></pre>
+                </div>
+
                 <h3 style="margin-top: 2rem;">Explore More</h3>
                 <ul style="list-style: none; padding: 0;">
                     <li style="margin: 0.5rem 0;">

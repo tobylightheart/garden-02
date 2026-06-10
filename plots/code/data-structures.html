@@ -399,6 +399,103 @@ ht.insert("orange", 3)
 print(f"Get banana: {ht.get('banana')}")
 ht.delete("banana")
 print(f"Get banana after delete: {ht.get('banana')}")</code></pre>
+
+                <h5 style="margin-top: 1rem;">Real-World Application: Choosing Data Structures</h5>
+                <pre style="background: rgba(255,255,255,0.9); padding: 1rem; border-radius: 4px; overflow-x: auto; margin: 1rem 0;"><code># Scenario: Building a social media feed
+# Problem: Show users posts from friends, sorted by recency
+
+class SocialFeed:
+    def __init__(self):
+        # Use a min-heap to track unread posts by timestamp
+        self.unread_posts = []
+        # Use a hash table for O(1) friend lookup
+        self.friends = {}
+    
+    def add_friend(self, friend_id, name):
+        """Add a friend: O(1)"""
+        self.friends[friend_id] = name
+    
+    def post_update(self, friend_id, post_content, timestamp):
+        """Add friend's post: O(log n) using heap"""
+        # Lower timestamp = higher priority (newest first)
+        heapq.heappush(self.unread_posts, (timestamp, friend_id, post_content))
+    
+    def get_next_post(self):
+        """Get most recent unread post: O(log n)"""
+        if not self.unread_posts:
+            return None
+        timestamp, friend_id, content = heapq.heappop(self.unread_posts)
+        return {
+            'friend_id': friend_id,
+            'friend_name': self.friends.get(friend_id, 'Unknown'),
+            'content': content,
+            'timestamp': timestamp
+        }
+
+# Test
+feed = SocialFeed()
+feed.add_friend(1, "Alice")
+feed.add_friend(2, "Bob")
+feed.add_friend(3, "Charlie")
+
+feed.post_update(1, "Just finished a great book!", 1699900000)
+feed.post_update(2, "Who wants to grab coffee?", 1699900100)
+feed.post_update(3, "New project launch tomorrow!", 1699900050)
+
+while feed.unread_posts:
+    post = feed.get_next_post()
+    print(f"{post['friend_name']}: {post['content']}")</code></pre>
+                
+                <h5 style="margin-top: 1rem;">Advanced: Custom Hash Table Performance Analysis</h5>
+                <pre style="background: rgba(255,255,255,0.9); padding: 1rem; border-radius: 4px; overflow-x: auto; margin: 1rem 0;"><code>import time
+from collections import defaultdict
+
+class AnalyticHashTable:
+    """Hash table with collision statistics"""
+    
+    def __init__(self, capacity=16):
+        self.capacity = capacity
+        self.table = [[] for _ in range(capacity)]
+        self.size = 0
+        self.total_collisions = 0
+    
+    def _hash(self, key):
+        return hash(key) % self.capacity
+    
+    def insert(self, key, value):
+        index = self._hash(key)
+        bucket = self.table[index]
+        bucket_size = len(bucket)
+        
+        for k, v in bucket:
+            if k == key:
+                bucket[i] = (key, value)
+                return
+        
+        self.total_collisions += bucket_size
+        bucket.append((key, value))
+        self.size += 1
+    
+    def get_load_factor(self):
+        """Calculate load factor (ratio of items to buckets)"""
+        return self.size / self.capacity
+    
+    def get_collision_rate(self):
+        """Average collisions per bucket"""
+        return self.total_collisions / self.capacity
+
+# Performance comparison
+ht = AnalyticHashTable(capacity=1024)
+items = {f"key_{i}": i for i in range(10000)}
+
+start = time.time()
+for key, value in items.items():
+    ht.insert(key, value)
+insert_time = time.time() - start
+
+print(f"Inserted {len(items)} items in {insert_time:.4f}s")
+print(f"Load factor: {ht.get_load_factor():.2f}")
+print(f"Average collisions per bucket: {ht.get_collision_rate():.2f}")</code></pre>
             </div>
         </article>
     </main>
