@@ -129,20 +129,61 @@ square = lambda x: x * x
     </div>
 
     <div style="margin: 2rem 0;">
-        <h4>🔸 Decorators</h4>
-        <pre style="background: rgba(0,0,0,0.05); padding: 1rem; border-radius: 4px; overflow-x: auto;">
-def timer(func):
+        <h4>🔸 Decorators - Complete Examples</h4>
+        <p style="margin-bottom: 1rem;">
+            Decorators let you modify function behavior without changing the function code.
+            They're commonly used for logging, timing, access control, and caching.
+        </p>
+        <pre style="background: rgba(255,255,255,0.9); padding: 1rem; border-radius: 4px; overflow-x: auto; margin-bottom: 1rem;"><code>from functools import wraps
+import time
+from datetime import datetime
+
+# Logging decorator
+def log_function_call(func):
+    @wraps(func)  # Preserves function metadata
     def wrapper(*args, **kwargs):
-        start = time.time()
+        print(f"Calling {func.__name__} at {datetime.now()}")
         result = func(*args, **kwargs)
-        print(f"Took {time.time() - start:.2f}s")
+        print(f"{func.__name__} returned {result}")
         return result
     return wrapper
 
-@timer
-def slow_function():
-    time.sleep(1)
-        </pre>
+# Timing decorator with caching
+def timed_and_cached(func):
+    cache = {}
+    @wraps(func)
+    def wrapper(*args):
+        if args in cache:
+            print(f"Cache hit: {func.__name__}({args})")
+            return cache[args]
+        start = time.time()
+        result = func(*args)
+        elapsed = time.time() - start
+        cache[args] = (result, elapsed)
+        print(f"{func.__name__}({args}) took {elapsed:.3f}s")
+        return result
+    return wrapper
+
+# Access control decorator
+def require_permission(permission):
+    def decorator(func):
+        @wraps(func)
+        def wrapper(user, *args, **kwargs):
+            if user.get("role") != permission:
+                raise PermissionError(f"User {user['name']} lacks {permission}")
+            return func(user, *args, **kwargs)
+        return wrapper
+    return decorator
+
+# Usage examples
+@log_function_call
+@timed_and_cached
+@require_permission("admin")
+def delete_user(user_id):
+    return f"User {user_id} deleted"</code></pre>
+        <p><strong>Stacking decorators:</strong> Decorators can be stacked. They execute from
+        bottom to top (innermost to outermost). The order matters when decorators have
+        side effects.</p>
     </div>
 
     <h3 style="margin-top: 2rem;">List Comprehensions</h3>
@@ -161,6 +202,72 @@ matrix = [[i*j for j in range(3)] for i in range(3)]
 # Dict comprehension
 squares_dict = {x: x**2 for x in range(5)}  # {0:0, 1:1, ...}
         </pre>
+    </div>
+
+    <h3 style="margin-top: 2rem;">Dictionary Operations</h3>
+    <div style="margin: 2rem 0;">
+        <h4>🔹 Dictionary Operations</h4>
+        <pre style="background: rgba(255,255,255,0.9); padding: 1rem; border-radius: 4px; overflow-x: auto; margin-bottom: 1rem;"><code># Basic operations
+user = {"name": "Alice", "age": 30, "city": "NYC"}
+
+# Get with default
+city = user.get("country", "Unknown")  # "Unknown"
+
+# Update
+user.update({"age": 31, "job": "Engineer"})
+
+# Delete
+del user["city"]
+# or: user.pop("city")  # Returns deleted value
+
+# Check existence
+if "name" in user:
+    print("Has name")
+
+# Iterate
+for key, value in user.items():
+    print(f"{key}: {value}")
+
+# Merge dictionaries
+config = {
+    "debug": True,
+    "timeout": 30
+}
+settings = {**config, **{"debug": False}}  # config wins, then settings wins
+
+# Dictionary comprehension
+words = ["hello", "world", "python"]
+uppercase = {word: word.upper() for word in words}</code></pre>
+        <p><strong>Dictionary methods:</strong> <code>keys()</code>, <code>values()</code>,
+        <code>items()</code>, <code>get()</code>, <code>update()</code>, <code>pop()</code></p>
+    </div>
+
+    <h3 style="margin-top: 2rem;">Set Operations</h3>
+    <div style="margin: 2rem 0;">
+        <h4>🔹 Set Operations</h4>
+        <pre style="background: rgba(255,255,255,0.9); padding: 1rem; border-radius: 4px; overflow-x: auto; margin-bottom: 1rem;"><code># Set creation
+odd = {1, 3, 5, 7, 9}
+even = {0, 2, 4, 6, 8}
+
+# Union
+all_numbers = odd | even  # or odd.union(even)
+print(all_numbers)  # {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+
+# Intersection
+common = odd & even  # or odd.intersection(even)
+print(common)  # set()
+
+# Difference
+only_odd = odd - even  # or odd.difference(even)
+print(only_odd)  # {1, 3, 5, 7, 9}
+
+# Symmetric difference
+unique = odd ^ even  # elements in either set, not both
+print(unique)  # {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+
+# Set comprehension
+numbers = range(10)
+squares = {x**2 for x in numbers if x % 2 == 1}</code></pre>
     </div>
 
     <h3 style="margin-top: 2rem;">String Methods</h3>
@@ -352,11 +459,97 @@ def get_user(user_id: int) -> Dict[str, any]:
             <li><strong>PEP 8:</strong> Follow style guide</li>
             <li><strong>Docstrings:</strong> Document functions</li>
             <li><strong>Use f-strings:</strong> Modern formatting</li>
-            <li><strong>Use type hints:</code> Better code</li>
-            <li><strong>Virtual environments:</code> Isolate dependencies</li>
-            <li><strong>Linting:</code> Use flake8/black</li>
-            <li><strong>Testing:</code> Write tests first (TDD)</li>
+            <li><strong>Use type hints:</strong> Better code</li>
+            <li><strong>Virtual environments:</strong> Isolate dependencies</li>
+            <li><strong>Linting:</strong> Use flake8/black</li>
+            <li><strong>Testing:</strong> Write tests first (TDD)</li>
         </ul>
+    </div>
+
+    <h3 style="margin-top: 2rem;">Advanced Python Features</h3>
+    <div style="margin: 2rem 0;">
+        <h4>🔹 Context Managers</h4>
+        <p style="margin-bottom: 1rem;">
+            Context managers ensure resources are properly cleaned up, even when exceptions occur.
+        </p>
+        <pre style="background: rgba(255,255,255,0.9); padding: 1rem; border-radius: 4px; overflow-x: auto; margin-bottom: 1rem;"><code># Using built-in context managers
+with open("file.txt", "r") as f:
+    content = f.read()  # File automatically closed!
+
+# Custom context manager
+class Timer:
+    def __enter__(self):
+        self.start = time.time()
+        return self
+    
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        elapsed = time.time() - self.start
+        print(f"Elapsed: {elapsed:.2f}s")
+        return False  # Don't suppress exceptions
+
+with Timer() as t:
+    # do something
+    pass
+
+# Using contextlib
+from contextlib import contextmanager
+
+@contextmanager
+def temp_file(content):
+    import tempfile
+    fd, path = tempfile.mkstemp()
+    with os.fdopen(fd, "w") as f:
+        f.write(content)
+    try:
+        yield path
+    finally:
+        os.unlink(path)
+
+with temp_file("Hello World") as path:
+    print(f"File at: {path}")</code></pre>
+    </div>
+
+    <div style="margin: 2rem 0;">
+        <h4>🔹 Generators and Iterators</h4>
+        <p style="margin-bottom: 1rem;">
+            Generators produce values one at a time, using minimal memory. They're ideal for
+            large datasets or infinite sequences.
+        </p>
+        <pre style="background: rgba(255,255,255,0.9); padding: 1rem; border-radius: 4px; overflow-x: auto; margin-bottom: 1rem;"><code># Generator function
+def count_up_to(n):
+    i = 1
+    while i <= n:
+        yield i
+        i += 1
+
+# Use generator
+for num in count_up_to(5):
+    print(num)
+
+# Generator expression (more concise)
+squares = (x**2 for x in range(10))
+print(sum(squares))  # 285
+
+# File reading (memory efficient)
+with open("large_file.txt") as f:
+    for line in f:  # Reads one line at a time
+        process(line)
+
+# itertools recipes
+from itertools import islice
+
+# First 10 from infinite sequence
+from itertools import count
+first_10 = list(islice(count(), 10))
+
+# Running total
+def running_total(values):
+    total = 0
+    for v in values:
+        total += v
+        yield total</code></pre>
+        <p><strong>Key difference:</strong> List comprehension creates all values in memory.
+        Generator expression <code>(...)</code> yields values one at a time.</p>
     </div>
 
     <h3 style="margin-top: 2rem;">Explore More</h3>

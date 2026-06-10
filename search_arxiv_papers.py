@@ -2,19 +2,24 @@
 """Search arXiv for papers on continual learning and related topics."""
 
 import urllib.request
+import urllib.parse
 import xml.etree.ElementTree as ET
 import json
+import time
 from datetime import datetime
 
-def search_arxiv(query, max_results=5):
+def search_arxiv(query, max_results=5, delay=3):
     """Search arXiv and return parsed results."""
-    url = f"https://export.arxiv.org/api/query?search_query=all:{query}&max_results={max_results}&sortBy=submittedDate&sortOrder=descending"
+    # URL-encode the query (arXiv API expects + for spaces)
+    encoded_query = urllib.parse.quote(query, safe='+')
+    url = f"https://export.arxiv.org/api/query?search_query=all:{encoded_query}&max_results={max_results}&sortBy=submittedDate&sortOrder=descending"
     
     print(f"\n{'='*60}")
     print(f"Searching arXiv for: {query}")
     print(f"{'='*60}")
     
     try:
+        time.sleep(delay)  # Respect rate limit
         with urllib.request.urlopen(url, timeout=30) as response:
             xml_data = response.read().decode('utf-8')
         
@@ -59,6 +64,7 @@ def search_arxiv(query, max_results=5):
                 print(f"Warning: Could not parse entry: {e}")
                 continue
         
+        time.sleep(delay)  # Respect rate limit
         return papers
     except Exception as e:
         print(f"Error: {e}")
@@ -71,7 +77,7 @@ def format_papers(papers):
     output.append("")
     
     for i, paper in enumerate(papers, 1):
-        output.append(f"{i}. [{paper['arxiv_id]}] {paper['title']}")
+        output.append(f"{i}. [{paper['arxiv_id']}] {paper['title']}")
         output.append(f"   Authors: {', '.join(paper['authors'])}")
         output.append(f"   Published: {paper['published']}")
         output.append(f"   Categories: {', '.join(paper['categories'])}")
@@ -84,9 +90,9 @@ def format_papers(papers):
     
     return "\n".join(output)
 
-def search_topic(query, max_results=5):
+def search_topic(query, max_results=5, delay=3):
     """Search for a specific topic and return papers."""
-    papers = search_arxiv(query, max_results)
+    papers = search_arxiv(query, max_results, delay)
     valid_papers = [p for p in papers if not p['is_withdrawn']]
     print(format_papers(valid_papers))
     return valid_papers
@@ -95,6 +101,7 @@ def main():
     """Run all searches and compile results."""
     print("Searching arXiv for papers on continual learning and related topics...")
     print(f"Current date: {datetime.now().strftime('%Y-%m-%d')}")
+    print("Note: Rate limit ~1 request per 3 seconds")
     
     queries = [
         ("continual learning", 5),
@@ -107,8 +114,10 @@ def main():
     all_papers = []
     
     for query, max_results in queries:
+        print(f"\n[1/5] Searching: {query}")
         papers = search_topic(query, max_results)
         all_papers.extend(papers)
+        time.sleep(1)  # Extra delay between queries
     
     seen_ids = set()
     unique_papers = []

@@ -125,7 +125,67 @@
         </ul>
     </div>
 
-    <h3 style="margin-top: 2rem;">Implementation Patterns</h3>
+    <h3 style="margin-top: 2rem;">Practical Implementation Example</h3>
+    <div style="margin: 2rem 0; padding: 1.5rem; background: rgba(0, 0, 0, 0.05); border-radius: 8px;">
+        <h4>🔧 Creating a Tool with Python</h4>
+        <p style="margin-bottom: 1rem;">
+            Here's how to implement a search tool that an LLM can call:
+        </p>
+        <pre style="background: rgba(255,255,255,0.9); padding: 1rem; border-radius: 4px; overflow-x: auto; margin-bottom: 1rem;"><code>import json
+import web_search  # hypothetical tool library
+
+# Define tool specification
+SEARCH_TOOL = {
+    "name": "web_search",
+    "description": "Search the web for current information",
+    "parameters": {
+        "query": {
+            "type": "string",
+            "description": "The search query"
+        }
+    },
+    "example": "web_search(query='Python tools for AI agents')"
+}
+
+# LLM calls this when user asks about recent AI tools
+def execute_search(query):
+    results = web_search(query=query, limit=5)
+    return {
+        "status": "success",
+        "results": results,
+        "count": len(results)
+    }
+
+# The system serializes and sends to LLM
+tool_call = {
+    "name": "web_search",
+    "arguments": {"query": "AI tools for automating research"}
+}
+
+# Execute and feed back to LLM
+response = execute_search(tool_call["arguments"]["query"])
+print(response)</code></pre>
+        <p><strong>Flow:</strong> User question → LLM selects tool → System executes → LLM receives result → Final answer</p>
+    </div>
+
+    <div style="margin: 2rem 0; padding: 1.5rem; background: rgba(0, 0, 0, 0.05); border-radius: 8px;">
+        <h4>🔄 Multi-Step Tool Chain</h4>
+        <p>Tools can chain together to handle complex tasks:</p>
+        <pre style="background: rgba(255,255,255,0.9); padding: 1rem; border-radius: 4px; overflow-x: auto;"><code># Step 1: Search for information
+search_results = web_search(query="Python sorting algorithms")
+
+# Step 2: Extract relevant content
+for result in search_results:
+    content = browser_navigate(url=result['url'])
+    text = extract_text(content)
+    
+# Step 3: Summarize findings
+summary = summarize(text, max_length=500)
+
+# Step 4: Save to file
+with open("sorting_guide.md", "w") as f:
+    f.write(summary)</code></pre>
+    </div>
 
     <div style="margin: 2rem 0;">
         <h4>🎯 Single-Step Tools</h4>
