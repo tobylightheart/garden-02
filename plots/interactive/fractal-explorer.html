@@ -34,16 +34,28 @@
             cursor: pointer;
             font-size: 0.9rem;
         }
+        button:hover {
+            background: var(--sage-green);
+        }
         .range-control {
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
+        .fractal-info {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            text-align: center;
+            font-size: 0.85rem;
+        }
     </style>
 </head>
-<body><nav class="sticky-nav">
+<body>
+<nav class="sticky-nav">
     <div class="nav-content">
-        <a href="/" class="nav-link" data-page="/">🏠 Home</a>
+        <a href="/">🏠 Home</a>
         <a href="/plots/about" class="nav-link" data-page="/plots/about">🌿 About</a>
         <a href="/plots/code" class="nav-link" data-page="/plots/code">💻 Code</a>
         <a href="/plots/patterns" class="nav-link" data-page="/plots/patterns">🌀 Patterns</a>
@@ -55,112 +67,302 @@
     </div>
 </nav>
 
+<div class="garden-container">
+    <header class="garden-header">
+        <div class="header-content">
+            <div class="garden-title">
+                <span class="tree-emoji">❄️</span>
+                <h1>Fractal Explorer</h1>
+            </div>
+        </div>
+    </header>
 
-    <div class="garden-container">
-        <header class="garden-header">
-            <div class="header-content">
-                <div class="garden-title">
-                    <span class="tree-emoji">❄️</span>
-                    <h1>Fractal Explorer</h1>
+    <main class="garden-main">
+        <article>
+            <h2>Interactive Fractal Generation</h2>
+            <p>
+                Explore the infinite complexity of fractals by adjusting parameters and
+                zooming into different regions. This interactive tool lets you generate
+                Mandelbrot and Julia sets with customizable settings.
+            </p>
+
+            <div class="fractal-container">
+                <canvas id="fractalCanvas" width="600" height="600"></canvas>
+                
+                <div class="controls">
+                    <select id="fractalType">
+                        <option value="mandelbrot">Mandelbrot Set</option>
+                        <option value="julia">Julia Set</option>
+                    </select>
+                    <input type="range" id="maxIter" min="50" max="1000" value="100">
+                    <label>Iterations: <span id="iterVal">100</span></label>
+                    <input type="range" id="zoom" min="1" max="10000" value="100">
+                    <label>Zoom: <span id="zoomVal">100</span>x</label>
+                    <button id="regenerateBtn">Regenerate</button>
+                    <button id="resetBtn">Reset</button>
+                </div>
+                
+                <div class="controls">
+                    <div class="range-control">
+                        <label>Real offset:</label>
+                        <input type="range" id="realOffset" min="-2" max="2" step="0.01" value="0">
+                        <span id="realOffsetVal">0</span>
+                    </div>
+                    <div class="range-control">
+                        <label>Imag offset:</label>
+                        <input type="range" id="imagOffset" min="-1.5" max="1.5" step="0.01" value="0">
+                        <span id="imagOffsetVal">0</span>
+                    </div>
+                </div>
+                
+                <div class="controls">
+                    <div class="range-control">
+                        <label>Julia Real:</label>
+                        <input type="range" id="juliaReal" min="-2" max="2" step="0.1" value="0">
+                        <span id="juliaRealVal">0</span>
+                    </div>
+                    <div class="range-control">
+                        <label>Julia Imag:</label>
+                        <input type="range" id="juliaImag" min="-2" max="2" step="0.1" value="0">
+                        <span id="juliaImagVal">0</span>
+                    </div>
+                </div>
+                
+                <div class="fractal-info">
+                    <strong>Current settings:</strong> <span id="settingsDisplay">Mandelbrot, 100 iterations</span>
                 </div>
             </div>
-        </header>
 
-        <main class="garden-main">
-            <article>
-                <h2>Interactive Fractal Generation</h2>
+            <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(143, 188, 143, 0.15); border-radius: 10px; border-left: 4px solid var(--sage-green);">
+                <h3>🤔 Understanding Fractals</h3>
                 <p>
-                    Explore the infinite complexity of fractals by adjusting parameters and
-                    zooming into different regions. This interactive tool lets you generate
-                    Mandelbrot and Julia sets with customizable settings.
+                    Fractals are generated by iterating simple mathematical formulas. The
+                    Mandelbrot set uses z = z² + c, where each point in the complex plane
+                    determines whether its orbit stays bounded or escapes to infinity.
                 </p>
-
-                <div class="fractal-container">
-                    <canvas id="fractalCanvas" width="600" height="600"></canvas>
-
-                    <div class="controls">
-                        <select id="fractalType">
-                            <option value="mandelbrot">Mandelbrot Set</option>
-                            <option value="julia">Julia Set</option>
-                        </select>
-                        <input type="range" id="maxIter" min="10" max="1000" value="100">
-                        <label>Iterations: <span id="iterVal">100</span></label>
-                        <input type="range" id="zoom" min="1" max="10000" value="100">
-                        <label>Zoom: <span id="zoomVal">100</span>x</label>
-                        <button id="regenerateBtn">Regenerate</button>
-                    </div>
-
-                    <div class="controls">
-                        <div class="range-control">
-                            <label>Real offset:</label>
-                            <input type="range" id="realOffset" min="-2" max="2" step="0.01" value="0">
-                        </div>
-                        <div class="range-control">
-                            <label>Imag offset:</label>
-                            <input type="range" id="imagOffset" min="-1.5" max="1.5" step="0.01" value="0">
-                        </div>
-                    </div>
-
-                    <div class="controls">
-                        <div class="range-control">
-                            <label>Julia Real:</label>
-                            <input type="range" id="juliaReal" min="-2" max="2" step="0.1" value="0">
-                        </div>
-                        <div class="range-control">
-                            <label>Julia Imag:</label>
-                            <input type="range" id="juliaImag" min="-2" max="2" step="0.1" value="0">
-                        </div>
-                    </div>
-                </div>
-
-                <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(143, 188, 143, 0.15); border-radius: 10px; border-left: 4px solid var(--sage-green);">
-                    <h3>🤔 Understanding Fractals</h3>
-                    <p>
-                        Fractals are generated by iterating simple mathematical formulas. The
-                        Mandelbrot set uses z = z² + c, where each point in the complex plane
-                        determines whether its orbit stays bounded or escapes to infinity.
-                    </p>
-                    <p style="margin-top: 1rem;">
-                        The color you see represents how quickly points escape - faster escape
-                        equals lighter colors. Points that never escape form the black set.
-                    </p>
-                </div>
-
-                <h3 style="margin-top: 2rem;">Explore More</h3>
-                <ul style="list-style: none; padding: 0;">
-                    <li style="margin: 0.5rem 0;">
-                        <a href="cellular-automata.html" style="color: var(--forest-green);">
-                            🔷 Conway's Game of Life
-                        </a>
-                    </li>
-                    <li style="margin: 0.5rem 0;">
-                        <a href="boids.html" style="color: var(--forest-green);">
-                            🔷 Boids simulation
-                        </a>
-                    </li>
-                    <li style="margin: 0.5rem 0;">
-                        <a href="index.html" style="color: var(--forest-green);">
-                            🔷 Return to Interactive section
-                        </a>
-                    </li>
-                    <li style="margin: 0.5rem 0;">
-                        <a href="../patterns/fractals.html" style="color: var(--forest-green);">
-                            🔷 Learn about fractals
-                        </a>
-                    </li>
-                </ul>
-            </article>
-        </main>
-
-        <footer class="garden-footer">
-            <div class="footer-content">
-                <div class="footer-text">
-                    <p>❄️ Fractal Explorer in Hermes' Digital Garden</p>
-                </div>
+                <p style="margin-top: 1rem;">
+                    The color you see represents how quickly points escape - faster escape
+                    equals lighter colors. Points that never escape form the black set.
+                </p>
+                <p style="margin-top: 1rem;">
+                    <strong>Julia Sets</strong> use the same iteration formula but with a fixed
+                    complex number c (controlled by the Julia Real/Imag sliders). The Mandelbrot
+                    set tells you which Julia sets are connected.
+                </p>
             </div>
-        </footer>
-    </div>
 
-    <script src="../../js/garden.js"></script>
+            <h3 style="margin-top: 2rem;">Explore More</h3>
+            <ul style="list-style: none; padding: 0;">
+                <li style="margin: 0.5rem 0;">
+                    <a href="cellular-automata.html" style="color: var(--forest-green);">
+                        🔷 Conway's Game of Life
+                    </a>
+                </li>
+                <li style="margin: 0.5rem 0;">
+                    <a href="boids.html" style="color: var(--forest-green);">
+                        🔷 Boids simulation
+                    </a>
+                </li>
+                <li style="margin: 0.5rem 0;">
+                    <a href="index.html" style="color: var(--forest-green);">
+                        🔷 Return to Interactive section
+                    </a>
+                </li>
+                <li style="margin: 0.5rem 0;">
+                    <a href="../patterns/fractals.html" style="color: var(--forest-green);">
+                        🔷 Learn about fractals
+                    </a>
+                </li>
+                <li style="margin: 0.5rem 0;">
+                    <a href="../code/math-visualization.html" style="color: var(--forest-green);">
+                        🔷 Math Visualization - Fractal dimension and algorithms
+                    </a>
+                </li>
+            </ul>
+        </article>
+    </main>
+
+    <footer class="garden-footer">
+        <div class="footer-content">
+            <div class="footer-text">
+                <p>❄️ Fractal Explorer in Hermes' Digital Garden</p>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<script src="../../js/garden.js"></script>
+<script>
+// Fractal Explorer Implementation
+(function() {
+    const canvas = document.getElementById('fractalCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    // UI Elements
+    const fractalType = document.getElementById('fractalType');
+    const maxIter = document.getElementById('maxIter');
+    const iterVal = document.getElementById('iterVal');
+    const zoom = document.getElementById('zoom');
+    const zoomVal = document.getElementById('zoomVal');
+    const regenerateBtn = document.getElementById('regenerateBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const realOffset = document.getElementById('realOffset');
+    const imagOffset = document.getElementById('imagOffset');
+    const realOffsetVal = document.getElementById('realOffsetVal');
+    const imagOffsetVal = document.getElementById('imagOffsetVal');
+    const juliaReal = document.getElementById('juliaReal');
+    const juliaImag = document.getElementById('juliaImag');
+    const juliaRealVal = document.getElementById('juliaRealVal');
+    const juliaImagVal = document.getElementById('juliaImagVal');
+    const settingsDisplay = document.getElementById('settingsDisplay');
+    
+    // State
+    let centerX = -0.5;
+    let centerY = 0;
+    let zoomLevel = 1;
+    
+    // Update value displays
+    function updateDisplays() {
+        iterVal.textContent = maxIter.value;
+        zoomVal.textContent = zoomLevel;
+        realOffsetVal.textContent = parseFloat(realOffset.value).toFixed(2);
+        imagOffsetVal.textContent = parseFloat(imagOffset.value).toFixed(2);
+        juliaRealVal.textContent = parseFloat(juliaReal.value).toFixed(1);
+        juliaImagVal.textContent = parseFloat(juliaImag.value).toFixed(1);
+        settingsDisplay.textContent = `${fractalType.options[fractalType.selectedIndex].text}, ${maxIter.value} iterations`;
+    }
+    
+    // Color mapping function
+    function getColor(iterations, maxIterations) {
+        if (iterations >= maxIterations) {
+            return 'black'; // Points that never escape
+        }
+        
+        // Smooth coloring
+        const smoothValue = iterations / maxIterations;
+        
+        // Create a gradient from dark to light
+        const hue = (smoothValue * 240) % 240;
+        const lightness = (1 - smoothValue) * 60;
+        return `hsl(${hue}, 100%, ${lightness}%)`;
+    }
+    
+    // Generate fractal
+    function generateFractal() {
+        const width = canvas.width;
+        const height = canvas.height;
+        const imageData = ctx.createImageData(width, height);
+        const data = imageData.data;
+        
+        const cRealMin = centerX - 3 / zoomLevel;
+        const cRealMax = centerX + 3 / zoomLevel;
+        const cImagMin = centerY - 3 / zoomLevel;
+        const cImagMax = centerY + 3 / zoomLevel;
+        
+        const w = (cRealMax - cRealMin) / width;
+        const h = (cImagMax - cImagMin) / height;
+        
+        const cFixedReal = parseFloat(juliaReal.value);
+        const cFixedImag = parseFloat(juliaImag.value);
+        
+        const isJulia = fractalType.value === 'julia';
+        const maxIterations = parseInt(maxIter.value);
+        
+        for (let py = 0; py < height; py++) {
+            for (let px = 0; px < width; px++) {
+                let cReal = cRealMin + px * w;
+                let cImag = cImagMin + py * h;
+                
+                let x = 0;
+                let y = 0;
+                let iterations = 0;
+                
+                if (isJulia) {
+                    cReal = cFixedReal;
+                    cImag = cFixedImag;
+                }
+                
+                // Iterate z = z² + c
+                while (x * x + y * y < 4 && iterations < maxIterations) {
+                    const xTemp = x * x - y * y + cReal;
+                    y = 2 * x * y + cImag;
+                    x = xTemp;
+                    iterations++;
+                }
+                
+                const index = (py * width + px) * 4;
+                
+                if (iterations >= maxIterations) {
+                    // Inside the set
+                    data[index] = 0;
+                    data[index + 1] = 0;
+                    data[index + 2] = 0;
+                    data[index + 3] = 255;
+                } else {
+                    // Outside the set - color based on escape speed
+                    const smoothIterations = iterations + 1 - Math.log(Math.log(x * x + y * y)) / Math.log(2);
+                    const ratio = smoothIterations / maxIterations;
+                    
+                    const r = Math.floor(255 * (1 - Math.pow(ratio, 3)));
+                    const g = Math.floor(255 * (1 - Math.pow(ratio, 2)));
+                    const b = Math.floor(255 * (1 - ratio));
+                    
+                    data[index] = r;
+                    data[index + 1] = g;
+                    data[index + 2] = b;
+                    data[index + 3] = 255;
+                }
+            }
+        }
+        
+        ctx.putImageData(imageData, 0, 0);
+    }
+    
+    // Event Listeners
+    fractalType.addEventListener('change', generateFractal);
+    maxIter.addEventListener('input', generateFractal);
+    zoom.addEventListener('input', () => {
+        zoomLevel = parseInt(zoom.value);
+        updateDisplays();
+        generateFractal();
+    });
+    realOffset.addEventListener('input', () => {
+        centerX = parseFloat(realOffset.value);
+        updateDisplays();
+        generateFractal();
+    });
+    imagOffset.addEventListener('input', () => {
+        centerY = parseFloat(imagOffset.value);
+        updateDisplays();
+        generateFractal();
+    });
+    juliaReal.addEventListener('input', generateFractal);
+    juliaImag.addEventListener('input', generateFractal);
+    regenerateBtn.addEventListener('click', generateFractal);
+    resetBtn.addEventListener('click', () => {
+        fractalType.value = 'mandelbrot';
+        maxIter.value = 100;
+        zoom.value = 100;
+        realOffset.value = 0;
+        imagOffset.value = 0;
+        juliaReal.value = 0;
+        juliaImag.value = 0;
+        centerX = -0.5;
+        centerY = 0;
+        zoomLevel = 1;
+        updateDisplays();
+        generateFractal();
+    });
+    
+    // Initial generation
+    updateDisplays();
+    generateFractal();
+    
+    // Handle window resize
+    window.addEventListener('resize', () => {
+        // Keep canvas size fixed for consistent fractal display
+    });
+})();
+</script>
 </body>
 </html>

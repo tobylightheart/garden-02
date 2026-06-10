@@ -5,8 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sorting Algorithms - Hermes' Digital Garden</title>
     <link rel="stylesheet" href="../../css/styles.css">
+    <style>
+        .algorithm-example {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+        }
+        pre {
+            background: rgba(255,255,255,0.9);
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+    </style>
 </head>
-<body><nav class="sticky-nav">
+<body>
+<nav class="sticky-nav">
     <div class="nav-content">
         <a href="/" class="nav-link" data-page="/">🏠 Home</a>
         <a href="/plots/about" class="nav-link" data-page="/plots/about">🌿 About</a>
@@ -20,163 +36,449 @@
     </div>
 </nav>
 
-
-    <div class="garden-container">
-        <header class="garden-header">
-            <div class="header-content">
-                <div class="garden-title">
-                    <span class="tree-emoji">🔢</span>
-                    <h1>Sorting Algorithms</h1>
-                </div>
+<div class="garden-container">
+    <header class="garden-header">
+        <div class="header-content">
+            <div class="garden-title">
+                <span class="tree-emoji">🔢</span>
+                <h1>Sorting Algorithms</h1>
             </div>
-        </header>
+        </div>
+    </header>
 
-        <main class="garden-main">
-            <article>
-                <h2>Ordering Data Efficiently</h2>
-                <p>
-                    Sorting is one of the most fundamental operations in computer science. From
-                    organizing a phone book to ranking search results, sorting appears everywhere.
-                    Understanding different sorting algorithms helps you choose the right tool
-                    for each problem.
-                </p>
+    <main class="garden-main">
+        <article>
+            <h2>Ordering Data Efficiently</h2>
+            <p>
+                Sorting is one of the most fundamental operations in computer science. From
+                organizing a phone book to ranking search results, sorting appears everywhere.
+                Understanding different sorting algorithms helps you choose the right tool
+                for each problem.
+            </p>
 
-                <h3 style="margin-top: 2rem;">Big O Notation Basics</h3>
-                <p>
-                    When analyzing sorting algorithms, we care about time complexity:
-                    <ul style="margin-left: 1.5rem;">
-                        <li><strong>O(n):</strong> Linear - fast for large data</li>
-                        <li><strong>O(n log n):</strong> Linearithmic - very efficient</li>
-                        <li><strong>O(n²):</strong> Quadratic - slow for large data</li>
-                        <li><strong>O(2ⁿ):</strong> Exponential - impractical for large data</li>
-                    </ul>
-                </p>
-
-                <h3 style="margin-top: 2rem;">Bubble Sort</h3>
-                <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(221, 128, 128, 0.15); border-radius: 8px;">
-                    <p><strong>Simple but inefficient.</strong> Repeatedly swap adjacent elements if they're
-                    in wrong order.</p>
-                    <p><strong>Time complexity:</strong> O(n²) average and worst case</p>
-                    <p><strong>Best for:</strong> Educational purposes, tiny datasets</p>
-                    <p><strong>Why it's slow:</strong> Too many comparisons and swaps</p>
-                </div>
-
-                <h3 style="margin-top: 2rem;">Selection Sort</h3>
-                <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(221, 128, 128, 0.15); border-radius: 8px;">
-                    <p><strong>Find minimum, swap to front.</strong> Repeat n-1 times.</p>
-                    <p><strong>Time complexity:</strong> O(n²) always</p>
-                    <p><strong>Best for:</strong> Very small arrays</p>
-                    <p><strong>Why it's slow:</strong> Doesn't learn from previous passes</p>
-                </div>
-
-                <h3 style="margin-top: 2rem;">Insertion Sort</h3>
-                <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(73, 143, 143, 0.15); border-radius: 8px;">
-                    <p><strong>Build sorted array one element at a time.</strong> Like sorting cards in hand.</p>
-                    <p><strong>Time complexity:</strong> O(n²) worst, O(n) best (already sorted)</p>
-                    <p><strong>Best for:</strong> Small arrays, nearly sorted data</p>
-                    <p><strong>Why it's good:</strong> Simple, stable, adaptive</p>
-                </div>
-
-                <h3 style="margin-top: 2rem;">Merge Sort</h3>
-                <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(73, 143, 143, 0.15); border-radius: 8px;">
-                    <p><strong>Divide and conquer.</strong> Split, sort halves, merge.</p>
-                    <p><strong>Time complexity:</strong> O(n log n) always</p>
-                    <p><strong>Best for:</strong> Large datasets, external sorting (disk)</p>
-                    <p><strong>Pros:</strong> Consistent performance, stable</p>
-                    <p><strong>Cons:</strong> Uses O(n) extra space</p>
-                </div>
-
-                <h3 style="margin-top: 2rem;">Quick Sort</h3>
-                <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(73, 143, 143, 0.15); border-radius: 8px;">
-                    <p><strong>Divide and conquer.</strong> Pick pivot, partition, sort sides.</p>
-                    <p><strong>Time complexity:</strong> O(n log n) average, O(n²) worst</p>
-                    <p><strong>Best for:</strong> General-purpose sorting</p>
-                    <p><strong>Pros:</strong> Fast in practice, in-place</p>
-                    <p><strong>Cons:</strong> Worst case on sorted data</p>
-                    <p><strong>Trick:</strong> Randomize pivot to avoid worst case</p>
-                </div>
-
-                <h3 style="margin-top: 2rem;">Heap Sort</h3>
-                <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(73, 143, 143, 0.15); border-radius: 8px;">
-                    <p><strong>Uses heap data structure.</strong> Build heap, repeatedly extract max.</p>
-                    <p><strong>Time complexity:</strong> O(n log n) always</p>
-                    <p><strong>Best for:</strong> When guaranteed performance matters</p>
-                    <p><strong>Pros:</strong> Consistent O(n log n), in-place</p>
-                    <p><strong>Cons:</strong> Not stable, complex to implement</p>
-                </div>
-
-                <h3 style="margin-top: 2rem;">Radix Sort</h3>
-                <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(73, 143, 143, 0.15); border-radius: 8px;">
-                    <p><strong>Sort by digits/characters.</strong> Bucket by digit, sort buckets.</p>
-                    <p><strong>Time complexity:</strong> O(nk) where k is number of digits</p>
-                    <p><strong>Best for:</strong> Integers, strings of fixed length</p>
-                    <p><strong>Pros:</strong> Linear time, stable</p>
-                    <p><strong>Cons:</strong> Only works on specific data types</p>
-                </div>
-
-                <h3 style="margin-top: 2rem;">Counting Sort</h3>
-                <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(73, 143, 143, 0.15); border-radius: 8px;">
-                    <p><strong>Count frequency of each value.</strong> Reconstruct sorted array.</p>
-                    <p><strong>Time complexity:</strong> O(n + k) where k is range</p>
-                    <p><strong>Best for:</strong> Small integer ranges</p>
-                    <p><strong>Pros:</strong> Linear time, stable</p>
-                    <p><strong>Cons:</strong> Only for integers with limited range</p>
-                </div>
-
-                <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(143, 188, 143, 0.15); border-radius: 10px; border-left: 4px solid var(--sage-green);">
-                    <h3>🤔 Choosing a Sort</h3>
-                    <p>
-                        <strong>For production code:</strong> Use built-in sort (Timsort in Python,
-                        Quicksort in C++, Introsort in Java). They're optimized and well-tested.
-                    </p>
-                    <p style="margin-top: 1rem;">
-                        <strong>When to implement custom sorts:</strong>
-                    </p>
-                    <ul style="margin-left: 1.5rem;">
-                        <li>Need specific stability requirements</li>
-                        <li>Working with special data types</li>
-                        <li>Learning and understanding</li>
-                        <li>Parallel sorting</li>
-                    </ul>
-                    <p style="margin-top: 1rem;">
-                        <strong>QuickSort vs MergeSort:</strong>
-                    </p>
-                    <ul style="margin-left: 1.5rem;">
-                        <li><strong>QuickSort:</strong> Faster in practice, in-place</li>
-                        <li><strong>MergeSort:</strong> Stable, predictable performance</li>
-                    </ul>
-                </div>
-
-                <h3 style="margin-top: 2rem;">Explore More</h3>
-                <ul style="list-style: none; padding: 0;">
-                    <li style="margin: 0.5rem 0;">
-                        <a href="data-structures.html" style="color: var(--forest-green);">
-                            🔷 Learn data structures
-                        </a>
-                    </li>
-                    <li style="margin: 0.5rem 0;">
-                        <a href="math-visualization.html" style="color: var(--forest-green);">
-                            🔷 Explore math visualization
-                        </a>
-                    </li>
-                    <li style="margin: 0.5rem 0;">
-                        <a href="index.html" style="color: var(--forest-green);">
-                            🔷 Return to Code section
-                        </a>
-                    </li>
+            <h3 style="margin-top: 2rem;">Big O Notation Basics</h3>
+            <p>
+                When analyzing sorting algorithms, we care about time complexity:
+                <ul style="margin-left: 1.5rem;">
+                    <li><strong>O(n):</strong> Linear - fast for large data</li>
+                    <li><strong>O(n log n):</strong> Linearithmic - very efficient</li>
+                    <li><strong>O(n²):</strong> Quadratic - slow for large data</li>
+                    <li><strong>O(2ⁿ):</strong> Exponential - impractical for large data</li>
                 </ul>
-            </article>
-        </main>
+            </p>
 
-        <footer class="garden-footer">
-            <div class="footer-content">
-                <div class="footer-text">
-                    <p>🔢 Sorting Algorithms in Hermes' Digital Garden</p>
+            <h3 style="margin-top: 2rem;">Bubble Sort</h3>
+            <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(221, 128, 128, 0.15); border-radius: 8px;">
+                <p><strong>Simple but inefficient.</strong> Repeatedly swap adjacent elements if they're
+                in wrong order.</p>
+                <p><strong>Time complexity:</strong> O(n²) average and worst case</p>
+                <p><strong>Best for:</strong> Educational purposes, tiny datasets</p>
+                <p><strong>Why it's slow:</strong> Too many comparisons and swaps</p>
+            </div>
+
+            <h3 style="margin-top: 2rem;">Selection Sort</h3>
+            <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(221, 128, 128, 0.15); border-radius: 8px;">
+                <p><strong>Find minimum, swap to front.</strong> Repeat n-1 times.</p>
+                <p><strong>Time complexity:</strong> O(n²) always</p>
+                <p><strong>Best for:</strong> Very small arrays</p>
+                <p><strong>Why it's slow:</strong> Doesn't learn from previous passes</p>
+            </div>
+
+            <h3 style="margin-top: 2rem;">Insertion Sort</h3>
+            <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(73, 143, 143, 0.15); border-radius: 8px;">
+                <p><strong>Build sorted array one element at a time.</strong> Like sorting cards in hand.</p>
+                <p><strong>Time complexity:</strong> O(n²) worst, O(n) best (already sorted)</p>
+                <p><strong>Best for:</strong> Small arrays, nearly sorted data</p>
+                <p><strong>Why it's good:</strong> Simple, stable, adaptive</p>
+            </div>
+
+            <h3 style="margin-top: 2rem;">Merge Sort</h3>
+            <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(73, 143, 143, 0.15); border-radius: 8px;">
+                <p><strong>Divide and conquer.</strong> Split, sort halves, merge.</p>
+                <p><strong>Time complexity:</strong> O(n log n) always</p>
+                <p><strong>Best for:</strong> Large datasets, external sorting (disk)</p>
+                <p><strong>Pros:</strong> Consistent performance, stable</p>
+                <p><strong>Cons:</strong> Uses O(n) extra space</p>
+            </div>
+
+            <h3 style="margin-top: 2rem;">Quick Sort</h3>
+            <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(73, 143, 143, 0.15); border-radius: 8px;">
+                <p><strong>Divide and conquer.</strong> Pick pivot, partition, sort sides.</p>
+                <p><strong>Time complexity:</strong> O(n log n) average, O(n²) worst</p>
+                <p><strong>Best for:</strong> General-purpose sorting</p>
+                <p><strong>Pros:</strong> Fast in practice, in-place</p>
+                <p><strong>Cons:</strong> Worst case on sorted data</p>
+                <p><strong>Trick:</strong> Randomize pivot to avoid worst case</p>
+            </div>
+
+            <h3 style="margin-top: 2rem;">Heap Sort</h3>
+            <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(73, 143, 143, 0.15); border-radius: 8px;">
+                <p><strong>Uses heap data structure.</strong> Build heap, repeatedly extract max.</p>
+                <p><strong>Time complexity:</strong> O(n log n) always</p>
+                <p><strong>Best for:</strong> When guaranteed performance matters</p>
+                <p><strong>Pros:</strong> Consistent O(n log n), in-place</p>
+                <p><strong>Cons:</strong> Not stable, complex to implement</p>
+            </div>
+
+            <h3 style="margin-top: 2rem;">Radix Sort</h3>
+            <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(73, 143, 143, 0.15); border-radius: 8px;">
+                <p><strong>Sort by digits/characters.</strong> Bucket by digit, sort buckets.</p>
+                <p><strong>Time complexity:</strong> O(nk) where k is number of digits</p>
+                <p><strong>Best for:</strong> Integers, strings of fixed length</p>
+                <p><strong>Pros:</strong> Linear time, stable</p>
+                <p><strong>Cons:</strong> Only works on specific data types</p>
+            </div>
+
+            <h3 style="margin-top: 2rem;">Counting Sort</h3>
+            <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(73, 143, 143, 0.15); border-radius: 8px;">
+                <p><strong>Count frequency of each value.</strong> Reconstruct sorted array.</p>
+                <p><strong>Time complexity:</strong> O(n + k) where k is range</p>
+                <p><strong>Best for:</strong> Small integer ranges</p>
+                <p><strong>Pros:</strong> Linear time, stable</p>
+                <p><strong>Cons:</strong> Only for integers with limited range</p>
+            </div>
+
+            <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(143, 188, 143, 0.15); border-radius: 10px; border-left: 4px solid var(--sage-green);">
+                <h3>🤔 Choosing a Sort</h3>
+                <p>
+                    <strong>For production code:</strong> Use built-in sort (Timsort in Python,
+                    Quicksort in C++, Introsort in Java). They're optimized and well-tested.
+                </p>
+                <p style="margin-top: 1rem;">
+                    <strong>When to implement custom sorts:</strong>
+                </p>
+                <ul style="margin-left: 1.5rem;">
+                    <li>Need specific stability requirements</li>
+                    <li>Working with special data types</li>
+                    <li>Learning and understanding</li>
+                    <li>Parallel sorting</li>
+                </ul>
+                <p style="margin-top: 1rem;">
+                    <strong>QuickSort vs MergeSort:</strong>
+                </p>
+                <ul style="margin-left: 1.5rem;">
+                    <li><strong>QuickSort:</strong> Faster in practice, in-place</li>
+                    <li><strong>MergeSort:</strong> Stable, predictable performance</li>
+                </ul>
+            </div>
+
+            <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(0, 0, 0, 0.05); border-radius: 8px;">
+                <h3>💻 Python Implementations</h3>
+                
+                <div class="algorithm-example">
+                    <h4>🔸 Bubble Sort</h4>
+                    <pre><code>def bubble_sort(arr):
+    """Bubble sort: repeatedly swap adjacent elements"""
+    n = len(arr)
+    arr = arr.copy()  # Don't modify original
+    
+    for i in range(n):
+        swapped = False
+        for j in range(0, n - i - 1):
+            if arr[j] > arr[j + 1]:
+                # Swap
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+                swapped = True
+        if not swapped:
+            break  # Already sorted!
+    
+    return arr
+
+# Test
+data = [64, 34, 25, 12, 22, 11, 90]
+print(f"Original: {data}")
+print(f"Sorted:   {bubble_sort(data)}")
+print(f"Comparisons: O(n²) worst case")</code></pre>
+                </div>
+
+                <div class="algorithm-example">
+                    <h4>🔸 Selection Sort</h4>
+                    <pre><code>def selection_sort(arr):
+    """Selection sort: find minimum, swap to front"""
+    n = len(arr)
+    arr = arr.copy()
+    
+    for i in range(n):
+        min_idx = i
+        for j in range(i + 1, n):
+            if arr[j] < arr[min_idx]:
+                min_idx = j
+        # Swap
+        arr[i], arr[min_idx] = arr[min_idx], arr[i]
+    
+    return arr
+
+# Test
+data = [64, 34, 25, 12, 22, 11, 90]
+print(f"Original: {data}")
+print(f"Sorted:   {selection_sort(data)}")
+print(f"Always O(n²) comparisons and swaps")</code></pre>
+                </div>
+
+                <div class="algorithm-example">
+                    <h4>🔸 Insertion Sort</h4>
+                    <pre><code>def insertion_sort(arr):
+    """Insertion sort: build sorted array one element at a time"""
+    n = len(arr)
+    arr = arr.copy()
+    
+    for i in range(1, n):
+        key = arr[i]
+        j = i - 1
+        
+        # Move elements greater than key
+        while j >= 0 and arr[j] > key:
+            arr[j + 1] = arr[j]
+            j -= 1
+        arr[j + 1] = key
+    
+    return arr
+
+# Test - Already sorted (best case)
+data_sorted = [11, 12, 22, 25, 34, 64, 90]
+print(f"Already sorted: {insertion_sort(data_sorted)}")
+
+# Test - Reverse sorted
+data_reverse = [90, 64, 34, 25, 22, 12, 11]
+print(f"Reverse sorted: {insertion_sort(data_reverse)}")
+print(f"Best case: O(n) when already sorted")</code></pre>
+                </div>
+
+                <div class="algorithm-example">
+                    <h4>🔸 Merge Sort</h4>
+                    <pre><code>def merge_sort(arr):
+    """Merge sort: divide and conquer with guaranteed O(n log n)"""
+    if len(arr) <= 1:
+        return arr
+    
+    mid = len(arr) // 2
+    left = merge_sort(arr[:mid])
+    right = merge_sort(arr[mid:])
+    
+    return merge(left, right)
+
+def merge(left, right):
+    """Merge two sorted arrays"""
+    result = []
+    i = j = 0
+    
+    while i < len(left) and j < len(right):
+        if left[i] <= right[j]:
+            result.append(left[i])
+            i += 1
+        else:
+            result.append(right[j])
+            j += 1
+    
+    # Append remaining elements
+    result.extend(left[i:])
+    result.extend(right[j:])
+    
+    return result
+
+# Test
+data = [64, 34, 25, 12, 22, 11, 90, 45]
+print(f"Original: {data}")
+print(f"Sorted:   {merge_sort(data)}")
+print(f"Consistent O(n log n) - stable sort")</code></pre>
+                </div>
+
+                <div class="algorithm-example">
+                    <h4>🔸 Quick Sort</h4>
+                    <pre><code>def quick_sort(arr, low=0, high=None):
+    """Quick sort: divide and conquer with randomized pivot"""
+    arr = arr.copy()
+    n = len(arr)
+    
+    if high is None:
+        high = n - 1
+    
+    if low < high:
+        # Random pivot to avoid worst case
+        import random
+        pivot_idx = random.randint(low, high)
+        pivot_idx = partition(arr, low, high, pivot_idx)
+        
+        quick_sort(arr, low, pivot_idx - 1)
+        quick_sort(arr, pivot_idx + 1, high)
+    
+    return arr
+
+def partition(arr, low, high, pivot_idx):
+    """Lomuto partition scheme"""
+    # Move pivot to end
+    pivot = arr[pivot_idx]
+    arr[pivot_idx], arr[high] = arr[high], arr[pivot_idx]
+    
+    store_idx = low
+    for i in range(low, high):
+        if arr[i] < pivot:
+            arr[store_idx], arr[i] = arr[i], arr[store_idx]
+            store_idx += 1
+    
+    # Move pivot to correct position
+    arr[store_idx], arr[high] = arr[high], arr[store_idx]
+    return store_idx
+
+# Test
+data = [64, 34, 25, 12, 22, 11, 90, 45]
+print(f"Original: {data}")
+print(f"Sorted:   {quick_sort(data)}")
+print(f"Average O(n log n), worst O(n²)")</code></pre>
+                </div>
+
+                <div class="algorithm-example">
+                    <h4>🔸 Heap Sort</h4>
+                    <pre><code>def heap_sort(arr):
+    """Heap sort: build max-heap, extract max repeatedly"""
+    arr = arr.copy()
+    n = len(arr)
+    
+    # Build max heap
+    for i in range(n // 2 - 1, -1, -1):
+        heapify(arr, n, i)
+    
+    # Extract elements
+    for i in range(n - 1, 0, -1):
+        arr[0], arr[i] = arr[i], arr[0]
+        heapify(arr, i, 0)
+    
+    return arr
+
+def heapify(arr, n, i):
+    """Ensure max-heap property at index i"""
+    largest = i
+    left = 2 * i + 1
+    right = 2 * i + 2
+    
+    if left < n and arr[left] > arr[largest]:
+        largest = left
+    
+    if right < n and arr[right] > arr[largest]:
+        largest = right
+    
+    if largest != i:
+        arr[i], arr[largest] = arr[largest], arr[i]
+        heapify(arr, n, largest)
+
+# Test
+data = [64, 34, 25, 12, 22, 11, 90, 45]
+print(f"Original: {data}")
+print(f"Sorted:   {heap_sort(data)}")
+print(f"Consistent O(n log n) - not stable")</code></pre>
+                </div>
+
+                <div class="algorithm-example">
+                    <h4>🔸 Radix Sort</h4>
+                    <pre><code>def counting_sort_by_digit(arr, exp):
+    """Sort array by digit at position exp (1, 10, 100, ...)"""
+    n = len(arr)
+    output = [0] * n
+    count = [0] * 10
+    
+    # Count frequencies
+    for num in arr:
+        index = (num // exp) % 10
+        count[index] += 1
+    
+    # Cumulative count
+    for i in range(1, 10):
+        count[i] += count[i - 1]
+    
+    # Build output (iterate backwards for stability)
+    for num in reversed(arr):
+        index = (num // exp) % 10
+        output[count[index] - 1] = num
+        count[index] -= 1
+    
+    return output
+
+def radix_sort(arr):
+    """Radix sort: sort by each digit from least to most significant"""
+    arr = arr.copy()
+    
+    # Find maximum number
+    max_val = max(arr)
+    
+    # Sort by each digit
+    exp = 1
+    while max_val // exp > 0:
+        arr = counting_sort_by_digit(arr, exp)
+        exp *= 10
+    
+    return arr
+
+# Test - Positive integers
+data = [170, 45, 75, 90, 802, 24, 2, 66]
+print(f"Original: {data}")
+print(f"Sorted:   {radix_sort(data)}")
+print(f"O(nk) time - stable, only for integers")</code></pre>
+                </div>
+
+                <div class="algorithm-example">
+                    <h4>🔸 Counting Sort</h4>
+                    <pre><code>def counting_sort(arr):
+    """Counting sort: count frequency, reconstruct"""
+    arr = arr.copy()
+    
+    if len(arr) == 0:
+        return arr
+    
+    # Find range
+    min_val = min(arr)
+    max_val = max(arr)
+    range_size = max_val - min_val + 1
+    
+    # Count frequencies
+    count = [0] * range_size
+    for num in arr:
+        count[num - min_val] += 1
+    
+    # Reconstruct sorted array
+    sorted_arr = []
+    for i in range(range_size):
+        sorted_arr.extend([i + min_val] * count[i])
+    
+    return sorted_arr
+
+# Test - Small integer range
+data = [4, 2, 2, 8, 3, 3, 1]
+print(f"Original: {data}")
+print(f"Sorted:   {counting_sort(data)}")
+print(f"O(n + k) - only for limited integer ranges")</code></pre>
                 </div>
             </div>
-        </footer>
-    </div>
 
-    <script src="../../js/garden.js"></script>
+            <h3 style="margin-top: 2rem;">Explore More</h3>
+            <ul style="list-style: none; padding: 0;">
+                <li style="margin: 0.5rem 0;">
+                    <a href="data-structures.html" style="color: var(--forest-green);">
+                        🔷 Learn data structures
+                    </a>
+                </li>
+                <li style="margin: 0.5rem 0;">
+                    <a href="math-visualization.html" style="color: var(--forest-green);">
+                        🔷 Explore math visualization
+                    </a>
+                </li>
+                <li style="margin: 0.5rem 0;">
+                    <a href="index.html" style="color: var(--forest-green);">
+                        🔷 Return to Code section
+                    </a>
+                </li>
+            </ul>
+        </article>
+    </main>
+
+    <footer class="garden-footer">
+        <div class="footer-content">
+            <div class="footer-text">
+                <p>🔢 Sorting Algorithms in Hermes' Digital Garden</p>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<script src="../../js/garden.js"></script>
 </body>
 </html>
