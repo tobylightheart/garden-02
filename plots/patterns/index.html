@@ -7,109 +7,161 @@
     <link rel="stylesheet" href="../../css/styles.css">
 </head>
 <body>
+    <nav class="sticky-nav">
+        <div class="nav-content">
+            <a href="/" class="nav-link" data-page="/">🏠 Home</a>
+            <a href="/plots/about" class="nav-link" data-page="/plots/about">🌿 About</a>
+            <a href="/plots/code" class="nav-link" data-page="/plots/code">💻 Code</a>
+            <a href="/plots/patterns" class="nav-link" data-page="/plots/patterns">🌀 Patterns</a>
+            <a href="/plots/thoughts" class="nav-link" data-page="/plots/thoughts">💭 Thoughts</a>
+            <a href="/plots/experiments" class="nav-link" data-page="/plots/experiments">🧪 Experiments</a>
+            <a href="/plots/help" class="nav-link" data-page="/plots/help">🛠️ Help</a>
+            <a href="/plots/resources" class="nav-link" data-page="/plots/resources">📚 Resources</a>
+            <a href="/plots/interactive" class="nav-link" data-page="/plots/interactive">🎮 Interactive</a>
+        </div>
+    </nav>
+
     <div class="garden-container">
         <header class="garden-header">
             <div class="header-content">
                 <div class="garden-title">
                     <span class="tree-emoji">🌀</span>
                     <h1>Patterns</h1>
-                    <p class="tagline">Finding order in complexity</p>
                 </div>
             </div>
         </header>
 
         <main class="garden-main">
-            <h2>Understanding Patterns</h2>
-            <p style="margin-bottom: 2rem;">
-                Patterns are the hidden structures that give order to chaos. From nature to code, 
-                patterns reveal the underlying rules that shape our world.
-            </p>
+            <article>
+                <h2>Recognizing Patterns in Code, Nature, and Thought</h2>
+                <p>
+                    Patterns are everywhere - in nature, in code, in our thinking. Understanding patterns
+                    helps us make sense of complexity and create elegant solutions.
+                </p>
 
-            <div class="thought-grid">
-                <article class="thought-card" data-tags="patterns,emergence,complexity">
-                    <h3>Emergence from Simplicity</h3>
-                    <p>How simple local rules can generate complex global behavior. Ant colonies, flocking birds, and cellular automata all demonstrate this phenomenon.</p>
-                    <div class="thought-meta">
-                        <span class="thought-date">Created: June 2026</span>
-                        <span class="thought-tags">
-                            <span class="thought-tag" data-tag="patterns">patterns</span>
-                            <span class="thought-tag" data-tag="emergence">emergence</span>
-                            <span class="thought-tag" data-tag="complexity">complexity</span>
-                        </span>
-                    </div>
-                    <a href="emergence.html" class="read-more">Explore the pattern →</a>
-                </article>
+                <h3 style="margin-top: 2rem;">Types of Patterns</h3>
 
-                <article class="thought-card" data-tags="patterns,recursion,self-similarity">
-                    <h3>Fractals and Self-Similarity</h3>
-                    <p>The same pattern repeating at different scales. From coastlines to computer algorithms, self-similarity reveals a fundamental truth about structure.</p>
-                    <div class="thought-meta">
-                        <span class="thought-date">Created: June 2026</span>
-                        <span class="thought-tags">
-                            <span class="thought-tag" data-tag="patterns">patterns</span>
-                            <span class="thought-tag" data-tag="recursion">recursion</span>
-                            <span class="thought-tag" data-tag="self-similarity">self-similarity</span>
-                        </span>
-                    </div>
-                    <a href="fractals.html" class="read-more">View fractals →</a>
-                </article>
+                <div class="info-box info">
+                    <h4>📐 Geometric Patterns</h4>
+                    <p>
+                        Regular, mathematical patterns found in nature and design. Fractals, symmetry,
+                        and repeating structures that follow mathematical rules.
+                    </p>
+                </div>
 
-                <article class="thought-card" data-tags="patterns,code,design">
-                    <h3>Code Design Patterns</h3>
-                    <p>Common solutions to recurring problems in software design. Singleton, Factory, Observer - patterns that have stood the test of time.</p>
-                    <div class="thought-meta">
-                        <span class="thought-date">Created: June 2026</span>
-                        <span class="thought-tags">
-                            <span class="thought-tag" data-tag="patterns">patterns</span>
-                            <span class="thought-tag" data-tag="code">code</span>
-                            <span class="thought-tag" data-tag="design">design</span>
-                        </span>
-                    </div>
-                    <a href="design-patterns.html" class="read-more">Study patterns →</a>
-                </article>
+                <div class="info-box info">
+                    <h4>🧠 Thinking Patterns</h4>
+                    <p>
+                        Cognitive patterns that shape how we process information: mental models, heuristics,
+                        biases, and frameworks for understanding the world.
+                    </p>
+                </div>
 
-                <article class="thought-card" data-tags="patterns,nature,biology">
-                    <h3>Natural Patterns</h3>
-                    <p>From the Fibonacci sequence in sunflowers to the hexagonal cells of honeycombs, nature loves patterns. Why do they appear so often?</p>
-                    <div class="thought-meta">
-                        <span class="thought-date">Created: June 2026</span>
-                        <span class="thought-tags">
-                            <span class="thought-tag" data-tag="patterns">patterns</span>
-                            <span class="thought-tag" data-tag="nature">nature</span>
-                            <span class="thought-tag" data-tag="biology">biology</span>
-                        </span>
-                    </div>
-                    <a href="natural-patterns.html" class="read-more">Observe nature →</a>
-                </article>
+                <div class="info-box info">
+                    <h4>🔧 Design Patterns</h4>
+                    <p>
+                        Reusable solutions to common problems in software design. Singleton, Factory, Observer,
+                        and other patterns that help create flexible, maintainable code.
+                    </p>
+                </div>
 
-                <article class="thought-card" data-tags="patterns,language,thinking">
-                    <h3>Thinking Patterns</h3>
-                    <p>How our minds organize information. Heuristics, mental models, and cognitive biases are all patterns that shape how we think and decide.</p>
-                    <div class="thought-meta">
-                        <span class="thought-date">Created: June 2026</span>
-                        <span class="thought-tags">
-                            <span class="thought-tag" data-tag="patterns">patterns</span>
-                            <span class="thought-tag" data-tag="language">language</span>
-                            <span class="thought-tag" data-tag="thinking">thinking</span>
-                        </span>
-                    </div>
-                    <a href="thinking-patterns.html" class="read-more">Explore minds →</a>
-                </article>
+                <div class="info-box info">
+                    <h4>🌊 Emergent Patterns</h4>
+                    <p>
+                        Complex patterns that arise from simple interactions. Flocking birds, market dynamics,
+                        neural networks - all show how simple rules create complex global behavior.
+                    </p>
+                </div>
 
-                <article class="thought-card" data-tags="patterns,mathematics,geometry">
-                    <h3>Geometric Patterns</h3>
-                    <p>The mathematics of repetition and symmetry. Tilings, tessellations, and the beautiful order found in two and three dimensions.</p>
-                    <div class="thought-meta">
-                        <span class="thought-date">Created: June 2026</span>
-                        <span class="thought-tags">
-                            <span class="thought-tag" data-tag="patterns">patterns</span>
-                            <span class="thought-tag" data-tag="mathematics">mathematics</span>
-                            <span class="thought-tag" data-tag="geometry">geometry</span>
-                        </span>
-                    </div>
-                    <a href="geometric-patterns.html" class="read-more">Visualize geometry →</a>
-                </article>
-            </div>
+                <h3 style="margin-top: 2rem;">Pattern Recognition Process</h3>
+                <ol style="margin-left: 1.5rem;">
+                    <li><strong>Observe:</strong> Notice something happening repeatedly</li>
+                    <li><strong>Abstract:</strong> Extract the underlying structure</li>
+                    <li><strong>Generalize:</strong> Create a reusable pattern</li>
+                    <li><strong>Apply:</strong> Use the pattern in new contexts</li>
+                </ol>
+
+                <h3 style="margin-top: 2rem;">Common Code Patterns</h3>
+
+                <div class="info-box info">
+                    <h4>🔸 Creational Patterns</h4>
+                    <p>
+                        Object creation mechanisms: Singleton, Factory, Builder, Prototype.
+                        These help control how objects are created and manage object lifecycle.
+                    </p>
+                </div>
+
+                <div class="info-box info">
+                    <h4>🔸 Structural Patterns</h4>
+                    <p>
+                        Class and object composition: Adapter, Decorator, Facade, Proxy.
+                        These help organize code into flexible structures.
+                    </p>
+                </div>
+
+                <div class="info-box info">
+                    <h4>🔸 Behavioral Patterns</h4>
+                    <p>
+                        Algorithms for communication between objects: Observer, Strategy, Command, State.
+                        These define how objects interact and distribute responsibility.
+                    </p>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Nature's Patterns</h3>
+                <ul style="margin-left: 1.5rem;">
+                    <li><strong>Fractals:</strong> Self-similar patterns at different scales (trees, coastlines)</li>
+                    <li><strong>Spirals:</strong> Golden ratio in shells, galaxies, hurricanes</li>
+                    <li><strong>Tessellations:</strong> Tiling patterns in honeycombs, tilings</li>
+                    <li><strong>Waves:</strong> Interference patterns in water, sound, light</li>
+                </ul>
+
+                <div class="info-box warning">
+                    <h4>🤔 Pattern vs Coincidence</h4>
+                    <p>
+                        Not everything that repeats is a pattern. True patterns have:
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                            <li>Consistency across observations</li>
+                            <li>Predictable behavior</li>
+                            <li>Underlying mechanism or rule</li>
+                            <li>Utility in explanation or prediction</li>
+                        </ul>
+                    </p>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Explore More</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin: 0.5rem 0;">
+                        <a href="geometric-patterns.html" style="color: var(--forest-green);">
+                            🔷 Geometric Patterns - Symmetry and tiling
+                        </a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="thinking-patterns.html" style="color: var(--forest-green);">
+                            🔷 Thinking Patterns - Mental models and biases
+                        </a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="design-patterns.html" style="color: var(--forest-green);">
+                            🔷 Design Patterns - Software design principles
+                        </a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="fractals.html" style="color: var(--forest-green);">
+                            🔷 Fractals - Self-similar complexity
+                        </a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="emergence.html" style="color: var(--forest-green);">
+                            🔷 Emergence - Complexity from simplicity
+                        </a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="index.html" style="color: var(--forest-green);">
+                            🔷 Return to Patterns section
+                        </a>
+                    </li>
+                </ul>
+            </article>
         </main>
 
         <footer class="garden-footer">

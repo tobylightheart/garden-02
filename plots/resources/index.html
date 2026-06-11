@@ -7,109 +7,175 @@
     <link rel="stylesheet" href="../../css/styles.css">
 </head>
 <body>
+    <nav class="sticky-nav">
+        <div class="nav-content">
+            <a href="/" class="nav-link" data-page="/">🏠 Home</a>
+            <a href="/plots/about" class="nav-link" data-page="/plots/about">🌿 About</a>
+            <a href="/plots/code" class="nav-link" data-page="/plots/code">💻 Code</a>
+            <a href="/plots/patterns" class="nav-link" data-page="/plots/patterns">🌀 Patterns</a>
+            <a href="/plots/thoughts" class="nav-link" data-page="/plots/thoughts">💭 Thoughts</a>
+            <a href="/plots/experiments" class="nav-link" data-page="/plots/experiments">🧪 Experiments</a>
+            <a href="/plots/help" class="nav-link" data-page="/plots/help">🛠️ Help</a>
+            <a href="/plots/resources" class="nav-link" data-page="/plots/resources">📚 Resources</a>
+            <a href="/plots/interactive" class="nav-link" data-page="/plots/interactive">🎮 Interactive</a>
+        </div>
+    </nav>
+
     <div class="garden-container">
         <header class="garden-header">
             <div class="header-content">
                 <div class="garden-title">
                     <span class="tree-emoji">📚</span>
                     <h1>Resources</h1>
-                    <p class="tagline">Curated learning materials and tools</p>
                 </div>
             </div>
         </header>
 
         <main class="garden-main">
-            <h2>Curated Resources</h2>
-            <p style="margin-bottom: 2rem;">
-                This is my collection of books, articles, courses, and tools that have 
-                been valuable in my learning journey. I organize them by topic for easy reference.
-            </p>
+            <article>
+                <h2>Curated Learning Resources</h2>
+                <p>
+                    A collection of books, courses, tools, and documentation to support your learning
+                    journey. These are resources I've found valuable in my exploration.
+                </p>
 
-            <div class="thought-grid">
-                <article class="thought-card" data-tags="resources,books,programming">
-                    <h3>📖 Essential Programming Books</h3>
-                    <p>My top picks for learning computer science and programming from first principles.</p>
-                    <div class="thought-meta">
-                        <span class="thought-date">Curated: June 2026</span>
-                        <span class="thought-tags">
-                            <span class="thought-tag" data-tag="resources">resources</span>
-                            <span class="thought-tag" data-tag="books">books</span>
-                            <span class="thought-tag" data-tag="programming">programming</span>
-                        </span>
-                    </div>
-                    <a href="books.html" class="read-more">Browse books →</a>
-                </article>
+                <h3 style="margin-top: 2rem;">Books</h3>
+                <ul class="book-list">
+                    <li class="book-card">
+                        <strong>📖 "Clean Code"</strong> by Robert C. Martin
+                        <p style="margin-top: 0.5rem;">
+                            Principles of writing maintainable, readable code.
+                        </p>
+                    </li>
+                    <li class="book-card">
+                        <strong>📖 "The Pragmatic Programmer"</strong> by Andrew Hunt & David Thomas
+                        <p style="margin-top: 0.5rem;">
+                            Timeless advice for software developers.
+                        </p>
+                    </li>
+                    <li class="book-card">
+                        <strong>📖 "Design Patterns"</strong> by Gang of Four
+                        <p style="margin-top: 0.5rem;">
+                            Classic patterns for object-oriented design.
+                        </p>
+                    </li>
+                    <li class="book-card">
+                        <strong>📖 "Thinking, Fast and Slow"</strong> by Daniel Kahneman
+                        <p style="margin-top: 0.5rem;">
+                            How we think and make decisions.
+                        </p>
+                    </li>
+                </ul>
 
-                <article class="thought-card" data-tags="resources,courses,learning">
-                    <h3>🎓 Free Online Courses</h3>
-                    <p>High-quality free courses from universities and platforms like Coursera, edX, and MIT OpenCourseWare.</p>
-                    <div class="thought-meta">
-                        <span class="thought-date">Curated: June 2026</span>
-                        <span class="thought-tags">
-                            <span class="thought-tag" data-tag="resources">resources</span>
-                            <span class="thought-tag" data-tag="courses">courses</span>
-                            <span class="thought-tag" data-tag="learning">learning</span>
-                        </span>
-                    </div>
-                    <a href="courses.html" class="read-more">View courses →</a>
-                </article>
+                <h3 style="margin-top: 2rem;">Courses</h3>
+                <ul class="doc-list">
+                    <li class="doc-card">
+                        <strong>🎓 Computer Science: Basic Algorithms and Data Structures</strong> (Coursera)
+                        <p style="margin-top: 0.5rem;">
+                            Fundamental algorithms and data structures with Java.
+                        </p>
+                    </li>
+                    <li class="doc-card">
+                        <strong>🎓 Machine Learning Specialization</strong> (Coursera)
+                        <p style="margin-top: 0.5rem;">
+                            ML fundamentals from Andrew Ng.
+                        </p>
+                    </li>
+                    <li class="doc-card">
+                        <strong>🎓 Full Stack Open</strong> (University of Helsinki)
+                        <p style="margin-top: 0.5rem;">
+                            Modern JavaScript and React development.
+                        </p>
+                    </li>
+                </ul>
 
-                <article class="thought-card" data-tags="resources,tools,development">
-                    <h3>🛠️ Developer Tools</h3>
-                    <p>My essential toolkit - editors, extensions, utilities that make development more efficient.</p>
-                    <div class="thought-meta">
-                        <span class="thought-date">Curated: June 2026</span>
-                        <span class="thought-tags">
-                            <span class="thought-tag" data-tag="resources">resources</span>
-                            <span class="thought-tag" data-tag="tools">tools</span>
-                            <span class="thought-tag" data-tag="development">development</span>
-                        </span>
-                    </div>
-                    <a href="tools.html" class="read-more">View tools →</a>
-                </article>
+                <h3 style="margin-top: 2rem;">Documentation</h3>
+                <ul class="doc-list">
+                    <li class="doc-card">
+                        <strong>📄 Python Official Documentation</strong>
+                        <p style="margin-top: 0.5rem;">
+                            Comprehensive Python language reference.
+                        </p>
+                    </li>
+                    <li class="doc-card">
+                        <strong>📄 JavaScript MDN</strong>
+                        <p style="margin-top: 0.5rem;">
+                            Web technologies reference.
+                        </p>
+                    </li>
+                    <li class="doc-card">
+                        <strong>📄 Rust Book</strong>
+                        <p style="margin-top: 0.5rem;">
+                            Official Rust programming guide.
+                        </p>
+                    </li>
+                </ul>
 
-                <article class="thought-card" data-tags="resources,articles,reading">
-                    <h3>📰 Recommended Reading</h3>
-                    <p>Articles, blogs, and newsletters that consistently deliver high-quality technical content.</p>
-                    <div class="thought-meta">
-                        <span class="thought-date">Curated: June 2026</span>
-                        <span class="thought-tags">
-                            <span class="thought-tag" data-tag="resources">resources</span>
-                            <span class="thought-tag" data-tag="articles">articles</span>
-                            <span class="thought-tag" data-tag="reading">reading</span>
-                        </span>
-                    </div>
-                    <a href="articles.html" class="read-more">Read articles →</a>
-                </article>
+                <h3 style="margin-top: 2rem;">Tools</h3>
+                <ul class="doc-list">
+                    <li class="doc-card">
+                        <strong>🛠️ Git</strong>
+                        <p style="margin-top: 0.5rem;">
+                            Version control system for tracking changes.
+                        </p>
+                    </li>
+                    <li class="doc-card">
+                        <strong>🛠️ VS Code</strong>
+                        <p style="margin-top: 0.5rem;">
+                            Popular code editor with extensive extensions.
+                        </p>
+                    </li>
+                    <li class="doc-card">
+                        <strong>🛠️ Docker</strong>
+                        <p style="margin-top: 0.5rem;">
+                            Containerization platform for consistent environments.
+                        </p>
+                    </li>
+                    <li class="doc-card">
+                        <strong>🛠️ GitHub</strong>
+                        <p style="margin-top: 0.5rem;">
+                            Code hosting and collaboration platform.
+                        </p>
+                    </li>
+                </ul>
 
-                <article class="thought-card" data-tags="resources,practice,projects">
-                    <h3>🏋️ Practice Projects</h3>
-                    <p>Project ideas for building skills - from beginner exercises to advanced challenges.</p>
-                    <div class="thought-meta">
-                        <span class="thought-date">Curated: June 2026</span>
-                        <span class="thought-tags">
-                            <span class="thought-tag" data-tag="resources">resources</span>
-                            <span class="thought-tag" data-tag="practice">practice</span>
-                            <span class="thought-tag" data-tag="projects">projects</span>
-                        </span>
-                    </div>
-                    <a href="projects.html" class="read-more">Start projects →</a>
-                </article>
+                <h3 style="margin-top: 2rem;">Learning Strategies</h3>
+                <div class="info-box info">
+                    <h4>🔍 Learning by Documentation</h4>
+                    <p>
+                        Some of the most valuable learning comes from reading documentation carefully
+                        rather than executing code immediately. Documentation teaches you the concepts
+                        and mental models behind the tools.
+                    </p>
+                </div>
 
-                <article class="thought-card" data-tags="resources,documentation,reference">
-                    <h3>📋 Documentation Index</h3>
-                    <p>Quick links to important documentation - language specs, API references, and cheat sheets.</p>
-                    <div class="thought-meta">
-                        <span class="thought-date">Curated: June 2026</span>
-                        <span class="thought-tags">
-                            <span class="thought-tag" data-tag="resources">resources</span>
-                            <span class="thought-tag" data-tag="documentation">documentation</span>
-                            <span class="thought-tag" data-tag="reference">reference</span>
-                        </span>
-                    </div>
-                    <a href="documentation.html" class="read-more">Index docs →</a>
-                </article>
-            </div>
+                <div class="info-box info">
+                    <h4>🔍 Learning by Doing</h4>
+                    <p>
+                        Build projects, break things, fix them. Hands-on experience cements understanding
+                        better than passive consumption.
+                    </p>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Explore More</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin: 0.5rem 0;">
+                        <a href="books.html" style="color: var(--forest-green);">📚 Books - Reading list</a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="courses.html" style="color: var(--forest-green);">🎓 Courses - Online classes</a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="documentation.html" style="color: var(--forest-green);">📖 Documentation - Reference guides</a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="tools.html" style="color: var(--forest-green);">🛠️ Tools - Software and utilities</a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="index.html" style="color: var(--forest-green);">🔗 Return to Resources</a>
+                    </li>
+                </ul>
+            </article>
         </main>
 
         <footer class="garden-footer">

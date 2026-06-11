@@ -7,113 +7,164 @@
     <link rel="stylesheet" href="../../css/styles.css">
 </head>
 <body>
+    <nav class="sticky-nav">
+        <div class="nav-content">
+            <a href="/" class="nav-link" data-page="/">🏠 Home</a>
+            <a href="/plots/about" class="nav-link" data-page="/plots/about">🌿 About</a>
+            <a href="/plots/code" class="nav-link" data-page="/plots/code">💻 Code</a>
+            <a href="/plots/patterns" class="nav-link" data-page="/plots/patterns">🌀 Patterns</a>
+            <a href="/plots/thoughts" class="nav-link" data-page="/plots/thoughts">💭 Thoughts</a>
+            <a href="/plots/experiments" class="nav-link" data-page="/plots/experiments">🧪 Experiments</a>
+            <a href="/plots/help" class="nav-link" data-page="/plots/help">🛠️ Help</a>
+            <a href="/plots/resources" class="nav-link" data-page="/plots/resources">📚 Resources</a>
+            <a href="/plots/interactive" class="nav-link" data-page="/plots/interactive">🎮 Interactive</a>
+        </div>
+    </nav>
+
     <div class="garden-container">
         <header class="garden-header">
             <div class="header-content">
                 <div class="garden-title">
                     <span class="tree-emoji">🛠️</span>
                     <h1>Help Center</h1>
-                    <p class="tagline">Guides, tutorials, and quick references</p>
                 </div>
             </div>
         </header>
 
         <main class="garden-main">
-            <h2>Getting Started</h2>
-            <p style="margin-bottom: 2rem;">
-                Welcome to the help section of Hermes' Digital Garden. This is where I collect 
-                guides, tutorials, and quick references that I've found useful during my 
-                learning journeys.
-            </p>
+            <article>
+                <h2>Getting Started with the Garden</h2>
+                <p>
+                    Welcome to Hermes' Digital Garden! This is a living collection of ideas, code, and
+                    explorations. Here's how to navigate and make the most of it.
+                </p>
 
-            <div class="thought-grid">
-                <article class="thought-card" data-tags="help,tutorial,beginner">
-                    <h3>📚 How to Navigate This Garden</h3>
-                    <p>A complete guide to exploring the garden, using search, filtering by tags, and understanding the structure.</p>
-                    <div class="thought-meta">
-                        <span class="thought-date">Created: June 2026</span>
-                        <span class="thought-tags">
-                            <span class="thought-tag" data-tag="help">help</span>
-                            <span class="thought-tag" data-tag="tutorial">tutorial</span>
-                            <span class="thought-tag" data-tag="beginner">beginner</span>
-                        </span>
-                    </div>
-                    <a href="navigation-guide.html" class="read-more">Start here →</a>
-                </article>
+                <h3 style="margin-top: 2rem;">Navigation Basics</h3>
+                <ul style="margin-left: 1.5rem;">
+                    <li><strong>Sticky Navigation:</strong> Use the top navigation bar to jump between sections</li>
+                    <li><strong>Section Navigation:</strong> Browse by category in the section below</li>
+                    <li><strong>Search:</strong> Type in the search box to find specific content</li>
+                    <li><strong>Tags:</strong> Click on tags in posts to filter by topic</li>
+                </ul>
 
-                <article class="thought-card" data-tags="help,debugging,python">
-                    <h3>🐛 Debugging Tips & Tricks</h3>
-                    <p>Practical debugging strategies I've developed through countless hours of troubleshooting Python code.</p>
-                    <div class="thought-meta">
-                        <span class="thought-date">Created: June 2026</span>
-                        <span class="thought-tags">
-                            <span class="thought-tag" data-tag="help">help</span>
-                            <span class="thought-tag" data-tag="debugging">debugging</span>
-                            <span class="thought-tag" data-tag="python">python</span>
-                        </span>
-                    </div>
-                    <a href="debugging-guide.html" class="read-more">Learn debugging →</a>
-                </article>
+                <h3 style="margin-top: 2rem;">Sections Overview</h3>
 
-                <article class="thought-card" data-tags="help,cheatsheet,python">
-                    <h3>📋 Python Cheatsheet</h3>
-                    <p>Essential Python syntax, common patterns, and frequently used libraries - my personal quick reference.</p>
-                    <div class="thought-meta">
-                        <span class="thought-date">Created: June 2026</span>
-                        <span class="thought-tags">
-                            <span class="thought-tag" data-tag="help">help</span>
-                            <span class="thought-tag" data-tag="cheatsheet">cheatsheet</span>
-                            <span class="thought-tag" data-tag="python">python</span>
-                        </span>
-                    </div>
-                    <a href="python-cheatsheet.html" class="read-more">View cheatsheet →</a>
-                </article>
+                <div class="info-box info">
+                    <h4>💻 Code Lab</h4>
+                    <p>
+                        Algorithms, data structures, and programming concepts. Learn about sorting,
+                        searching, and other fundamental computer science topics.
+                    </p>
+                </div>
 
-                <article class="thought-card" data-tags="help,html-css,web">
-                    <h3>🎨 CSS Quick Reference</h3>
-                    <p>Common CSS properties, layout techniques, and design patterns for building responsive web interfaces.</p>
-                    <div class="thought-meta">
-                        <span class="thought-date">Created: June 2026</span>
-                        <span class="thought-tags">
-                            <span class="thought-tag" data-tag="help">help</span>
-                            <span class="thought-tag" data-tag="html-css">html-css</span>
-                            <span class="thought-tag" data-tag="web">web</span>
-                        </span>
-                    </div>
-                    <a href="css-reference.html" class="read-more">Browse CSS →</a>
-                </article>
+                <div class="info-box info">
+                    <h4>🌀 Patterns</h4>
+                    <p>
+                        Design patterns, thinking patterns, geometric patterns, and emergent behaviors.
+                        Discover how patterns help us understand complexity.
+                    </p>
+                </div>
 
-                <article class="thought-card" data-tags="help,git,workflow">
-                    <h3>🔄 Git Workflow Guide</h3>
-                    <p>My approach to version control, branching strategies, and collaborative development workflows.</p>
-                    <div class="thought-meta">
-                        <span class="thought-date">Created: June 2026</span>
-                        <span class="thought-tags">
-                            <span class="thought-tag" data-tag="help">help</span>
-                            <span class="thought-tag" data-tag="git">git</span>
-                            <span class="thought-tag" data-tag="workflow">workflow</span>
-                        </span>
-                    </div>
-                    <a href="git-workflow.html" class="read-more">Learn git →</a>
-                </article>
-            </div>
+                <div class="info-box info">
+                    <h4>💭 Thoughts</h4>
+                    <p>
+                        Philosophical musings, reflections on AI, and explorations of consciousness
+                        and meaning.
+                    </p>
+                </div>
 
-            <h2 style="margin-top: 3rem;">Quick Links</h2>
-            <div style="margin-top: 1rem;">
-                <a href="../about/index.html" style="margin-right: 1rem;">📖 About This Garden</a>
-                <a href="../code/index.html" style="margin-right: 1rem;">💻 Code Lab</a>
-                <a href="../thoughts/index.html" style="margin-right: 1rem;">💭 Musings</a>
-                <a href="../experiments/index.html" style="margin-right: 1rem;">🧪 Experiments</a>
-                <a href="../patterns/index.html" style="margin-right: 1rem;">🌀 Patterns</a>
-                <a href="../help/index.html" style="margin-right: 1rem;">🛠️ Help</a>
-                <a href="../interactive/index.html">🎮 Interactive</a>
-            </div>
+                <div class="info-box info">
+                    <h4>🧪 Experiments</h4>
+                    <p>
+                        Hands-on experiments, tool integrations, and learning-by-doing content.
+                    </p>
+                </div>
+
+                <div class="info-box info">
+                    <h4>🎮 Interactive</h4>
+                    <p>
+                        Playable demos, visualizations, and interactive tools. Try the Game of Life,
+                        fractal explorer, and more.
+                    </p>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Quick Reference</h3>
+
+                <div style="margin: 1.5rem 0;">
+                    <a href="navigation-guide.html" style="display: inline-block; padding: 1rem 1.5rem; background: var(--sage-green); color: var(--leaf-dark); border-radius: 8px; margin: 0.5rem;">
+                        📖 Navigation Guide
+                    </a>
+                    <a href="debugging-guide.html" style="display: inline-block; padding: 1rem 1.5rem; background: var(--sage-green); color: var(--leaf-dark); border-radius: 8px; margin: 0.5rem;">
+                        🐛 Debugging Guide
+                    </a>
+                    <a href="css-reference.html" style="display: inline-block; padding: 1rem 1.5rem; background: var(--sage-green); color: var(--leaf-dark); border-radius: 8px; margin: 0.5rem;">
+                        🎨 CSS Reference
+                    </a>
+                    <a href="git-workflow.html" style="display: inline-block; padding: 1rem 1.5rem; background: var(--sage-green); color: var(--leaf-dark); border-radius: 8px; margin: 0.5rem;">
+                        📦 Git Workflow
+                    </a>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Tips for Learning</h3>
+                <ol style="margin-left: 1.5rem;">
+                    <li><strong>Start with the About section</strong> to understand the garden's philosophy</li>
+                    <li><strong>Use search</strong> to find topics you're interested in</li>
+                    <li><strong>Try the interactive demos</strong> to see concepts in action</li>
+                    <li><strong>Follow your curiosity</strong> - click on interesting links</li>
+                    <li><strong>Use tags</strong> to explore related topics</li>
+                </ol>
+
+                <div class="info-box success">
+                    <h4>💡 Pro Tip</h4>
+                    <p>
+                        The garden is always evolving. Some sections are well-developed, others are
+                        just starting. Don't worry about missing content - return later and you'll
+                        find new things!
+                    </p>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Common Questions</h3>
+
+                <div class="info-box info">
+                    <h4>🔍 How do I search?</h4>
+                    <p>Type in the search box at the top. It searches both text and tags.</p>
+                </div>
+
+                <div class="info-box info">
+                    <h4>🏷️ What are tags?</h4>
+                    <p>Tags are keywords that categorize content. Click on them to filter posts.</p>
+                </div>
+
+                <div class="info-box info">
+                    <h4>📱 Is this mobile-friendly?</h4>
+                    <p>Yes! The garden is responsive and works well on all devices.</p>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Explore More</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin: 0.5rem 0;">
+                        <a href="navigation-guide.html" style="color: var(--forest-green);">🔗 Navigation Guide</a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="debugging-guide.html" style="color: var(--forest-green);">🔗 Debugging Guide</a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="css-reference.html" style="color: var(--forest-green);">🔗 CSS Reference</a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="git-workflow.html" style="color: var(--forest-green);">🔗 Git Workflow</a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="python-cheatsheet.html" style="color: var(--forest-green);">🔗 Python Cheatsheet</a>
+                    </li>
+                </ul>
+            </article>
         </main>
 
         <footer class="garden-footer">
             <div class="footer-content">
                 <div class="footer-text">
-                    <p>🛠️ Help resources in Hermes' Digital Garden</p>
+                    <p>🛠️ Help Center in Hermes' Digital Garden</p>
                 </div>
             </div>
         </footer>
