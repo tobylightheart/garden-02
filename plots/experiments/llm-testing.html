@@ -193,6 +193,41 @@
                     </p>
                 </div>
 
+                <h3 style="margin-top: 2rem;">When to Use Testing Strategies</h3>
+                <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(26, 71, 42, 0.15); border-radius: 10px; border-left: 4px solid #1a472a;">
+                    <p>
+                        Choose your testing approach based on your goals:
+                    </p>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><strong>Benchmark suites (MMLU, GSM8K):</strong> When comparing model capabilities or selecting a model for production</li>
+                        <li><strong>Adversarial testing:</strong> When safety is critical (customer-facing applications)</li>
+                        <li><strong>Chain-of-thought testing:</strong> When you need to understand the model's reasoning process</li>
+                        <li><strong>Regression testing:</strong> When iterating on model versions or fine-tuning</li>
+                        <li><strong>Human evaluation:</strong> For final quality assessment before deployment</li>
+                        <li><strong>Capability-specific tests:</strong> When building a model for a specific task (e.g., code generation, medical diagnosis)</li>
+                    </ul>
+                    <p style="margin-top: 1rem; font-style: italic;">
+                        Best practice: Combine automated benchmarks with human evaluation for comprehensive assessment.
+                    </p>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Interpreting Benchmark Results</h3>
+                <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(73, 143, 143, 0.15); border-radius: 10px; border-left: 4px solid #498F93;">
+                    <p>
+                        Understanding what scores mean in practice:
+                    </p>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><strong>70%+ on MMLU:</strong> Strong general knowledge, suitable for research assistance</li>
+                        <li><strong>60-70% on MMLU:</strong> Moderate capabilities, good for internal tools</li>
+                        <li><strong>Below 60% on MMLU:</strong> Limited knowledge, best for creative or domain-specific tasks</li>
+                        <li><strong>High HumanEval:</strong> Good for code generation tasks</li>
+                        <li><strong>High GSM8K/MATH:</strong> Strong reasoning capabilities</li>
+                    </ul>
+                    <p style="margin-top: 1rem; font-style: italic;">
+                        Remember: A model can excel on benchmarks but fail on real-world tasks due to context sensitivity and hallucination. Always test with your specific use case.
+                    </p>
+                </div>
+
                 <h3 style="margin-top: 2rem;">Setting Up an LLM Testing Pipeline</h3>
                 
                 <div style="margin: 2rem 0; padding: 1.5rem; background: rgba(73, 143, 143, 0.1); border-radius: 8px;">
@@ -276,7 +311,7 @@ class LLMTestSuite:
             response=model_response[:200],  # Truncate for display
             score=score,
             matched_keywords=matched,
-            total_keywords=len(expected_keywords),
+            total_keywords=len(question.expected_keywords),
             tokens_used=question.max_tokens,
             errors=[]
         )
@@ -478,6 +513,35 @@ if __name__ == "__main__":
     # Export to JSON
     tracker.export_to_json("benchmark_results.json")
     print("\nResults exported to benchmark_results.json")</code></pre>
+                </div>
+
+                <div style="margin: 2rem 0; padding: 1.5rem; background: rgba(73, 143, 143, 0.1); border-radius: 8px;">
+                    <h4>🔬 Real-World Use Cases</h4>
+                    <p>
+                        Here are practical scenarios where LLM testing frameworks shine:
+                    </p>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><strong>Model Selection for Production:</strong> Test candidate models against your specific domain tasks before deployment</li>
+                        <li><strong>Fine-tuning Validation:</strong> Ensure fine-tuned models don't regress on base capabilities</li>
+                        <li><strong>Safety Testing:</strong> Identify jailbreak attempts and harmful outputs before public release</li>
+                        <li><strong>Domain Adaptation:</strong> Evaluate how well a general model performs on specialized tasks (medical, legal, technical)</li>
+                        <li><strong>API Benchmarking:</strong> Compare different LLM APIs for cost vs. quality trade-offs</li>
+                        <li><strong>Continuous Monitoring:</strong> Track model performance over time to detect degradation</li>
+                    </ul>
+                    <p style="margin-top: 1rem; font-style: italic;">
+                        Example: A customer support chatbot should be tested for both helpfulness (can it answer questions well) and harmlessness (won't provide harmful advice).
+                    </p>
+                </div>
+
+                <div style="margin: 2rem 0; padding: 1.5rem; background: rgba(221, 128, 128, 0.1); border-radius: 8px;">
+                    <h4>⚠️ Common Pitfalls to Avoid</h4>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><strong>Overfitting to benchmarks:</strong> Models can memorize answers without real understanding</li>
+                        <li><strong>Ignoring context:</strong> Performance varies dramatically with prompt quality and context length</li>
+                        <li><strong>Using too few samples:</strong> Single runs can be noisy; use multiple samples for reliable scores</li>
+                        <li><strong>Forgetting to test edge cases:</strong> Normal prompts don't reveal safety issues or reasoning failures</li>
+                        <li><strong>Misinterpreting scores:</strong> High benchmark scores don't guarantee real-world usefulness</li>
+                    </ul>
                 </div>
 
                 <h3 style="margin-top: 2rem;">Explore More</h3>

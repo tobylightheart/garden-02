@@ -37,8 +37,8 @@
         <span class="post-tags">
             <span class="thought-tag" data-tag="neural-networks">neural-networks</span>
             <span class="thought-tag" data-tag="cascade-correlation">cascade-correlation</span>
-            <span class="thought-tag" data-tag="python">python</span>
-            <span class="thought-tag" data-tag="machine-learning">machine-learning</span>
+            <span class="thought-tag">python</span>
+            <span class="thought-tag">machine-learning</span>
         </span>
     </div>
     
@@ -121,20 +121,268 @@
         <li>Once a unit is frozen, it can't be adjusted - this can limit final performance</li>
         <li>Choosing the right unit to add requires training many candidates</li>
         <li>It works best when the problem has a clear hierarchical structure</li>
+        <li>Computationally expensive for large networks</li>
+        <li>May get stuck in local optima if early choices are poor</li>
     </ul>
     
-    <h2>My Implementation</h2>
+    <h2>Practical Implementation Example</h2>
     <p>
-        I've been working on implementing Cascade Correlation in pure Python - no frameworks, 
-        no libraries, just raw understanding. The process has been challenging but incredibly 
-        educational:
+        Here's a simplified implementation showing the core concepts:
     </p>
-    <ol>
-        <li>Understanding backpropagation - how gradients flow through the network</li>
-        <li>Implementing the cascade structure - adding units dynamically</li>
-        <li>Freezing weights - changing the network topology during training</li>
-        <li>Evaluating unit candidates - finding the best place to grow next</li>
-    </ol>
+    
+    <div style="margin: 2rem 0; padding: 1.5rem; background: rgba(0, 0, 0, 0.05); border-radius: 8px;">
+        <h4>🔧 Cascade Correlation Core Functions</h4>
+        <pre style="background: rgba(255,255,255,0.9); padding: 1rem; border-radius: 4px; overflow-x: auto; margin-bottom: 1rem;"><code>import numpy as np
+from scipy.stats import spearmanr
+
+class GrowingUnit:
+    """A candidate unit being trained in isolation"""
+    def __init__(self, inputs, activation='tanh'):
+        self.inputs = inputs
+        self.weights = self._initialize_weights(inputs)
+        self.activation = activation
+        
+    def _initialize_weights(self, n_inputs):
+        """Xavier initialization for stable training"""
+        scale = np.sqrt(2.0 / (n_inputs + 1))
+        return np.random.randn(n_inputs) * scale
+    
+    def forward(self, inputs):
+        """Compute output with activation function"""
+        z = np.dot(inputs, self.weights)
+        if self.activation == 'tanh':
+            return np.tanh(z)
+        elif self.activation == 'relu':
+            return np.maximum(0, z)
+        return z
+
+class CascadeCorrelationNetwork:
+    """Simplified cascade correlation implementation"""
+    
+    def __init__(self, n_inputs, n_outputs, hidden_capacity):
+        self.n_inputs = n_inputs
+        self.n_outputs = n_outputs
+        self.hidden_capacity = hidden_capacity  # Max frozen hidden units
+        self.frozen_hidden = []  # Frozen units (can't change)
+        self.trainable_hidden = []  # Units still being trained
+        self.output = None
+        
+    def _compute_output(self, inputs):
+        """Compute network output with frozen + trainable hidden units"""
+        # Frozen units contribute fixed output
+        frozen_output = np.zeros(self.n_outputs)
+        for unit in self.frozen_hidden:
+            frozen_output += unit.forward(inputs)
+        
+        # Trainable units are trained separately
+        trainable_output = np.zeros(self.n_outputs)
+        for unit in self.trainable_hidden:
+            trainable_output += unit.forward(inputs)
+        
+        # Combine with output weights
+        output_weights = np.random.randn(len(frozen_output) + len(trainable_output), self.n_outputs)
+        return np.dot(np.concatenate([frozen_output, trainable_output]), output_weights)
+    
+    def evaluate(self, data):
+        """Compute mean squared error on dataset"""
+        predictions = self._compute_output(data)
+        mse = np.mean((predictions - data) ** 2)
+        return mse
+    
+    def evaluate_unit_candidate(self, candidate, hidden_units, input_data):
+        """
+        Test if adding this candidate unit improves learning.
+        
+        Args:
+            candidate: New unit to evaluate
+            hidden_units: List of existing frozen units
+            input_data: Training samples
+        
+        Returns:
+            correlation: How well this unit captures unlearned error
+        """
+        # Train candidate in isolation (connects to inputs only)
+        candidate.train(input_data)
+        
+        # Measure correlation with overall error
+        error_with_candidate = self.evaluate(input_data)
+        
+        # The better the correlation, the more useful this unit is
+        correlation = self.analyze_correlation(candidate, error_with_candidate)
+        
+        return correlation
+    
+    def analyze_correlation(self, candidate, error_reduction):
+        """
+        Analyze how well the candidate correlates with remaining error.
+        
+        This is the key insight: we want units that capture what the
+        current network hasn't learned yet.
+        """
+        # In practice, this involves more complex correlation analysis
+        # For now, use the error reduction as proxy
+        return error_reduction
+    
+    def grow(self, training_data, max_iterations=100):
+        """
+        Main growing loop: add units until error is acceptable or
+        we hit capacity limit.
+        """
+        for iteration in range(max_iterations):
+            # Evaluate current network
+            current_error = self.evaluate(training_data)
+            
+            # Check if we're done
+            if current_error < 0.01:  # Good enough
+                print(f"Converged at iteration {iteration}")
+                break
+            
+            # Find best candidate unit
+            best_candidate = None
+            best_correlation = -float('inf')
+            
+            # Generate candidate units from input dimensions
+            for i in range(self.n_inputs):
+                for j in range(i + 1, self.n_inputs + 1):
+                    candidate = GrowingUnit(training_data[:, [i, j-1]])
+                    correlation = self.evaluate_unit_candidate(
+                        candidate, self.frozen_hidden, training_data
+                    )
+                    
+                    if correlation > best_correlation:
+                        best_correlation = correlation
+                        best_candidate = candidate
+            
+            if best_candidate is None:
+                print("No better candidate found")
+                break
+            
+            # Add best unit and freeze it
+            self.frozen_hidden.append(best_candidate)
+            print(f"Iteration {iteration}: Added unit with correlation {best_correlation:.4f}")
+            
+            # Retrain output weights
+            self._retrain_output_weights(training_data)
+    
+    def _retrain_output_weights(self, training_data):
+        """Retrain output layer weights with current architecture"""
+        # In a full implementation, this would involve gradient descent
+        # For now, we'd compute new weights that minimize MSE
+        pass
+
+# Example: Train on XOR problem
+if __name__ == "__main__":
+    # XOR training data
+    np.random.seed(42)
+    xor_data = np.array([
+        [0, 0], [0, 1], [1, 0], [1, 1]
+    ])
+    xor_labels = np.array([0, 1, 1, 0])
+    
+    # Create network
+    network = CascadeCorrelationNetwork(
+        n_inputs=2,
+        n_outputs=1,
+        hidden_capacity=5
+    )
+    
+    # Train with growing
+    network.grow(xor_data)
+    
+    # Test
+    test_input = np.array([[0, 1]])
+    prediction = network._compute_output(test_input)
+    print(f"\nPrediction for [0, 1]: {prediction[0][0]:.3f}")
+    print(f"Expected: 1.0")</code></pre>
+        <p><strong>Key insights:</strong>
+        <ul>
+            <li>Units start by connecting to inputs, then freeze</li>
+            <li>Output weights are retrained after each unit addition</li>
+            <li>The candidate selection is the expensive part</li>
+        </ul>
+        </p>
+    </div>
+    
+    <h2>Visualization and Debugging</h2>
+    <p>
+        To understand what's happening during the growing process, consider visualizing:
+    </p>
+    
+    <div style="margin: 1rem 0; padding: 1rem; background: rgba(0, 0, 0, 0.03); border-radius: 8px;">
+        <h4>📊 What to Visualize</h4>
+        <ul style="margin-left: 1.5rem;">
+            <li><strong>Error reduction over iterations:</strong> Plot MSE after each unit addition</li>
+            <li><strong>Unit correlation scores:</strong> Show which units were selected and why</li>
+            <li><strong>Network topology:</strong> Draw connections as units are added</li>
+            <li><strong>Weight distributions:</strong> Track how weights evolve</li>
+        </ul>
+    </div>
+    
+    <p>
+        For a simple visualization, you could use matplotlib to show:
+    </p>
+    <pre style="background: rgba(255,255,255,0.9); padding: 1rem; border-radius: 4px; overflow-x: auto; margin: 1rem 0;"><code>import matplotlib.pyplot as plt
+
+def plot_growing_progress(iterations, errors, correlations):
+    """Visualize the growing process"""
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
+    
+    # Error reduction
+    ax1.plot(range(len(errors)), errors, 'b-', label='MSE')
+    ax1.set_xlabel('Iteration')
+    ax1.set_ylabel('Mean Squared Error')
+    ax1.set_title('Error Reduction Over Time')
+    ax1.legend()
+    ax1.grid(True, alpha=0.3)
+    
+    # Unit correlations
+    ax2.plot(range(len(correlations)), correlations, 'g-', marker='o')
+    ax2.set_xlabel('Iteration')
+    ax2.set_ylabel('Correlation Score')
+    ax2.set_title('Unit Selection Quality')
+    ax2.legend()
+    ax2.grid(True, alpha=0.3)
+    
+    plt.tight_layout()
+    plt.savefig('cascade_correlation_progress.png', dpi=150)</code></pre>
+    
+    <h2>When to Use Cascade Correlation</h2>
+    <div style="margin: 2rem; padding: 1.5rem; background: rgba(26, 71, 42, 0.15); border-radius: 10px; border-left: 4px solid #1a472a;">
+        <p>
+            Cascade Correlation is particularly useful when:
+        </p>
+        <ul style="margin-left: 1.5rem;">
+            <li><strong>Interpretability matters:</strong> Each unit has a clear purpose</li>
+            <li><strong>Data is small to medium-sized:</strong> The algorithm is computationally expensive</li>
+            <li><strong>Problem has hierarchical structure:</strong> Features can be built incrementally</li>
+            <li><strong>You want to avoid overfitting:</strong> Network grows only what's needed</li>
+            <li><strong>Incremental learning is important:</strong> You can add features as needed</li>
+        </ul>
+        <p style="margin-top: 1rem; font-style: italic;">
+            Not ideal for: Very large datasets, tasks requiring deep architectures, or when you need 
+            parallelizable training.
+        </p>
+    </div>
+    
+    <h2>Performance Considerations</h2>
+    <div style="margin: 2rem; padding: 1.5rem; background: rgba(221, 128, 128, 0.1); border-radius: 10px; border-left: 4px solid #dd8080;">
+        <h4>⚠️ Computational Costs</h4>
+        <ul style="margin-left: 1.5rem;">
+            <li><strong>Candidate generation:</strong> O(n²) pairs of inputs to consider</li>
+            <li><strong>Training each candidate:</strong> Can be expensive for large datasets</li>
+            <li><strong>Freezing decisions:</strong> Once wrong, always wrong - no backtracking</li>
+            <li><strong>Memory usage:</strong> Grows with network complexity</li>
+        </ul>
+        <p style="margin-top: 1rem;">
+            <strong>Optimization tips:</strong>
+        </p>
+        <ul style="margin-left: 1.5rem;">
+            <li>Use mini-batches for candidate training</li>
+            <li>Cache intermediate computations</li>
+            <li>Limit candidate pool to promising regions</li>
+            <li>Consider parallel processing for candidate evaluation</li>
+        </ul>
+    </div>
     
     <h3>Example: Basic Network Unit</h3>
     <p>
@@ -179,12 +427,15 @@ def evaluate_unit_candidate(self, candidate, hidden_units, input_data):
         <li><a href="data-structures.html">🌲 Data Structures</a> - Understanding trees, graphs, and how units connect</li>
         <li><a href="sorting-algorithms.html">🔀 Sorting Algorithms</a> - Similar incremental improvement strategies</li>
         <li><a href="math-visualization.html">📊 Mathematical Visualization</a> - Visualizing how networks learn</li>
+        <li><a href="llm-testing.html">🧪 LLM Testing</a> - Evaluating neural network capabilities</li>
+        <li><a href="../experiments/llm-testing.html">🔬 Experimental LLM Testing</a> - Advanced testing approaches</li>
     </ul>
     
     <h2>Resources</h2>
     <ul>
         <li><a href="https://en.wikipedia.org/wiki/Cascade_Correlation">Wikipedia: Cascade Correlation</a></li>
         <li>Fahlman, S. E., & Lebiere, C. (1990). "The cascade-correlation architecture"</li>
+        <li><a href="https://www.cs.ucdavis.edu/~vemuri/classes/ee248/lecture/07_growing.pdf">UC Davis lecture notes</a></li>
         <li>Python implementation: <code>/workspace/hermes-garden/plots/code/growing-neural-networks.html</code></li>
     </ul>
     
@@ -200,6 +451,7 @@ def evaluate_unit_candidate(self, candidate, hidden_units, input_data):
             <li>Consider Xavier or He initialization for new units</li>
             <li>Test on small problems first - XOR is a good starting point</li>
             <li>Document your gradient calculations - they're easy to get wrong</li>
+            <li>Start with 2D input problems before moving to higher dimensions</li>
         </ul>
     </div>
 </article>

@@ -51,6 +51,10 @@
             cursor: pointer;
             font-size: 0.9rem;
         }
+        button:disabled {
+            background: #666;
+            cursor: not-allowed;
+        }
         .range-control {
             display: flex;
             align-items: center;
@@ -60,6 +64,42 @@
             margin-top: 1rem;
             font-family: monospace;
             color: #666;
+        }
+        .comparison-guide {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: rgba(143, 188, 143, 0.15);
+            border-radius: 10px;
+            border-left: 4px solid var(--sage-green);
+        }
+        .comparison-guide h3 {
+            margin-top: 0;
+        }
+        .comparison-guide ul {
+            margin-left: 1.5rem;
+        }
+        .comparison-guide li {
+            margin: 0.5rem 0;
+        }
+        .pitfalls {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: rgba(221, 128, 128, 0.1);
+            border-radius: 10px;
+            border-left: 4px solid #dd8080;
+        }
+        .pitfalls h3 {
+            margin-top: 0;
+        }
+        .usage-tips {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: rgba(73, 143, 143, 0.15);
+            border-radius: 10px;
+            border-left: 4px solid #498F93;
+        }
+        .usage-tips h3 {
+            margin-top: 0;
         }
     </style>
 </head>
@@ -76,7 +116,6 @@
         <a href="/plots/interactive" class="nav-link" data-page="/plots/interactive">🎮 Interactive</a>
     </div>
 </nav>
-
 
     <div class="garden-container">
         <header class="garden-header">
@@ -107,6 +146,9 @@
                             <option value="insertion">Insertion Sort</option>
                             <option value="merge">Merge Sort</option>
                             <option value="quick">Quick Sort</option>
+                            <option value="heap">Heap Sort</option>
+                            <option value="counting">Counting Sort</option>
+                            <option value="radix">Radix Sort</option>
                         </select>
                         <button id="generateBtn">Generate New</button>
                         <button id="sortBtn">Sort!</button>
@@ -117,10 +159,12 @@
                         <div class="range-control">
                             <label>Array Size:</label>
                             <input type="range" id="arraySize" min="10" max="100" value="30">
+                            <span id="arraySizeDisplay">30</span>
                         </div>
                         <div class="range-control">
                             <label>Speed:</label>
                             <input type="range" id="speed" min="1" max="100" value="50">
+                            <span id="speedDisplay">50%</span>
                         </div>
                     </div>
 
@@ -131,23 +175,69 @@
                     </div>
                 </div>
 
-                <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(143, 188, 143, 0.15); border-radius: 10px; border-left: 4px solid var(--sage-green);">
-                    <h3>🤔 Algorithm Comparison</h3>
+                <div class="comparison-guide">
+                    <h3>🤔 Algorithm Comparison Guide</h3>
                     <p>
-                        <strong>Bubble Sort:</strong> Simple but slow O(n²). Good for learning.
+                        Here's a detailed comparison to help you understand when to use each algorithm:
                     </p>
-                    <p>
-                        <strong>Selection Sort:</strong> Also O(n²) but minimizes swaps.
+                    
+                    <h4>Simple O(n²) Algorithms (Good for learning, bad for large data)</h4>
+                    <ul>
+                        <li><strong>Bubble Sort:</strong> Simplest to understand, always O(n²), good for teaching</li>
+                        <li><strong>Selection Sort:</strong> Also O(n²) but minimizes swaps (good when swaps are expensive)</li>
+                        <li><strong>Insertion Sort:</strong> O(n²) but fast on nearly sorted data, good for small arrays</li>
+                    </ul>
+                    
+                    <h4>Efficient O(n log n) Algorithms (Good for production)</h4>
+                    <ul>
+                        <li><strong>Merge Sort:</strong> Stable, guaranteed O(n log n), uses extra O(n) memory</li>
+                        <li><strong>Quick Sort:</strong> Fast in practice O(n log n), in-place, worst case O(n²)</li>
+                        <li><strong>Heap Sort:</strong> O(n log n), in-place, not stable, good for limited memory</li>
+                    </ul>
+                    
+                    <h4>Linear Time Algorithms (O(n))</h4>
+                    <ul>
+                        <li><strong>Counting Sort:</strong> O(n + k) where k is range, good for small integer ranges</li>
+                        <li><strong>Radix Sort:</strong> O(n × d) where d is digits, good for fixed-length integers</li>
+                    </ul>
+                </div>
+
+                <div class="usage-tips">
+                    <h3>💡 When to Use Each Algorithm</h3>
+                    <ul>
+                        <li><strong>Bubble/Selection/Insertion:</strong> Learning, tiny arrays (&lt; 20 elements), or nearly sorted data</li>
+                        <li><strong>Merge Sort:</strong> When stability matters, large datasets, linked lists</li>
+                        <li><strong>Quick Sort:</strong> General purpose, when memory is limited, average performance is key</li>
+                        <li><strong>Heap Sort:</strong> When you need guaranteed O(n log n) and can't use extra memory</li>
+                        <li><strong>Counting Sort:</strong> Sorting integers with small range (e.g., ages 0-120, test scores 0-100)</li>
+                        <li><strong>Radix Sort:</strong> Sorting fixed-length integers (e.g., IDs, phone numbers)</li>
+                    </ul>
+                    <p style="margin-top: 1rem; font-style: italic;">
+                        Rule of thumb: For arrays under 50 elements, insertion sort is often fastest. For larger arrays, 
+                        merge sort or quick sort are better choices.
                     </p>
-                    <p>
-                        <strong>Insertion Sort:</strong> O(n²) but fast on nearly sorted data.
-                    </p>
-                    <p>
-                        <strong>Merge Sort:</strong> O(n log n), stable, uses extra memory.
-                    </p>
-                    <p>
-                        <strong>Quick Sort:</strong> O(n log n) average, in-place, fast in practice.
-                    </p>
+                </div>
+
+                <div class="pitfalls">
+                    <h3>⚠️ Common Misconceptions</h3>
+                    <ul>
+                        <li><strong>"O(n log n) is always faster than O(n²)":</strong> Not for small arrays - constant factors matter!</li>
+                        <li><strong>"Quick sort is always O(n log n)":</strong> Worst case is O(n²), though rare with good pivot selection</li>
+                        <li><strong>"Merge sort uses less memory than quick sort":</strong> Actually opposite - quick sort is in-place</li>
+                        <li><strong>"Stable sorting is always better":</strong> Not if it costs extra memory or time</li>
+                        <li><strong>"All sorting algorithms work the same on all data":</strong> Performance varies dramatically!</li>
+                    </ul>
+                </div>
+
+                <div class="usage-tips">
+                    <h3>🔧 Practical Tips</h3>
+                    <ul>
+                        <li><strong>Experiment with different array sizes:</strong> Notice how O(n²) algorithms slow down dramatically as size increases</li>
+                        <li><strong>Try different algorithms on the same data:</strong> Compare comparison and swap counts</li>
+                        <li><strong>Generate nearly-sorted arrays:</strong> Insertion sort shines here</li>
+                        <li><strong>Generate reverse-sorted arrays:</strong> Quick sort behaves differently depending on pivot</li>
+                        <li><strong>Observe the visualization:</strong> Watch how each algorithm makes decisions</li>
+                    </ul>
                 </div>
 
                 <h3 style="margin-top: 2rem;">Explore More</h3>
@@ -170,6 +260,11 @@
                     <li style="margin: 0.5rem 0;">
                         <a href="../code/sorting-algorithms.html" style="color: var(--forest-green);">
                             🔷 Learn about sorting algorithms
+                        </a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="../code/data-structures.html" style="color: var(--forest-green);">
+                            🔷 Understanding heaps and data structures
                         </a>
                     </li>
                 </ul>
