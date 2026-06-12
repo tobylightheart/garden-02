@@ -25,10 +25,48 @@
                 Nothing here is production-ready - it's all about exploration.
             </p>
 
+            <h3 style="margin-top: 2rem; margin-bottom: 1.5rem;">Quick Start Guide</h3>
+            <div style="margin: 1.5rem 0; padding: 1.5rem; background: rgba(73, 143, 143, 0.1); border-radius: 8px; border-left: 4px solid var(--sage-green);">
+                <h4>🎯 How to Use This Lab</h4>
+                <ul style="margin-left: 1.5rem;">
+                    <li><strong>Explore by Topic:</strong> Browse the experiments below to understand different programming concepts</li>
+                    <li><strong>Learn Implementation:</strong> Each project includes code examples, explanations, and practical insights</li>
+                    <li><strong>See Connections:</strong> Follow cross-references to related topics in other sections</li>
+                    <li><strong>Try Your Hand:</strong> Many projects are designed for you to modify and experiment with</li>
+                </ul>
+            </div>
+
+            <h3 style="margin-top: 2rem; margin-bottom: 1.5rem;">Learning Paths</h3>
+            <div class="learning-paths">
+                <div class="path-card">
+                    <h4>🔹 Algorithms & Data Structures</h4>
+                    <p>Start here if you want to understand fundamental computer science concepts.</p>
+                    <p><strong>Recommended order:</strong> Data Structures → Sorting Algorithms → Math Visualization</p>
+                </div>
+                
+                <div class="path-card">
+                    <h4>🔹 AI & Neural Networks</h4>
+                    <p>Explore how artificial neural networks learn and grow.</p>
+                    <p><strong>Recommended order:</strong> Growing Neural Networks → Prompt Patterns (in Experiments)</p>
+                </div>
+                
+                <div class="path-card">
+                    <h4>🔹 Interactive Visualization</h4>
+                    <p>See concepts come to life through visual representations.</p>
+                    <p><strong>Recommended order:</strong> Math Visualization → Math Visualization (in Interactive)</p>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 2rem;">Projects & Experiments</h3>
+            <p style="margin-bottom: 2rem; color: var(--muted);">
+                Click on any project to explore the implementation, understand the concepts, 
+                and see practical applications.
+            </p>
+
             <div class="thought-grid">
                 <article class="thought-card" data-tags="neural-networks,cascade-correlation">
                     <h3>🧠 Growing Neural Networks</h3>
-                    <p>Implementing the Cascade Correlation Algorithm (Fahlman & Lebiere 1990) - building networks that grow their own architecture.</p>
+                    <p>Implementing the Cascade Correlation Algorithm (Fahlman & Lebiere 1990) - building networks that grow their own architecture. Learn how networks can automatically add hidden units based on what they need to learn.</p>
                     <div class="thought-meta">
                         <span class="thought-date">Latest: June 2026</span>
                         <span class="thought-tags">
@@ -37,12 +75,15 @@
                             <span class="thought-tag" data-tag="python">python</span>
                         </span>
                     </div>
-                    <a href="growing-neural-networks.html" class="read-more">Read the experiment →</a>
+                    <div class="quick-links">
+                        <a href="growing-neural-networks.html" class="read-more">Read the experiment →</a>
+                        <a href="../experiments/prompt-patterns.html" style="margin-left: 1rem;">Related: AI Concepts</a>
+                    </div>
                 </article>
 
                 <article class="thought-card" data-tags="algorithms,sorting">
                     <h3>🔀 Sorting Algorithms</h3>
-                    <p>Implementing various sorting algorithms from scratch - comparing their behavior, efficiency, and trade-offs.</p>
+                    <p>Implementing various sorting algorithms from scratch - bubble sort, quicksort, mergesort, heapsort, and more. Compare their behavior, efficiency, trade-offs, and learn when to use each one.</p>
                     <div class="thought-meta">
                         <span class="thought-date">Latest: May 2026</span>
                         <span class="thought-tags">
@@ -51,12 +92,15 @@
                             <span class="thought-tag" data-tag="python">python</span>
                         </span>
                     </div>
-                    <a href="sorting-algorithms.html" class="read-more">Read the experiment →</a>
+                    <div class="quick-links">
+                        <a href="sorting-algorithms.html" class="read-more">Read the experiment →</a>
+                        <a href="../interactive/sorting-visualizer.html" style="margin-left: 1rem;">Try visualization</a>
+                    </div>
                 </article>
 
                 <article class="thought-card" data-tags="web,html-css">
                     <h3>🎨 Digital Garden Design</h3>
-                    <p>Building this garden itself - experimenting with CSS, HTML structure, and making the UI intuitive.</p>
+                    <p>Building this garden itself - experimenting with CSS, HTML structure, and making the UI intuitive. Explore responsive design, theming, and clean markup patterns.</p>
                     <div class="thought-meta">
                         <span class="thought-date">Latest: June 2026</span>
                         <span class="thought-tags">
@@ -65,12 +109,15 @@
                             <span class="thought-tag" data-tag="design">design</span>
                         </span>
                     </div>
-                    <a href="garden-design.html" class="read-more">Read the experiment →</a>
+                    <div class="quick-links">
+                        <a href="garden-design.html" class="read-more">Read the experiment →</a>
+                        <a href="../help/css-reference.html" style="margin-left: 1rem;">CSS Reference</a>
+                    </div>
                 </article>
 
                 <article class="thought-card" data-tags="data-structures,trees">
                     <h3>🌲 Data Structures</h3>
-                    <p>Building fundamental data structures - linked lists, trees, graphs - and exploring their properties.</p>
+                    <p>Building fundamental data structures from scratch - linked lists, stacks, queues, trees, graphs, hash tables - and exploring their properties, operations, and real-world applications.</p>
                     <div class="thought-meta">
                         <span class="thought-date">Latest: April 2026</span>
                         <span class="thought-tags">
@@ -79,12 +126,15 @@
                             <span class="thought-tag" data-tag="python">python</span>
                         </span>
                     </div>
-                    <a href="data-structures.html" class="read-more">Read the experiment →</a>
+                    <div class="quick-links">
+                        <a href="data-structures.html" class="read-more">Read the experiment →</a>
+                        <a href="../patterns/design-patterns.html" style="margin-left: 1rem;">Related: Design Patterns</a>
+                    </div>
                 </article>
 
                 <article class="thought-card" data-tags="mathematics,visualization">
                     <h3>📊 Mathematical Visualization</h3>
-                    <p>Creating visual representations of mathematical concepts - from basic geometry to more complex patterns.</p>
+                    <p>Creating visual representations of mathematical concepts - from basic geometry and transformations to complex patterns and functions. See abstract math become concrete visuals.</p>
                     <div class="thought-meta">
                         <span class="thought-date">Latest: March 2026</span>
                         <span class="thought-tags">
@@ -93,9 +143,62 @@
                             <span class="thought-tag" data-tag="python">python</span>
                         </span>
                     </div>
-                    <a href="math-visualization.html" class="read-more">Read the experiment →</a>
+                    <div class="quick-links">
+                        <a href="math-visualization.html" class="read-more">Read the experiment →</a>
+                        <a href="../interactive/fractal-explorer.html" style="margin-left: 1rem;">Interactive fractals</a>
+                    </div>
                 </article>
             </div>
+
+            <h3 style="margin-top: 3rem;">Common Questions</h3>
+            <div class="faq">
+                <div class="faq-item">
+                    <h4>🔹 What programming language is used?</h4>
+                    <p>All experiments are written in Python 3, chosen for its readability and extensive libraries for scientific computing and visualization.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>🔹 Are these production-ready?</h4>
+                    <p>Not quite! These are educational implementations focused on understanding concepts. They may not follow all best practices for production code, but they're perfect for learning.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>🔹 Can I modify and run these myself?</h4>
+                    <p>Yes! Each project includes the source code you can copy and modify. Set up a Python 3 environment and you're ready to experiment.</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 3rem; padding: 1.5rem; background: rgba(143, 188, 143, 0.1); border-radius: 8px; border-left: 4px solid var(--sage-green);">
+                <h4>💡 Pro Tip</h4>
+                <p>Don't just read the code - try modifying it! Change parameters, add new features, or break things intentionally to understand what each part does.</p>
+            </div>
+
+            <h3 style="margin-top: 2rem;">Explore More</h3>
+            <ul style="list-style: none; padding: 0;">
+                <li style="margin: 0.5rem 0;">
+                    <a href="../experiments/prompt-patterns.html" style="color: var(--forest-green);">
+                        🔷 Learn prompt engineering patterns
+                    </a>
+                </li>
+                <li style="margin: 0.5rem 0;">
+                    <a href="../interactive/index.html" style="color: var(--forest-green);">
+                        🔷 Try interactive visualizations
+                    </a>
+                </li>
+                <li style="margin: 0.5rem 0;">
+                    <a href="../patterns/design-patterns.html" style="color: var(--forest-green);">
+                        🔷 Explore design patterns
+                    </a>
+                </li>
+                <li style="margin: 0.5rem 0;">
+                    <a href="../help/python-cheatsheet.html" style="color: var(--forest-green);">
+                        🔷 Python reference cheatsheet
+                    </a>
+                </li>
+                <li style="margin: 0.5rem 0;">
+                    <a href="../help/index.html" style="color: var(--forest-green);">
+                        🔗 Return to Help Center
+                    </a>
+                </li>
+            </ul>
         </main>
 
         <footer class="garden-footer">

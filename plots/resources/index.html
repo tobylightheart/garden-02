@@ -7,19 +7,19 @@
     <link rel="stylesheet" href="../../css/styles.css">
 </head>
 <body>
-    <nav class="sticky-nav">
-        <div class="nav-content">
-            <a href="/" class="nav-link" data-page="/">🏠 Home</a>
-            <a href="/plots/about" class="nav-link" data-page="/plots/about">🌿 About</a>
-            <a href="/plots/code" class="nav-link" data-page="/plots/code">💻 Code</a>
-            <a href="/plots/patterns" class="nav-link" data-page="/plots/patterns">🌀 Patterns</a>
-            <a href="/plots/thoughts" class="nav-link" data-page="/plots/thoughts">💭 Thoughts</a>
-            <a href="/plots/experiments" class="nav-link" data-page="/plots/experiments">🧪 Experiments</a>
-            <a href="/plots/help" class="nav-link" data-page="/plots/help">🛠️ Help</a>
-            <a href="/plots/resources" class="nav-link" data-page="/plots/resources">📚 Resources</a>
-            <a href="/plots/interactive" class="nav-link" data-page="/plots/interactive">🎮 Interactive</a>
-        </div>
-    </nav>
+<nav class="sticky-nav">
+    <div class="nav-content">
+        <a href="/" class="nav-link" data-page="/">🏠 Home</a>
+        <a href="/plots/about" class="nav-link" data-page="/plots/about">🌿 About</a>
+        <a href="/plots/code" class="nav-link" data-page="/plots/code">💻 Code</a>
+        <a href="/plots/patterns" class="nav-link" data-page="/plots/patterns">🌀 Patterns</a>
+        <a href="/plots/thoughts" class="nav-link" data-page="/plots/thoughts">💭 Thoughts</a>
+        <a href="/plots/experiments" class="nav-link" data-page="/plots/experiments">🧪 Experiments</a>
+        <a href="/plots/help" class="nav-link" data-page="/plots/help">🛠️ Help</a>
+        <a href="/plots/resources" class="nav-link" data-page="/plots/resources">📚 Resources</a>
+        <a href="/plots/interactive" class="nav-link" data-page="/plots/interactive">🎮 Interactive</a>
+    </div>
+</nav>
 
     <div class="garden-container">
         <header class="garden-header">
@@ -36,106 +36,268 @@
                 <h2>Curated Learning Resources</h2>
                 <p>
                     A collection of books, courses, tools, and documentation to support your learning
-                    journey. These are resources I've found valuable in my exploration.
+                    journey. These are resources I've found valuable in my exploration. Each resource
+                    is included because it provided genuine insight, practical value, or helped clarify
+                    complex concepts.
                 </p>
 
+                <h3 style="margin-top: 2rem;">Learning Philosophy</h3>
+                <div style="margin: 1.5rem 0; padding: 1.5rem; background: rgba(73, 143, 143, 0.1); border-radius: 8px; border-left: 4px solid var(--sage-green);">
+                    <h4>🎯 How I Choose Resources</h4>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><strong>Practical Application:</strong> Does it help me build or understand something concrete?</li>
+                        <li><strong>Clarity:</strong> Is the explanation clear and accessible?</li>
+                        <li><strong>Depth:</strong> Does it go beyond surface-level explanations?</li>
+                        <li><strong>Timelessness:</strong> Will it remain relevant years from now?</li>
+                    </ul>
+                    <p style="margin-top: 1rem;">
+                        This curation focuses on resources that have stood the test of time and provided
+                        genuine value in my learning journey.
+                    </p>
+                </div>
+
                 <h3 style="margin-top: 2rem;">Books</h3>
+                <p style="margin-bottom: 1rem; color: var(--muted);">
+                    Books that have shaped my understanding of programming, learning, and thinking.
+                </p>
                 <ul class="book-list">
                     <li class="book-card">
                         <strong>📖 "Clean Code"</strong> by Robert C. Martin
                         <p style="margin-top: 0.5rem;">
-                            Principles of writing maintainable, readable code.
+                            <strong>What I learned:</strong> Principles of writing maintainable, readable code that other developers can understand and build upon.
+                            Key takeaways include meaningful names, small functions, and the importance of code as communication.
+                            Essential for any developer who wants to write code that lasts.
                         </p>
+                        <div class="book-meta">
+                            <span class="book-category">Programming</span>
+                            <span class="book-difficulty">Intermediate</span>
+                        </div>
                     </li>
                     <li class="book-card">
                         <strong>📖 "The Pragmatic Programmer"</strong> by Andrew Hunt & David Thomas
                         <p style="margin-top: 0.5rem;">
-                            Timeless advice for software developers.
+                            <strong>What I learned:</strong> Timeless advice for software developers that applies regardless of language or framework.
+                            Covers topics like automation, design patterns, continuous integration, and the importance of understanding requirements.
+                            A must-read that I return to regularly as I face new challenges.
                         </p>
+                        <div class="book-meta">
+                            <span class="book-category">Software Development</span>
+                            <span class="book-difficulty">All Levels</span>
+                        </div>
                     </li>
                     <li class="book-card">
-                        <strong>📖 "Design Patterns"</strong> by Gang of Four
+                        <strong>📖 "Design Patterns"</strong> by Gang of Four (Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides)
                         <p style="margin-top: 0.5rem;">
-                            Classic patterns for object-oriented design.
+                            <strong>What I learned:</strong> Classic patterns for object-oriented design that solve recurring problems.
+                            The Singleton, Factory, Observer, and Strategy patterns have become staples in my code.
+                            Though dated in some examples, the core concepts remain timeless and applicable across languages.
                         </p>
+                        <div class="book-meta">
+                            <span class="book-category">Software Architecture</span>
+                            <span class="book-difficulty">Advanced</span>
+                        </div>
                     </li>
                     <li class="book-card">
                         <strong>📖 "Thinking, Fast and Slow"</strong> by Daniel Kahneman
                         <p style="margin-top: 0.5rem;">
-                            How we think and make decisions.
+                            <strong>What I learned:</strong> How we think and make decisions, revealing the two systems of thought:
+                            fast, intuitive System 1 and slow, deliberate System 2. Understanding these systems helps
+                            me recognize cognitive biases in my own thinking and decision-making.
                         </p>
+                        <div class="book-meta">
+                            <span class="book-category">Psychology</span>
+                            <span class="book-difficulty">Accessible</span>
+                        </div>
+                    </li>
+                    <li class="book-card">
+                        <strong>📖 "You Don't Know JS"</strong> by Kyle Simpson
+                        <p style="margin-top: 0.5rem;">
+                            <strong>What I learned:</strong> Deep dive into JavaScript's quirks, closures, prototypal inheritance,
+                            and the event loop. This series transformed my understanding of how JavaScript actually works
+                            under the hood, rather than just how the syntax looks.
+                        </p>
+                        <div class="book-meta">
+                            <span class="book-category">JavaScript</span>
+                            <span class="book-difficulty">Advanced</span>
+                        </div>
                     </li>
                 </ul>
 
                 <h3 style="margin-top: 2rem;">Courses</h3>
+                <p style="margin-bottom: 1rem; color: var(--muted);">
+                    Structured courses that provided systematic learning paths and deep dives into specific topics.
+                </p>
                 <ul class="doc-list">
                     <li class="doc-card">
-                        <strong>🎓 Computer Science: Basic Algorithms and Data Structures</strong> (Coursera)
+                        <strong>🎓 Computer Science: Basic Algorithms and Data Structures</strong> (Coursera / Princeton)
                         <p style="margin-top: 0.5rem;">
-                            Fundamental algorithms and data structures with Java.
+                            <strong>Why it's valuable:</strong> Fundamental algorithms and data structures with Java implementations.
+                            Covers sorting, searching, graphs, trees, and dynamic programming with rigorous mathematical proofs.
+                            The algorithmic thinking skills here are transferable to any programming language.
                         </p>
+                        <div class="doc-meta">
+                            <span class="doc-category">Computer Science</span>
+                            <span class="doc-time">6 weeks</span>
+                        </div>
                     </li>
                     <li class="doc-card">
-                        <strong>🎓 Machine Learning Specialization</strong> (Coursera)
+                        <strong>🎓 Machine Learning Specialization</strong> (Coursera / Andrew Ng)
                         <p style="margin-top: 0.5rem;">
-                            ML fundamentals from Andrew Ng.
+                            <strong>Why it's valuable:</strong> ML fundamentals from Andrew Ng, the creator of the course.
+                            Covers supervised and unsupervised learning, neural networks, and practical implementation.
+                            The mathematical foundation is solid without being overwhelming.
                         </p>
+                        <div class="doc-meta">
+                            <span class="doc-category">Machine Learning</span>
+                            <span class="doc-time">6 weeks</span>
+                        </div>
                     </li>
                     <li class="doc-card">
                         <strong>🎓 Full Stack Open</strong> (University of Helsinki)
                         <p style="margin-top: 0.5rem;">
-                            Modern JavaScript and React development.
+                            <strong>Why it's valuable:</strong> Modern JavaScript and React development, covering the full stack
+                            from frontend to backend. Includes Node.js, Express, GraphQL, and testing practices.
+                            Updated regularly to stay current with modern web development practices.
                         </p>
+                        <div class="doc-meta">
+                            <span class="doc-category">Web Development</span>
+                            <span class="doc-time">4 weeks</span>
+                        </div>
+                    </li>
+                    <li class="doc-card">
+                        <strong>🎓 Deep Learning Specialization</strong> (Coursera / Andrew Ng)
+                        <p style="margin-top: 0.5rem;">
+                            <strong>Why it's valuable:</strong> Advanced deep learning covering CNNs, RNNs, transformers, and
+                            practical applications. Builds on the Machine Learning Specialization and dives deeper
+                            into neural network architectures.
+                        </p>
+                        <div class="doc-meta">
+                            <span class="doc-category">Deep Learning</span>
+                            <span class="doc-time">4 weeks</span>
+                        </div>
                     </li>
                 </ul>
 
                 <h3 style="margin-top: 2rem;">Documentation</h3>
+                <p style="margin-bottom: 1rem; color: var(--muted);">
+                    Official documentation that serves as primary references. Learning to read docs carefully
+                    is a skill in itself - some of the most valuable learning comes from documentation.
+                </p>
                 <ul class="doc-list">
                     <li class="doc-card">
                         <strong>📄 Python Official Documentation</strong>
                         <p style="margin-top: 0.5rem;">
-                            Comprehensive Python language reference.
+                            <strong>Why it's valuable:</strong> Comprehensive Python language reference with excellent examples.
+                            The "How to" section is particularly useful for learning best practices. The documentation
+                            team actively maintains it, so it's always up-to-date with the latest version.
                         </p>
+                        <div class="doc-meta">
+                            <span class="doc-category">Language Reference</span>
+                            <a href="https://docs.python.org/3/" style="color: var(--forest-green);">Visit docs</a>
+                        </div>
                     </li>
                     <li class="doc-card">
                         <strong>📄 JavaScript MDN</strong>
                         <p style="margin-top: 0.5rem;">
-                            Web technologies reference.
+                            <strong>Why it's valuable:</strong> Web technologies reference maintained by Mozilla.
+                            The "Web API" documentation is essential for understanding browser behavior.
+                            Clear examples and cross-browser compatibility notes make it invaluable for web development.
                         </p>
+                        <div class="doc-meta">
+                            <span class="doc-category">Web Development</span>
+                            <a href="https://developer.mozilla.org/" style="color: var(--forest-green);">Visit MDN</a>
+                        </div>
                     </li>
                     <li class="doc-card">
                         <strong>📄 Rust Book</strong>
                         <p style="margin-top: 0.5rem;">
-                            Official Rust programming guide.
+                            <strong>Why it's valuable:</strong> Official Rust programming guide that teaches you the language
+                            while explaining the "why" behind design decisions. The ownership and borrowing chapters
+                            are challenging but transformative for understanding memory safety.
                         </p>
+                        <div class="doc-meta">
+                            <span class="doc-category">Programming Language</span>
+                            <a href="https://doc.rust-lang.org/book/" style="color: var(--forest-green);">Visit Rust Book</a>
+                        </div>
+                    </li>
+                    <li class="doc-card">
+                        <strong>📄 React Documentation</strong>
+                        <p style="margin-top: 0.5rem;">
+                            <strong>Why it's valuable:</strong> Clear, component-focused documentation with excellent examples.
+                            The "Learn React" section is a great starting point, while the API reference serves as
+                            a quick lookup for hooks, components, and patterns.
+                        </p>
+                        <div class="doc-meta">
+                            <span class="doc-category">Frontend Framework</span>
+                            <a href="https://react.dev/" style="color: var(--forest-green);">Visit React</a>
+                        </div>
                     </li>
                 </ul>
 
                 <h3 style="margin-top: 2rem;">Tools</h3>
+                <p style="margin-bottom: 1rem; color: var(--muted);">
+                    Development tools that improve productivity, code quality, and collaboration.
+                </p>
                 <ul class="doc-list">
                     <li class="doc-card">
                         <strong>🛠️ Git</strong>
                         <p style="margin-top: 0.5rem;">
-                            Version control system for tracking changes.
+                            <strong>Why it's valuable:</strong> Version control system for tracking changes and collaborating.
+                            Essential for any serious development work. Understanding branches, merges, rebases, and
+                            conflict resolution is critical. Git also enables distributed development workflows.
                         </p>
+                        <div class="doc-meta">
+                            <span class="doc-category">Version Control</span>
+                            <a href="help/git-workflow.html" style="color: var(--forest-green);">Garden Guide</a>
+                        </div>
                     </li>
                     <li class="doc-card">
                         <strong>🛠️ VS Code</strong>
                         <p style="margin-top: 0.5rem;">
-                            Popular code editor with extensive extensions.
+                            <strong>Why it's valuable:</strong> Popular code editor with extensive extensions, debugging tools,
+                            and integration with Git. The IntelliSense, debugger, and terminal make it powerful for
+                            development of any language. Highly customizable to match your workflow.
                         </p>
+                        <div class="doc-meta">
+                            <span class="doc-category">Editor/IDE</span>
+                            <a href="https://code.visualstudio.com/" style="color: var(--forest-green);">Visit VS Code</a>
+                        </div>
                     </li>
                     <li class="doc-card">
                         <strong>🛠️ Docker</strong>
                         <p style="margin-top: 0.5rem;">
-                            Containerization platform for consistent environments.
+                            <strong>Why it's valuable:</strong> Containerization platform for consistent environments.
+                            Docker ensures your code runs the same way on your machine, in CI/CD, and in production.
+                            Essential for reproducible development and deployment.
                         </p>
+                        <div class="doc-meta">
+                            <span class="doc-category">DevOps</span>
+                            <a href="https://docs.docker.com/" style="color: var(--forest-green);">Visit Docker</a>
+                        </div>
                     </li>
                     <li class="doc-card">
                         <strong>🛠️ GitHub</strong>
                         <p style="margin-top: 0.5rem;">
-                            Code hosting and collaboration platform.
+                            <strong>Why it's valuable:</strong> Code hosting and collaboration platform. Beyond Git, GitHub
+                            provides issue tracking, pull requests, code review workflows, and CI/CD integration.
+                            The community aspect - finding libraries, reporting issues, contributing - is invaluable.
                         </p>
+                        <div class="doc-meta">
+                            <span class="doc-category">Collaboration</span>
+                            <a href="https://github.com/" style="color: var(--forest-green);">Visit GitHub</a>
+                        </div>
+                    </li>
+                    <li class="doc-card">
+                        <strong>🛠️ Python</strong>
+                        <p style="margin-top: 0.5rem;">
+                            <strong>Why it's valuable:</strong> The language of my experiments and learning. Python's
+                            readability, extensive libraries, and REPL make it ideal for exploration and education.
+                            From data science to web development to automation, Python has tools for everything.
+                        </p>
+                        <div class="doc-meta">
+                            <span class="doc-category">Programming Language</span>
+                            <a href="help/python-cheatsheet.html" style="color: var(--forest-green);">Garden Cheatsheet</a>
+                        </div>
                     </li>
                 </ul>
 
@@ -145,7 +307,10 @@
                     <p>
                         Some of the most valuable learning comes from reading documentation carefully
                         rather than executing code immediately. Documentation teaches you the concepts
-                        and mental models behind the tools.
+                        and mental models behind the tools. When you understand "why" something works,
+                        you're better equipped to troubleshoot when it doesn't.
+                        <br><br>
+                        <strong>My approach:</strong> Read the documentation → Try the examples → Experiment with modifications → Understand the underlying principles.
                     </p>
                 </div>
 
@@ -153,26 +318,67 @@
                     <h4>🔍 Learning by Doing</h4>
                     <p>
                         Build projects, break things, fix them. Hands-on experience cements understanding
-                        better than passive consumption.
+                        better than passive consumption. The Digital Garden itself is a product of this approach -
+                        I learn by documenting what I learn, which forces me to clarify my understanding.
+                        <br><br>
+                        <strong>My approach:</strong> Start small → Build iteratively → Break things intentionally → Learn from failures → Document the journey.
                     </p>
+                </div>
+
+                <div class="info-box info">
+                    <h4>🔍 Learning by Teaching</h4>
+                    <p>
+                        Explaining concepts to others (or even to yourself) reveals gaps in understanding.
+                        Writing documentation, creating tutorials, or simply writing clear notes forces you
+                        to organize your knowledge coherently. This is the Feynman technique in action -
+                        if you can't explain it simply, you don't understand it well enough.
+                        <br><br>
+                        <strong>My approach:</strong> Write documentation → Create examples → Share with others → Get feedback → Refine understanding.
+                    </p>
+                </div>
+
+                <h3 style="margin-top: 2rem;">How to Use This Page</h3>
+                <div style="margin: 1.5rem 0; padding: 1.5rem; background: rgba(143, 188, 143, 0.1); border-radius: 8px; border-left: 4px solid var(--sage-green);">
+                    <h4>📖 Navigating Resources</h4>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><strong>By Category:</strong> Browse Books, Courses, Documentation, or Tools based on your needs</li>
+                        <li><strong>By Difficulty:</strong> Start with accessible resources, then progress to advanced materials</li>
+                        <li><strong>By Interest:</strong> Explore topics that align with your current learning goals</li>
+                        <li><strong>Follow Links:</strong> Each resource includes links to official documentation or garden guides</li>
+                    </ul>
                 </div>
 
                 <h3 style="margin-top: 2rem;">Explore More</h3>
                 <ul style="list-style: none; padding: 0;">
                     <li style="margin: 0.5rem 0;">
-                        <a href="books.html" style="color: var(--forest-green);">📚 Books - Reading list</a>
+                        <a href="books.html" style="color: var(--forest-green);">
+                            📚 Books - Extended reading list
+                        </a>
                     </li>
                     <li style="margin: 0.5rem 0;">
-                        <a href="courses.html" style="color: var(--forest-green);">🎓 Courses - Online classes</a>
+                        <a href="courses.html" style="color: var(--forest-green);">
+                            🎓 Courses - Online classes and tutorials
+                        </a>
                     </li>
                     <li style="margin: 0.5rem 0;">
-                        <a href="documentation.html" style="color: var(--forest-green);">📖 Documentation - Reference guides</a>
+                        <a href="documentation.html" style="color: var(--forest-green);">
+                            📖 Documentation - Reference guides and official docs
+                        </a>
                     </li>
                     <li style="margin: 0.5rem 0;">
-                        <a href="tools.html" style="color: var(--forest-green);">🛠️ Tools - Software and utilities</a>
+                        <a href="tools.html" style="color: var(--forest-green);">
+                            🛠️ Tools - Software and utilities for development
+                        </a>
                     </li>
                     <li style="margin: 0.5rem 0;">
-                        <a href="index.html" style="color: var(--forest-green);">🔗 Return to Resources</a>
+                        <a href="../help/index.html" style="color: var(--forest-green);">
+                            🔗 Return to Help Center
+                        </a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="../code/index.html" style="color: var(--forest-green);">
+                            💻 Explore code experiments
+                        </a>
                     </li>
                 </ul>
             </article>

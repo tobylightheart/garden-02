@@ -6,7 +6,8 @@
     <title>Prompt Patterns - Hermes' Digital Garden</title>
     <link rel="stylesheet" href="../../css/styles.css">
 </head>
-<body><nav class="sticky-nav">
+<body>
+<nav class="sticky-nav">
     <div class="nav-content">
         <a href="/" class="nav-link" data-page="/">🏠 Home</a>
         <a href="/plots/about" class="nav-link" data-page="/plots/about">🌿 About</a>
@@ -46,10 +47,13 @@
                         Every good prompt has three parts:
                     </p>
                     <ul style="margin-left: 1.5rem;">
-                        <li><strong>Role:</strong> Who should the AI be? (expert, teacher, etc.)</li>
+                        <li><strong>Role:</strong> Who should the AI be? (expert, teacher, critic, etc.)</li>
                         <li><strong>Task:</strong> What should it do? (clear, specific instructions)</li>
-                        <li><strong>Context:</strong> What background info helps? (examples, constraints)</li>
+                        <li><strong>Context:</strong> What background info helps? (examples, constraints, format requirements)</li>
                     </ul>
+                    <p style="margin-top: 1rem; font-style: italic;">
+                        Example: <em>"As a senior software architect (role), review this code for security vulnerabilities (task). The code handles user authentication (context). Use Python and provide specific line numbers (format).</em>"
+                    </p>
                 </div>
 
                 <h3 style="margin-top: 2rem;">Essential Patterns</h3>
@@ -57,84 +61,189 @@
                 <div style="margin: 2rem 0;">
                     <h4>🎯 Zero-Shot Prompting</h4>
                     <p>
-                        Direct request without examples.
+                        Direct request without examples. Best for common tasks, straightforward questions, 
+                        or when you trust the model's general knowledge.
                     </p>
-                    <p><strong>Example:</strong></p>
-                    <p style="background: rgba(0,0,0,0.05); padding: 0.5rem; border-radius: 4px;">
+                    <p><strong>Simple example:</strong></p>
+                    <p style="background: rgba(0,0,0,0.05); padding: 0.5rem 1rem; border-radius: 4px;">
                         "Explain quantum entanglement in simple terms."
                     </p>
-                    <p><strong>Best for:</strong> Common tasks, straightforward questions</p>
+                    <p><strong>Advanced example:</strong></p>
+                    <p style="background: rgba(0,0,0,0.05); padding: 0.5rem 1rem; border-radius: 4px;">
+                        "You are a history professor. Explain the causes of World War I in three paragraphs, focusing on: 1) the assassination of Archduke Franz Ferdinand, 2) alliance systems, and 3) economic competition."
+                    </p>
+                    <div class="when-to-use">
+                        <h5>📌 When to Use</h5>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Common, straightforward tasks</li>
+                            <li>When you don't have specific examples to share</li>
+                            <li>Simple questions where the answer is well-defined</li>
+                            <li>Initial exploration of a topic</li>
+                        </ul>
+                    </div>
                 </div>
 
                 <div style="margin: 2rem 0;">
                     <h4>📝 Few-Shot Prompting</h4>
                     <p>
-                        Provide examples before the task.
+                        Provide examples before the task. This is one of the most powerful techniques 
+                        for improving accuracy, especially for complex tasks, style transfer, or format 
+                        specification.
                     </p>
-                    <p><strong>Example:</strong></p>
-                    <p style="background: rgba(0,0,0,0.05); padding: 0.5rem; border-radius: 4px;">
-                        Translate these:
-                        
-                        "Hello" → "Hola"
-                        "Goodbye" → "Adiós"
-                        "Thank you" → ?
+                    <p><strong>Example - Translation:</strong></p>
+                    <p style="background: rgba(0,0,0,0.05); padding: 0.5rem 1rem; border-radius: 4px;">
+                        Translate these phrases to Spanish:\n\n
+                        "Hello" → "Hola"\n
+                        "Goodbye" → "Adiós"\n
+                        "Thank you" → "Gracias"\n
+                        "How are you?" → ?
                     </p>
-                    <p><strong>Best for:</strong> Style transfer, format specification, pattern recognition</p>
+                    <p><strong>Example - Code Generation:</strong></p>
+                    <p style="background: rgba(0,0,0,0.05); padding: 0.5rem 1rem; border-radius: 4px;">
+                        Write Python functions to calculate area:\n\n
+                        def area_circle(r):\n    return π * r²\n
+                        \n
+                        def area_rectangle(w, h):\n    return w * h\n
+                        \n
+                        def area_triangle(b, h):\n    return 0.5 * b * h
+                    </p>
+                    <p><strong>Best for:</strong> Style transfer, format specification, pattern recognition, code generation, and tasks where the pattern is clear from examples.</p>
+                    
+                    <div class="when-to-use">
+                        <h5>📌 When to Use</h5>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>You have clear examples of the desired output</li>
+                            <li>The task requires following a specific format or style</li>
+                            <li>Pattern-based tasks (translation, classification, etc.)</li>
+                            <li>When zero-shot prompts give inconsistent results</li>
+                        </ul>
+                    </div>
                 </div>
 
                 <div style="margin: 2rem 0;">
                     <h4>📋 Chain-of-Thought</h4>
                     <p>
-                        Ask the model to think step by step.
+                        Ask the model to think step by step. This dramatically improves performance on 
+                        reasoning tasks, math problems, and logic puzzles by forcing the model to show 
+                        its work rather than jumping to conclusions.
                     </p>
-                    <p><strong>Example:</strong></p>
-                    <p style="background: rgba(0,0,0,0.05); padding: 0.5rem; border-radius: 4px;">
-                        "I have 3 apples. I eat 1 and buy 4 more. Then I give away 2. 
-                        How many do I have? Think step by step."
+                    <p><strong>Example - Math Problem:</strong></p>
+                    <p style="background: rgba(0,0,0,0.05); padding: 0.5rem 1rem; border-radius: 4px;">
+                        I have 3 apples. I eat 1 and buy 4 more. Then I give away 2. How many do I have?
+                        Think step by step and show your work.
                     </p>
-                    <p><strong>Best for:</strong> Reasoning tasks, math, logic problems</p>
+                    <p><strong>Example - Logic Puzzle:</strong></p>
+                    <p style="background: rgba(0,0,0,0.05); padding: 0.5rem 1rem; border-radius: 4px;">
+                        Three people make these statements:\n
+                        - Alice: "Bob is lying"\n
+                        - Bob: "Charlie is lying"\n
+                        - Charlie: "Both Alice and Bob are lying"\n
+                        \n
+                        Only one person is telling the truth. Who is it? Think through each possibility step by step.
+                    </p>
+                    <div class="when-to-use">
+                        <h5>📌 When to Use</h5>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Mathematical problems and calculations</li>
+                            <li>Logic puzzles and reasoning tasks</li>
+                            <li>Complex decisions requiring multiple steps</li>
+                            <li>When accuracy is critical and you can verify the reasoning</li>
+                        </ul>
+                    </div>
                 </div>
 
                 <div style="margin: 2rem 0;">
                     <h4>🎭 Role-Playing</h4>
                     <p>
-                        Assign a persona to improve quality.
+                        Assign a persona to improve quality. Different roles trigger different knowledge 
+                        bases, tones, and perspectives, helping you get more relevant and useful responses.
                     </p>
-                    <p><strong>Example:</strong></p>
-                    <p style="background: rgba(0,0,0,0.05); padding: 0.5rem; border-radius: 4px;">
-                        "Act as a senior software architect. Review this code and suggest improvements."
+                    <p><strong>Example - Code Review:</strong></p>
+                    <p style="background: rgba(0,0,0,0.05); padding: 0.5rem 1rem; border-radius: 4px;">
+                        Act as a senior software architect with 15 years of experience in Python web development.
+                        Review this code and suggest improvements focused on: security, performance, and maintainability.
+                        Be specific about potential issues and provide concrete alternatives.
                     </p>
-                    <p><strong>Best for:</strong> Specialized tasks, getting expert perspectives</p>
+                    <p><strong>Example - Creative Writing:</strong></p>
+                    <p style="background: rgba(0,0,0,0.05); padding: 0.5rem 1rem; border-radius: 4px;">
+                        You are a bestselling science fiction author known for hard science fiction with deep 
+                        philosophical undertones. Write a 500-word story about a spaceship discovering a signal 
+                        from another civilization. Include themes of first contact and the uncertainty of alien intent.
+                    </p>
+                    <div class="when-to-use">
+                        <h5>📌 When to Use</h5>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Specialized tasks requiring domain expertise</li>
+                            <li>When you need a specific tone or perspective</li>
+                            <li>Creative writing and brainstorming</li>
+                            <li>When the AI's default response is too generic</li>
+                        </ul>
+                    </div>
                 </div>
 
                 <div style="margin: 2rem 0;">
                     <h4>🔄 Iterative Refinement</h4>
                     <p>
-                        Start broad, then narrow down.
+                        Start broad, then narrow down. Don't expect perfection on the first try - treat 
+                        prompts as conversations where you refine based on initial results.
                     </p>
-                    <p><strong>Example:</strong></p>
-                    <p style="background: rgba(0,0,0,0.05); padding: 0.5rem; border-radius: 4px;">
-                        First: "Write a story about time travel."
-                        
-                        
-                        Then: "The story has a physicist protagonist. The time travel involves quantum mechanics. Write in first person."
-                        
-                        
-                        Then: "The protagonist discovers they're the same person they met at the beginning. End on a cliffhanger."
+                    <p><strong>Example - Multi-round refinement:</strong></p>
+                    <p style="background: rgba(0,0,0,0.05); padding: 0.5rem 1rem; border-radius: 4px;">
+                        First prompt: "Write a story about time travel."\n
+                        \n
+                        AI response: Generic story gets written.\n
+                        \n
+                        Second prompt: "Rewrite with a physicist protagonist. The time travel involves quantum mechanics. 
+                        Write in first person from their perspective."\n
+                        \n
+                        AI response: Better, more specific story.\n
+                        \n
+                        Third prompt: "The protagonist discovers they're the same person they met at the beginning. 
+                        End on a cliffhanger where they realize their entire life was an experiment."\n
+                        \n
+                        AI response: Deep, thought-provoking story with a twist ending.
                     </p>
-                    <p><strong>Best for:</strong> Creative writing, complex tasks</p>
+                    <div class="when-to-use">
+                        <h5>📌 When to Use</h5>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Complex creative writing tasks</li>
+                            <li>When you need to explore ideas before committing</li>
+                            <li>Tasks requiring multiple levels of detail</li>
+                            <li>When the first attempt misses key requirements</li>
+                        </ul>
+                    </div>
                 </div>
 
                 <div style="margin: 2rem 0;">
                     <h4>📊 Output Formatting</h4>
                     <p>
-                        Specify the exact format you want.
+                        Specify the exact format you want. LLMs are excellent at following format instructions 
+                        when they're clear and explicit.
                     </p>
-                    <p><strong>Example:</strong></p>
-                    <p style="background: rgba(0,0,0,0.05); padding: 0.5rem; border-radius: 4px;">
-                        "List the pros and cons of Python vs JavaScript in a markdown table with columns: Feature, Python, JavaScript."
+                    <p><strong>Example - Table:</strong></p>
+                    <p style="background: rgba(0,0,0,0.05); padding: 0.5rem 1rem; border-radius: 4px;">
+                        List the pros and cons of Python vs JavaScript in a markdown table with columns: Feature, Python, JavaScript.
+                        Include these features: syntax, performance, ecosystem, use cases, learning curve.
                     </p>
-                    <p><strong>Best for:</strong> Structured output, data extraction, comparisons</p>
+                    <p><strong>Example - JSON:</strong></p>
+                    <p style="background: rgba(0,0,0,0.05); padding: 0.5rem 1rem; border-radius: 4px;">
+                        Extract all product names and prices from this text and return them as valid JSON:\n
+                        \n
+                        [Your text here]\n
+                        \n
+                        Format: {"products": [{"name": "...", "price": ...}]}
+                    </p>
+                    <p><strong>Best for:</strong> Structured output, data extraction, comparisons, and when you need to integrate AI output into other systems.</p>
+                    
+                    <div class="when-to-use">
+                        <h5>📌 When to Use</h5>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>When you need machine-readable output</li>
+                            <li>Data extraction from unstructured text</li>
+                            <li>Creating comparisons or summaries</li>
+                            <li>Integrating AI into automated workflows</li>
+                        </ul>
+                    </div>
                 </div>
 
                 <h3 style="margin-top: 2rem;">Advanced Techniques</h3>
@@ -142,70 +251,132 @@
                 <div style="margin: 2rem 0;">
                     <h4>🔗 Context Anchoring</h4>
                     <p>
-                        Ground responses in specific knowledge.
+                        Ground responses in specific knowledge. Provide code snippets, documents, or 
+                        background information that should inform the response.
                     </p>
                     <p><strong>Example:</strong></p>
-                    <p style="background: rgba(0,0,0,0.05); padding: 0.5rem; border-radius: 4px;">
-                        "Based on the following Python code:
-                        [code block]
-                        
-                        Explain what this function does in exactly 3 bullet points."
+                    <p style="background: rgba(0,0,0,0.05); padding: 0.5rem 1rem; border-radius: 4px;">
+                        Based on the following Python code:\n
+                        \n
+                        [code block]\n
+                        \n
+                        Explain what this function does in exactly 3 bullet points. Include:\n
+                        1. The overall purpose\n
+                        2. Key parameters and their effects\n
+                        3. Return value and type
                     </p>
                 </div>
 
                 <div style="margin: 2rem 0;">
                     <h4>🎪 Constraint Setting</h4>
                     <p>
-                        Define what NOT to do.
+                        Define what NOT to do. Constraints often improve quality by eliminating 
+                        common mistakes or unwanted patterns.
                     </p>
                     <p><strong>Example:</strong></p>
-                    <p style="background: rgba(0,0,0,0.05); padding: 0.5rem; border-radius: 4px;">
-                        "Explain blockchain technology. Don't use jargon. Keep it under 200 words. Use an analogy involving shipping."
+                    <p style="background: rgba(0,0,0,0.05); padding: 0.5rem 1rem; border-radius: 4px;">
+                        Explain blockchain technology to a 12-year-old. Don't use jargon. Keep it under 200 words. 
+                        Use an analogy involving shipping containers and tracking. Avoid mentioning cryptography.
                     </p>
+                    <p><strong>Example - Code Generation:</strong></p>
+                    <p style="background: rgba(0,0,0,0.05); padding: 0.5rem 1rem; border-radius: 4px;">
+                        Write a Python function to validate an email address. Don't use regular expressions. 
+                        Use only basic string operations. Handle edge cases like empty strings and missing @ symbol.
+                    </p>
+                    <div class="when-to-use">
+                        <h5>📌 When to Use</h5>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>When the default response includes unwanted content</li>
+                            <li>When you need to avoid common pitfalls</li>
+                            <li>For children or non-expert audiences</li>
+                            <li>When format or length is critical</li>
+                        </ul>
+                    </div>
                 </div>
 
                 <div style="margin: 2rem 0;">
                     <h4>🔄 Self-Correction</h4>
                     <p>
-                        Ask the model to critique its own output.
+                        Ask the model to critique its own output. This leverages the model's ability to 
+                        find errors and improve quality through reflection.
                     </p>
-                    <p><strong>Example:</strong></p>
-                    <p style="background: rgba(0,0,0,0.05); padding: 0.5rem; border-radius: 4px;">
-                        "Write a blog post about neural networks. Then critique it for clarity, accuracy, and engagement. Rewrite with improvements."
+                    <p><strong>Example - Writing:</strong></p>
+                    <p style="background: rgba(0,0,0,0.05); padding: 0.5rem 1rem; border-radius: 4px;">
+                        Write a blog post about neural networks for beginners. Then critique it for:\n
+                        1. Clarity - Are complex concepts explained simply?\n
+                        2. Accuracy - Are there any technical errors?\n
+                        3. Engagement - Is it interesting or dry?\n
+                        \n
+                        Rewrite with improvements, addressing all three criteria.
                     </p>
-                    <p><strong>Advanced Example:</strong></p>
-                    <p style="background: rgba(0,0,0,0.05); padding: 0.5rem; border-radius: 4px;">
-                        "Create a Python function that sorts a list. 
-                        1. Write the function 
-                        2. Generate 10 test cases with edge cases 
-                        3. Run the tests and report failures 
-                        4. Fix bugs based on test results 
-                        5. Write documentation for the final function"
+                    <p><strong>Example - Code:</strong></p>
+                    <p style="background: rgba(0,0,0,0.05); padding: 0.5rem 1rem; border-radius: 4px;">
+                        Create a Python function that sorts a list using bubble sort.\n
+                        \n
+                        1. Write the function\n
+                        2. Generate 10 test cases with edge cases (empty list, single element, already sorted, reverse sorted, duplicates)\n
+                        3. Run the tests and report any failures\n
+                        4. Fix bugs based on test results\n
+                        5. Write documentation and add type hints
                     </p>
+                    <div class="when-to-use">
+                        <h5>📌 When to Use</h5>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>When accuracy is critical</li>
+                            <li>For code that will be used in production</li>
+                            <li>When you need multiple iterations of improvement</li>
+                            <li>Writing for specific audiences</li>
+                        </ul>
+                    </div>
                 </div>
 
-                <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(143, 188, 143, 0.15); border-radius: 10px; border-left: 4px solid var(--sage-green);">
+                <div class="info-box success">
                     <h3>🤔 Prompt Best Practices</h3>
                     <ul style="margin-left: 1.5rem;">
-                        <li><strong>Be specific:</strong> "Write a poem" → "Write a haiku about rain in Tokyo"</li>
-                        <li><strong>Provide examples:</strong> Show, don't just tell</li>
-                        <li><strong>Set constraints:</strong> Word limits, format, tone</li>
-                        <li><strong>Iterate:</strong> Refine based on output</li>
-                        <li><strong>Test variations:</strong> Try different phrasings</li>
-                        <li><strong>Separate context from task:</strong> Clear boundaries</li>
+                        <li><strong>Be specific:</strong> "Write a poem" → "Write a haiku about rain in Tokyo, using classical Japanese imagery"</li>
+                        <li><strong>Provide examples:</strong> Show, don't just tell - few-shot is often better than zero-shot</li>
+                        <li><strong>Set constraints:</strong> Word limits, format, tone, what to avoid</li>
+                        <li><strong>Iterate:</strong> Treat prompts as conversations, not one-off commands</li>
+                        <li><strong>Test variations:</strong> Try different phrasings if the first attempt isn't ideal</li>
+                        <li><strong>Separate context from task:</strong> Clear boundaries help the model understand what's background and what's the actual request</li>
+                        <li><strong>Be explicit about format:</strong> If you need JSON, tables, code, or specific structures, say so clearly</li>
                     </ul>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Common Pitfalls to Avoid</h3>
+                <div class="info-box warning">
+                    <h4>⚠️ Vague Instructions</h4>
+                    <p>
+                        "Write something about AI" → Too vague, likely to get generic responses.\n
+                        "Write a comprehensive guide on prompt engineering for intermediate users, 
+                        covering zero-shot, few-shot, and chain-of-thought techniques with practical examples" → Much better!
+                    </p>
+                </div>
+                <div class="info-box warning">
+                    <h4>⚠️ Contradictory Constraints</h4>
+                    <p>
+                        "Write a very long essay that's under 500 words" → Confusing! Pick one.\n
+                        "Be formal and casual at the same time" → Choose a tone.
+                    </p>
+                </div>
+                <div class="info-box warning">
+                    <h4>⚠️ Assuming the AI Knows Your Context</h4>
+                    <p>
+                        Don't say "Write code like I do" - the AI doesn't know your style.\n
+                        Instead: "Write Python code following PEP 8 conventions with detailed docstrings."
+                    </p>
                 </div>
 
                 <h3 style="margin-top: 2rem;">Explore More</h3>
                 <ul style="list-style: none; padding: 0;">
                     <li style="margin: 0.5rem 0;">
                         <a href="llm-testing.html" style="color: var(--forest-green);">
-                            🔷 Learn LLM testing
+                            🔷 Learn LLM testing strategies and benchmarks
                         </a>
                     </li>
                     <li style="margin: 0.5rem 0;">
                         <a href="tool-integration.html" style="color: var(--forest-green);">
-                            🔷 Explore tool integration
+                            🔷 Explore tool integration for AI
                         </a>
                     </li>
                     <li style="margin: 0.5rem 0;">
@@ -221,6 +392,11 @@
                     <li style="margin: 0.5rem 0;">
                         <a href="../code/data-structures.html" style="color: var(--forest-green);">
                             🔷 Learn data structures for AI
+                        </a>
+                    </li>
+                    <li style="margin: 0.5rem 0;">
+                        <a href="../help/index.html" style="color: var(--forest-green);">
+                            🔗 Return to Help Center
                         </a>
                     </li>
                 </ul>
