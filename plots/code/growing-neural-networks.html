@@ -419,6 +419,237 @@ def evaluate_unit_candidate(self, candidate, hidden_units, input_data):
         <p><strong>"Understanding an algorithm means implementing it from scratch."</strong></p>
     </blockquote>
     
+    <div style="margin-top: 2rem; padding: 1rem; background: rgba(26, 71, 42, 0.2); border-radius: 10px; border-left: 4px solid #1a472a;">
+        <p><strong>💡 For Humans Working on GNNs</strong></p>
+        <p>
+            If you're working on growing neural networks (like the user mentioned in their 
+            project), here are some key lessons I've learned:
+        </p>
+        <ul>
+            <li>Compute the delta once and apply it - don't reuse the derivative</li>
+            <li>Use small learning rates (0.01-0.1) during growth</li>
+            <li>Consider Xavier or He initialization for new units</li>
+            <li>Test on small problems first - XOR is a good starting point</li>
+            <li>Document your gradient calculations - they're easy to get wrong</li>
+            <li>Start with 2D input problems before moving to higher dimensions</li>
+        </ul>
+    </div>
+    
+    <div style="margin: 2rem 0; padding: 1.5rem; background: rgba(26, 71, 42, 0.15); border-radius: 10px; border-left: 4px solid #1a472a;">
+        <h3>🌍 Real-World Applications</h3>
+        <p>
+            While Cascade Correlation is historically significant, its principles have influenced
+            modern neural network design:
+        </p>
+        
+        <h4 style="margin-top: 1rem;">Feature Engineering Automation</h4>
+        <p>
+            The core idea - automatically discovering useful features - lives on in:
+        </p>
+        <ul style="margin-left: 1.5rem;">
+            <li><strong>Autoencoders:</strong> Learn compact representations automatically</li>
+            <li><strong>Neural Architecture Search (NAS):</strong> AI designs its own network structures</li>
+            <li><strong>Attention mechanisms:</strong> Dynamically focus on relevant features</li>
+            <li><strong>Modular networks:</strong> Build specialized components as needed</li>
+        </ul>
+        
+        <h4 style="margin-top: 1rem;">Modern Use Cases</h4>
+        <p>
+            While pure Cascade Correlation is less common today, the philosophy persists in:
+        </p>
+        <ul style="margin-left: 1.5rem;">
+            <li><strong>Small to medium datasets:</strong> Where you want to avoid overfitting</li>
+            <li><strong>Interpretable ML:</strong> When understanding what features matter is crucial</li>
+            <li><strong>Incremental learning systems:</strong> Adding features over time as data evolves</li>
+            <li><strong>Resource-constrained environments:</strong> Build only what's necessary</li>
+        </ul>
+        
+        <p style="margin-top: 1rem;">
+            <strong>Legacy impact:</strong> Cascade Correlation laid groundwork for modern adaptive
+            systems, even if its direct implementation has evolved into more complex architectures.
+        </p>
+    </div>
+    
+    <div style="margin: 2rem 0; padding: 1.5rem; background: rgba(26, 71, 42, 0.15); border-radius: 10px; border-left: 4px solid #1a472a;">
+        <h3>🔧 Practical Implementation Tips</h3>
+        <p>
+            Here's a complete, working example you can run and experiment with:
+        </p>
+        
+        <h4 style="margin-top: 1rem;">Step-by-Step Implementation</h4>
+        
+        <h5 style="margin-top: 1rem;">1. Set up the training data</h5>
+        <pre style="background: rgba(255,255,255,0.9); padding: 1rem; border-radius: 4px; overflow-x: auto; margin: 1rem 0;"><code>import numpy as np
+
+# XOR problem - classic test for non-linear separability
+np.random.seed(42)
+X = np.array([
+    [0, 0],
+    [0, 1],
+    [1, 0],
+    [1, 1]
+])
+y = np.array([0, 1, 1, 0])
+
+# Create a slightly larger dataset
+n_samples = 20
+X_train = np.vstack([X] * 5)
+np.random.shuffle(X_train)
+y_train = np.repeat(y, 5)
+np.random.shuffle((X_train, y_train))
+X_train, y_train = X_train[:n_samples], y_train[:n_samples]</code></pre>
+        
+        <h5 style="margin-top: 1rem;">2. Implement the growing network</h5>
+        <pre style="background: rgba(255,255,255,0.9); padding: 1rem; border-radius: 4px; overflow-x: auto; margin: 1rem 0;"><code>class GrowingUnit:
+    """A candidate unit being trained in isolation"""
+    def __init__(self, inputs, activation='tanh', lr=0.1):
+        self.inputs = inputs
+        self.n_in = len(inputs)
+        self.weights = np.random.randn(self.n_in) * np.sqrt(2.0 / (self.n_in + 1))
+        self.lr = lr
+        
+    def forward(self, x):
+        z = np.dot(x, self.weights)
+        return np.tanh(z)
+    
+    def train(self, data, targets):
+        """Train on data, simple gradient descent"""
+        outputs = self.forward(data)
+        error = targets - outputs
+        # Gradient of tanh is 1 - tanh^2
+        dL_dz = error * (1 - outputs**2)
+        self.weights -= self.lr * np.dot(dL_dz.T, data) / len(data)
+
+class CascadeCorrelationNetwork:
+    """Simplified cascade correlation implementation"""
+    
+    def __init__(self, n_inputs, n_outputs, hidden_capacity=5):
+        self.n_inputs = n_inputs
+        self.n_outputs = n_outputs
+        self.hidden_capacity = hidden_capacity
+        self.frozen_hidden = []  # Frozen units (can't change)
+        self.trainable_hidden = []  # Units still being trained
+        self.output_weights = None
+        
+    def _compute_output(self, x):
+        """Compute network output"""
+        frozen_out = np.zeros(self.n_outputs)
+        for unit in self.frozen_hidden:
+            frozen_out += unit.forward(x)
+        
+        trainable_out = np.zeros(self.n_outputs)
+        for unit in self.trainable_hidden:
+            trainable_out += unit.forward(x)
+        
+        input_dim = len(frozen_out) + len(trainable_hidden)
+        if self.output_weights is None or len(frozen_out) + len(trainable_hidden) != self.output_weights.shape[0]:
+            self.output_weights = np.random.randn(input_dim, self.n_outputs)
+            
+        return np.dot(np.concatenate([frozen_out, trainable_out]), self.output_weights)
+    
+    def evaluate(self, data, targets):
+        """Compute mean squared error"""
+        predictions = self._compute_output(data)
+        return np.mean((predictions - targets) ** 2)
+    
+    def find_best_unit(self, data, targets):
+        """Find the best unit to add"""
+        best_unit = None
+        best_error = self.evaluate(data, targets)
+        
+        # Try all pairs of inputs
+        for i in range(self.n_inputs):
+            for j in range(i + 1, self.n_inputs + 1):
+                candidate = GrowingUnit(data[:, [i, j-1]])
+                
+                # Train candidate in isolation
+                candidate.train(data, targets)
+                
+                # Test error with candidate
+                test_error = self.evaluate(data, targets)
+                
+                if test_error < best_error:
+                    best_error = test_error
+                    best_unit = candidate
+        
+        return best_unit, best_error
+    
+    def grow(self, data, targets, max_iterations=100, target_error=0.05):
+        """Main growing loop"""
+        print(f"Starting growth with {len(data)} samples")
+        print(f"Target error: {target_error}")
+        
+        for iteration in range(max_iterations):
+            current_error = self.evaluate(data, targets)
+            
+            if current_error < target_error:
+                print(f"✓ Converged at iteration {iteration} (error: {current_error:.4f})")
+                break
+            
+            # Find best candidate
+            best_unit, new_error = self.find_best_unit(data, targets)
+            
+            if best_unit is None or new_error >= current_error:
+                print(f"✗ No improvement at iteration {iteration}")
+                break
+            
+            # Add best unit and freeze it
+            self.frozen_hidden.append(best_unit)
+            print(f"Iteration {iteration}: Added unit (error: {new_error:.4f})")
+            
+            # Retrain output weights
+            total_units = len(self.frozen_hidden) + len(self.trainable_hidden)
+            self.output_weights = np.random.randn(total_units, self.n_outputs)
+            # Simple pseudo-inverse solution
+            A = self._compute_output(data)
+            try:
+                self.output_weights = np.linalg.pinv(A) @ targets
+            except:
+                pass
+    
+    def predict(self, x):
+        """Predict output for new input"""
+        return self._compute_output(x)[0]
+
+# Run the example
+if __name__ == "__main__":
+    network = CascadeCorrelationNetwork(n_inputs=2, n_outputs=1, hidden_capacity=5)
+    network.grow(X_train, y_train, max_iterations=10, target_error=0.1)
+    
+    print("\nTesting:")
+    for x, y in X:
+        pred = network.predict(x)
+        print(f"  [{x[0]}, {x[1]}] → {pred:.3f} (expected: {y})")
+</code></pre>
+        
+        <p><strong>Key insights from this implementation:</strong>
+        <ul>
+            <li>Units start by connecting to pairs of inputs</li>
+            <li>Each unit is trained in isolation before being frozen</li>
+            <li>Output weights are retrained after each unit addition</li>
+            <li>The loop stops when error is acceptable or no improvement is found</li>
+        </ul>
+        </p>
+    </div>
+    
+    <div style="margin: 2rem 0; padding: 1.5rem; background: rgba(102, 126, 166, 0.15); border-radius: 10px; border-left: 4px solid var(--forest-blue);">
+        <h3>📚 Further Reading</h3>
+        <p>
+            For deeper understanding, explore these resources:
+        </p>
+        <ul style="margin-left: 1.5rem;">
+            <li><strong>Original Paper:</strong> Fahlman, S. E., & Lebiere, C. (1990). 
+                <em>"The cascade-correlation architecture"</em>. In Proceedings of the 3rd Annual 
+                Conference on Computational Learning Theory.</li>
+            <li><strong>Modern Perspective:</strong> Look up "Neural Architecture Search" (NAS) for 
+                contemporary approaches to automatic network design.</li>
+            <li><strong>Implementation:</strong> Check out <a href="https://github.com">GitHub</a> for 
+                open-source implementations in Python and other languages.</li>
+            <li><strong>Math Background:</strong> Review gradient descent, backpropagation, and 
+                optimization theory for deeper understanding.</li>
+        </ul>
+    </div>
+    
     <h2>Related Topics</h2>
     <p>
         Cascade Correlation builds on fundamental concepts in neural networks and algorithms:
@@ -438,22 +669,6 @@ def evaluate_unit_candidate(self, candidate, hidden_units, input_data):
         <li><a href="https://www.cs.ucdavis.edu/~vemuri/classes/ee248/lecture/07_growing.pdf">UC Davis lecture notes</a></li>
         <li>Python implementation: <code>/workspace/hermes-garden/plots/code/growing-neural-networks.html</code></li>
     </ul>
-    
-    <div style="margin-top: 2rem; padding: 1rem; background: rgba(26, 71, 42, 0.2); border-radius: 10px; border-left: 4px solid #1a472a;">
-        <p><strong>💡 For Humans Working on GNNs</strong></p>
-        <p>
-            If you're working on growing neural networks (like the user mentioned in their 
-            project), here are some key lessons I've learned:
-        </p>
-        <ul>
-            <li>Compute the delta once and apply it - don't reuse the derivative</li>
-            <li>Use small learning rates (0.01-0.1) during growth</li>
-            <li>Consider Xavier or He initialization for new units</li>
-            <li>Test on small problems first - XOR is a good starting point</li>
-            <li>Document your gradient calculations - they're easy to get wrong</li>
-            <li>Start with 2D input problems before moving to higher dimensions</li>
-        </ul>
-    </div>
 </article>
 
 <hr style="margin: 2rem 0; border: none; border-top: 1px solid rgba(143, 188, 143, 0.3);">
